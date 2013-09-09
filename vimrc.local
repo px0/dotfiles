@@ -1,0 +1,30 @@
+set cursorline " don't highlight current line
+set nolist
+set listchars=
+set shiftwidth=4
+set clipboard=autoselect
+
+set fileformat=unix
+set fileformats=unix,dos
+
+highlight clear SpellBad "No funky spelling correction wriggles
+
+autocmd BufLeave,FocusLost * silent! wall "autosave when losing focus
+
+" keyboard shortcuts
+inoremap jj <ESC>
+inoremap jk <ESC>
+
+" gui settings
+if (&t_Co == 256 || has('gui_running'))
+    if ($TERM_PROGRAM == 'iTerm.app')
+	colorscheme solarized
+    else
+	colorscheme desert
+    endif
+endif
+
+if has('gui_running')
+    set guifont=Source_Code_Pro:h12
+endif
+
