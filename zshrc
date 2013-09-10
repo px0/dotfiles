@@ -40,17 +40,34 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby vi-mode colorize )
+plugins=(git osx ruby vi-mode colorize brew)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin
 
-export LSCOLORS=exfxcxdxbxexexabagacad
 
+# Some neat colors
+export LSCOLORS=exfxcxdxbxexexabagacad
 
 # Basic directory operations
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias -- -='cd -'
+
+# -------------------------------------------------------------------
+# Oddball stuff
+# -------------------------------------------------------------------
+# necessary to make rake work inside of zsh
+alias rake="noglob rake"
+
+# myIP address
+function myip() {
+    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0 : " $2}'
+    ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
+
