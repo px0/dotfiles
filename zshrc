@@ -45,7 +45,7 @@ plugins=(git osx ruby vi-mode colorize brew)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin
 
 
 # Some neat colors
@@ -69,5 +69,7 @@ function myip() {
     ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
     ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
     ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
