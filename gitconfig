@@ -1,0 +1,36 @@
+[include]
+    path = ~/.gitconfig.local
+
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    cob = checkout -b
+    b = branch
+    br = branch -r
+    a = add
+    m = merge --no-commit --no-ff
+    mom = merge origin master
+    f = fetch
+    rs = reset
+    rsh = reset --hard
+    rss = reset --soft
+    rb = rebase
+[core]
+    excludesfile = /Users/mgerlach/.gitignore_global
+    autocrlf = false
+    editor = 'vim'
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[color]
+	ui = true
+[credential]
+	helper = cache
+[oh-my-zsh]
+	hide-status = 1
+[push]
+	default = simple
