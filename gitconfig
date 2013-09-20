@@ -16,8 +16,9 @@
     rsh = reset --hard
     rss = reset --soft
     rb = rebase
+    cam = commit -am 
 [core]
-    excludesfile = /Users/mgerlach/.gitignore_global
+    excludesfile = ~/.gitignore_global
     autocrlf = false
     editor = 'vim'
 [difftool "sourcetree"]
