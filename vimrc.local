@@ -15,6 +15,10 @@ autocmd BufLeave,FocusLost * silent! wall "autosave when losing focus
 inoremap jj <ESC>
 inoremap jk <ESC>
 
+"map F1 to esc instead of help because that's fucking annoying
+map <F1> <Esc>
+imap <F1> <Esc>
+
 " gui settings
 " if (&t_Co == 256 || has('gui_running'))
 "     if ($TERM_PROGRAM == 'iTerm.app')
