@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+unsetopt correct
+
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -27,7 +30,7 @@ ZSH_THEME="af-magic"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
+DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -45,7 +48,8 @@ plugins=(git osx ruby vi-mode colorize brew)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin
+export PATH=$PATH:/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools/
+export NODE_PATH="/usr/local/lib/node"
 
 
 # Some neat colors
@@ -61,6 +65,7 @@ alias -- -='cd -'
 # -------------------------------------------------------------------
 # necessary to make rake work inside of zsh
 alias rake="noglob rake"
+alias bower='noglob bower'
 
 # myIP address
 function myip() {
@@ -69,7 +74,14 @@ function myip() {
     ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
     ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
     ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-    ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-    ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en3 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en3 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en3 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en3 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
+
+function android_screenshot() {
+    adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > /tmp/screen.png
+    echo "screenshot has been saved to /tmp/screen.png"
 }
 
