@@ -17,6 +17,7 @@
     rss = reset --soft
     rb = rebase
     cam = commit -am 
+    p = pull
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = false
