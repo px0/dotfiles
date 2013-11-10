@@ -12,6 +12,8 @@ ZSH_THEME="af-magic"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias g="git"
+alias gi="git"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
