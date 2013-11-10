@@ -3,7 +3,6 @@ ZSH=$HOME/.oh-my-zsh
 
 unsetopt correct
 
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -38,7 +37,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -48,7 +47,7 @@ plugins=(git osx ruby vi-mode colorize brew)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools/
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools/
 export NODE_PATH="/usr/local/lib/node"
 
 
