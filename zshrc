@@ -43,7 +43,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby colorize brew)
+plugins=(git osx ruby colorize brew vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools/
+export PATH=/usr/local/sbin:/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/phyrex/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/phyrex/.rvm/bin:/Users/phyrex/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools/:$PATH
 export NODE_PATH="/usr/local/lib/node"
 
 
