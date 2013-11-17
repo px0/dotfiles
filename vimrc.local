@@ -3,11 +3,16 @@ set nolist
 set listchars=
 set shiftwidth=4
 set clipboard=autoselect
+set si "Smart indent
+set wrap "Wrap lines
 
 set fileformat=unix
 set fileformats=unix,dos
 
 highlight clear SpellBad "No funky spelling correction wriggles
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
 
 autocmd BufLeave,FocusLost * silent! wall "autosave when losing focus
 
@@ -19,6 +24,10 @@ inoremap jk <ESC>
 map <F1> <Esc>
 imap <F1> <Esc>
 
+"map <F13><F14><F15>
+nmap <F13> ciw
+nmap <F14> ci"
+
 " gui settings
 " if (&t_Co == 256 || has('gui_running'))
 "     if ($TERM_PROGRAM == 'iTerm.app')
@@ -28,9 +37,52 @@ imap <F1> <Esc>
 "     endif
 " endif
 
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
 colorscheme desert
 
 if has('gui_running')
     set guifont=Source_Code_Pro:h12
 endif
 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
