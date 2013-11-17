@@ -12,7 +12,7 @@
 
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 #http://stackoverflow.com/questions/4466245/customize-zshs-prompt-when-displaying-previous-command-exit-code
-local return_code="%(?..%{$fg[red]%}%?↵%{$reset_color%})"
+local return_code="%(?..%{$fg[red]%}☹ %?%{$reset_color%})"
 
 # primary prompt
 PROMPT='$FG[237]-----------------------------------------------------%t ${return_code}%{$reset_color%}
@@ -34,8 +34,6 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
 
-
 function collapse_pwd {
-    # echo $(pwd | sed -e "s,^$HOME,~," | sed -e "s:\([^/]\)[^/]*/:\1/:g")
       echo $(pwd | sed -e "s|^$HOME|~|" -e 's|^/private||' -e 's-\([^/.]\)[^/]*/-\1/-g')
 }

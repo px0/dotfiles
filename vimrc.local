@@ -11,10 +11,11 @@ set fileformats=unix,dos
 
 highlight clear SpellBad "No funky spelling correction wriggles
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+set hlsearch "highlight search results
+" Disable highlight when <leader>. is pressed
+map <silent> <leader>. :noh<cr>
 
-autocmd BufLeave,FocusLost * silent! wall "autosave when losing focus
+autocmd BufLeave,FocusLost * silent! wall "autosave when losing focusresults
 
 " keyboard shortcuts
 inoremap jj <ESC>
@@ -24,9 +25,13 @@ inoremap jk <ESC>
 map <F1> <Esc>
 imap <F1> <Esc>
 
-"map <F13><F14><F15>
+" map <F13><F14><F15>
 nmap <F13> ciw
 nmap <F14> ci"
+nmap <F15> <Plug>CommentaryLine
+
+" command+/ comments/uncomments line. Just like in Textmate. Nice
+nmap <D-/> <Plug>CommentaryLine 
 
 " gui settings
 " if (&t_Co == 256 || has('gui_running'))
@@ -47,7 +52,7 @@ set tm=500
 map 0 ^
 
 
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
