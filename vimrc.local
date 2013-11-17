@@ -1,6 +1,5 @@
 set cursorline " don't highlight current line
-set nolist
-set listchars=
+
 set shiftwidth=4
 set clipboard=autoselect
 set si "Smart indent
@@ -16,6 +15,11 @@ set hlsearch "highlight search results
 map <silent> <leader>. :noh<cr>
 
 autocmd BufLeave,FocusLost * silent! wall "autosave when losing focusresults
+
+"invisibles
+set listchars=trail:.,tab:>-,eol:$
+set nolist
+noremap <Leader>i :set list!<CR> " Toggle invisible chars
 
 " keyboard shortcuts
 inoremap jj <ESC>
@@ -36,12 +40,27 @@ nmap <D-/> <Plug>CommentaryLine
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set t_vb=
+set vb t_vb=
 set tm=500
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+" Make cursor move by visual lines instead of file lines (when wrapping)
+map <up> gk
+map k gk
+imap <up> <C-o>gk
+map <down> gj
+map j gj
+imap <down> <C-o>gj
+map E ge
+
+" Insert New Line *************************************************************
+map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
+map <Enter> o<ESC>
+
+" ctrl+enter = new line underneath in insert mode - (nearly) like textmate
+imap <C-Enter> <ESC>o
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
