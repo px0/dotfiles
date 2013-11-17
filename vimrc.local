@@ -1,6 +1,6 @@
 set cursorline " don't highlight current line
 
-set shiftwidth=4
+set ts=4 sw=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
 set clipboard=autoselect
 set si "Smart indent
 set wrap "Wrap lines
@@ -17,8 +17,10 @@ map <silent> <leader>. :noh<cr>
 autocmd BufLeave,FocusLost * silent! wall "autosave when losing focusresults
 
 "invisibles
-set listchars=trail:.,tab:>-,eol:$
-set nolist
+" set listchars=trail:.,tab:>-,eol:$
+" set listchars=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
+" set listchars=trail:.,tab:>-,eol:$
+set listchars=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
 noremap <Leader>i :set list!<CR> " Toggle invisible chars
 
 " keyboard shortcuts
