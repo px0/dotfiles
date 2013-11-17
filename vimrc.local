@@ -33,15 +33,6 @@ nmap <F15> <Plug>CommentaryLine
 " command+/ comments/uncomments line. Just like in Textmate. Nice
 nmap <D-/> <Plug>CommentaryLine 
 
-" gui settings
-" if (&t_Co == 256 || has('gui_running'))
-"     if ($TERM_PROGRAM == 'iTerm.app')
-" 	colorscheme solarized
-"     else
-" 	colorscheme desert
-"     endif
-" endif
-
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -65,11 +56,29 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-colorscheme desert
 
 if has('gui_running')
-    set guifont=Source_Code_Pro:h12
+    set guifont=Source_Code_Pro:h13
+    " In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
+    " switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
+    noremap <C-Tab> :tabnext<CR>
+    noremap <C-S-Tab> :tabprev<CR>
+
+    " Switch to specific tab numbers with Command-number
+    noremap <D-1> :tabn 1<CR>
+    noremap <D-2> :tabn 2<CR>
+    noremap <D-3> :tabn 3<CR>
+    noremap <D-4> :tabn 4<CR>
+    noremap <D-5> :tabn 5<CR>
+    noremap <D-6> :tabn 6<CR>
+    noremap <D-7> :tabn 7<CR>
+    noremap <D-8> :tabn 8<CR>
+    noremap <D-9> :tabn 9<CR>
+    " Command-0 goes to the last tab
+    noremap <D-0> :tablast<CR>
 endif
+
+colorscheme jellybeans
 
 
 
