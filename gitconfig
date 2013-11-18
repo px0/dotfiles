@@ -10,29 +10,36 @@
     br = branch -r
     a = add
     m = merge --no-commit --no-ff
-    mom = merge origin master
     f = fetch
     rs = reset
-    rsh = reset --hard
-    rss = reset --soft
-    rb = rebase
     cam = commit -am 
     p = pull
+	who = shortlog -s -n --no-merges
+	standup = shortlog --since=yesterday
+	today = shortlog --since=midnight
+	uncommit = reset --soft HEAD^
+
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = false
     editor = 'vim'
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+
 [color]
 	ui = true
+
 [credential]
 	helper = cache
+
 [oh-my-zsh]
 	hide-status = 0
+
 [push]
 	default = simple
