@@ -127,13 +127,26 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " when selected, pressing '"' surrounds the selection with "". Like textmate
 xmap " S"
 
-
+" Save a file as root.
+cabbrev w!! w !sudo tee % > /dev/null<CR>:e!<CR><CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " =>  Statusline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " from https://github.com/spf13/spf13-vim/blob/master/.vimrc
+" " %< truncation point
+" \ space
+" %f relative path to file
+" %m modified flag [+] (modified), [-] (unmodifiable) or nothing
+" %r readonly flag [RO]
+" %y filetype [ruby]
+" %= split point for left and right justification
+" %-14.( %) block of fixed width 14 characters
+" %l current line
+" %c current column
+" %V current virtual column as -{num} if different from %c
+" %P percentage through buffer
 if has('statusline')
 	set laststatus=2
 	" Broken down into easily includeable segments
@@ -148,3 +161,21 @@ if has('statusline')
 	let g:syntastic_enable_signs=1
 	set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
+
+" Create a split on the given side.
+" " From
+" http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
+" via joakimk.
+nmap <leader><left> :leftabove vsp<CR>
+nmap <leader><right> :rightbelow vsp<CR>
+nmap <leader><up> :leftabove sp<CR>
+nmap <leader><down> :rightbelow sp<CR>
+
+
+" Tab/shift-tab to indent/outdent in visual mode.
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Keep selection when indenting/outdenting.
+vnoremap > >gv
+vnoremap < <gv
