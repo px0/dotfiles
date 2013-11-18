@@ -84,3 +84,7 @@ def install_oh_my_zsh
     end
   end
 end
+
+def install_snippets
+	system %Q{curl -o $HOME/.vim/snippets/ruby.snippets https://raw.github.com/kaichen/vim-snipmate-ruby-snippets/master/ruby.snippets}
+end

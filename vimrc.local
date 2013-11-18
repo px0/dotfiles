@@ -124,6 +124,8 @@ map <leader>s? z=
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
+" when selected, pressing '"' surrounds the selection with "". Like textmate
+xmap " S"
 
 
 
