@@ -34,10 +34,12 @@ imap <F1> <Esc>
 " map <F13><F14><F15>
 nmap <F13> ciw
 nmap <F14> ci"
-nmap <F15> <Plug>CommentaryLine
+nmap <F15> <Plug>Commentary
 
 " command+/ comments/uncomments line. Just like in Textmate. Nice
-nmap <D-/> <Plug>CommentaryLine 
+" In visual mode it comments the whole block
+nmap <D-/> <Plug>CommentaryLine
+xmap <D-/> <Plug>Commentary
 
 " No annoying sound on errors
 set noerrorbells
