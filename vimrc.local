@@ -8,7 +8,9 @@ set wrap "Wrap lines
 set fileformat=unix
 set fileformats=unix,dos
 
-highlight clear SpellBad "No funky spelling correction wriggles
+" set complete+=k " enable dictionary completion
+
+"highlight clear SpellBad "No funky spelling correction wriggles
 
 set hlsearch "highlight search results
 " Disable highlight when <leader>. is pressed
@@ -50,6 +52,33 @@ set tm=500
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+" ," Surround a word with "quotes"
+map ," ysiw"
+vmap ," c"<C-R>""<ESC>
+
+" ,' Surround a word with 'single quotes'
+map ,' ysiw'
+vmap ,' c'<C-R>"'<ESC>
+
+" ,) or ,( Surround a word with (parens)
+" The difference is in whether a space is put in
+map ,( ysiw(
+map ,) ysiw)
+vmap ,( c( <C-R>" )<ESC>
+vmap ,) c(<C-R>")<ESC>
+
+" ,[ Surround a word with [brackets]
+map ,] ysiw]
+map ,[ ysiw[
+vmap ,[ c[ <C-R>" ]<ESC>
+vmap ,] c[<C-R>"]<ESC>
+
+" ,{ Surround a word with {braces}
+map ,} ysiw}
+map ,{ ysiw{
+vmap ,} c{ <C-R>" }<ESC>
+vmap ,{ c{<C-R>"}<ESC>
+
 " Make cursor move by visual lines instead of file lines (when wrapping)
 map <up> gk
 map k gk
@@ -58,6 +87,11 @@ map <down> gj
 map j gj
 imap <down> <C-o>gj
 map E ge
+
+" Camelcase Motion
+nmap W <Plug>CamelCaseMotion_w
+nmap B <Plug>CamelCaseMotion_b
+nmap E <Plug>CamelCaseMotion_e
 
 " Insert New Line *************************************************************
 map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
@@ -162,6 +196,12 @@ if has('statusline')
 	set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>  Splits
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap vv :vsplit<cr><C-w>l
+
 " Create a split on the given side.
 " " From
 " http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
@@ -179,3 +219,11 @@ vnoremap <S-Tab> <gv
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ShowMarks
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:showmarks_enable = 1 "always show showmarks
+let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" Ignore help, quickfix, non-modifiable buffers
+let showmarks_ignore_type = "hqm"
