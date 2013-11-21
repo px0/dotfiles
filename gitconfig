@@ -6,7 +6,7 @@
     ci = commit
     co = checkout
     cob = checkout -b
-    b = branch
+	b = branch
     br = branch -r
     a = add
     m = merge --no-commit --no-ff
@@ -39,7 +39,7 @@
 	helper = cache
 
 [oh-my-zsh]
-	hide-status = 0
+	hide-status = 1
 
 [push]
 	default = simple
