@@ -2,11 +2,17 @@ set cursorline " don't highlight current line
 
 set ts=4 sw=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
 set clipboard=autoselect
-set si "Smart indent
+set smartindent "Smart indent
 set wrap "Wrap lines
 
 set fileformat=unix
 set fileformats=unix,dos
+
+set filetype indent on
+
+set foldmethod=syntax
+"unfold everything on opening file
+au BufRead * normal zR
 
 highlight clear SpellBad "No funky spelling correction wriggles
 
@@ -34,7 +40,7 @@ imap <F1> <Esc>
 " map <F13><F14><F15>
 nmap <F13> ciw
 nmap <F14> ci"
-nmap <F15> <Plug>Commentary
+nmap <F15> <Plug>CommentaryLine
 
 " command+/ comments/uncomments line. Just like in Textmate. Nice
 " In visual mode it comments the whole block
@@ -130,6 +136,13 @@ xmap " S"
 " Save a file as root.
 cabbrev w!! w !sudo tee % > /dev/null<CR>:e!<CR><CR>
 
+" Ruby stuff
+" Insert HashRockets... :)
+imap <C-l> <Space>=><Space>
+
+" Alignment
+map <Leader>l :Tabularize<space>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " =>  Statusline
@@ -165,7 +178,6 @@ endif
 " Create a split on the given side.
 " " From
 " http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
-" via joakimk.
 nmap <leader><left> :leftabove vsp<CR>
 nmap <leader><right> :rightbelow vsp<CR>
 nmap <leader><up> :leftabove sp<CR>
@@ -179,3 +191,22 @@ vnoremap <S-Tab> <gv
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>  Filetype mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" au BufRead *.html set ft=javascript.html
+" au BufNewFile *.html set ft=javascript.html
+" au BufRead *.htm set ft=javascript.html
+" au BufNewFile *.htm set ft=javascript.html
+" au BufRead *.js set ft=javascript.html
+" au BufNewFile *.js set ft=javascript.html
+au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
+
+
+" Persistent undo
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=100 "maximum number of changes that can be undone
+set undoreload=100 "maximum number lines to save for undo on a buffer reload

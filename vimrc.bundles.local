@@ -1,3 +1,5 @@
 Bundle 'https://github.com/vim-scripts/indent-motion.git'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'Toggle'
+Bundle 'closetag.vim'
+Bundle 'mbadran/headlights'
