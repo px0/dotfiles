@@ -3,3 +3,6 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'Toggle'
 Bundle 'closetag.vim'
 Bundle 'mbadran/headlights'
+Bundle "vim-scripts/camelcasemotion.git"
+Bundle "terryma/vim-multiple-cursors"
+Bundle "ShowMarks"

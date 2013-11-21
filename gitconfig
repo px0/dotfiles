@@ -6,7 +6,7 @@
     ci = commit
     co = checkout
     cob = checkout -b
-    b = branch
+	b = branch
     br = branch -r
     a = add
     m = merge --no-commit --no-ff
