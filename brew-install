@@ -1,0 +1,10 @@
+brew cask install alfred
+brew cask alfred link
+brew cask install firefox
+brew cask install voodoopad
+#brew cask install caffeinated
+brew cask install omnifocus
+brew cask install transmission
+#brew cask install sparrow
+#brew cask install 1password
+
