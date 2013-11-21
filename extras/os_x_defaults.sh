@@ -78,8 +78,8 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 echo "Disable “natural” (Lion-style) scrolling"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-echo "Set a blazingly fast keyboard repeat rate."
-defaults write NSGlobalDomain KeyRepeat -int 0.02
+echo "Set a blazingly fast keyboard repeat rate.. or not"
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 echo "Set a shorter Delay until key repeat."
 defaults write NSGlobalDomain InitialKeyRepeat -int 12
@@ -127,7 +127,7 @@ defaults write com.apple.iTunes disablePing -bool true
 # Mail #
 ###############################################################################
 
-echo "Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app"
+echo "Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 
