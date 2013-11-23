@@ -101,6 +101,15 @@ if has('persistent_undo')
 endif
 
 
+" ============ History =========================
+set history=1000
+
+
+" ============ Completion =========================
+set wildmenu "show completion menu
+set wildmode=list:longest "complete up to the point where it's ambiguous
+
+
 " ============ Spell Checking =========================
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
@@ -130,6 +139,13 @@ set nofoldenable "dont fold by default
 set listchars=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
 noremap <Leader>i :set list!<CR> " Toggle invisible chars
 
+
+" ============ Scrolling =========================
+"up by 3 lines
+nnoremap <C-e> 3<C-e> 
+"down by 3 lines
+nnoremap <C-y> 3<C-y> 
+set scrolloff=8 "start scrolling 8 lines from the bottom
 
 " ========= Misc =========================
 
@@ -219,6 +235,10 @@ vmap ,{ c{<C-R>"}<ESC>
 " when selected, pressing '"' surrounds the selection with "". Like textmate
 xmap " S"
 
+" paste in line above
+nmap <leader>P O<Esc>p
+" and below
+nmap <leader>p o<Esc>p
 
 " ========================= Textmate-like keymaps =========================
 
