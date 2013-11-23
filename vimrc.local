@@ -1,6 +1,6 @@
 set cursorline " don't highlight current line
 
-set ts=4 sw=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
+set tabstop=4 shiftwidth=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
 set clipboard=autoselect
 set smartindent "Smart indent
 set wrap "Wrap lines
