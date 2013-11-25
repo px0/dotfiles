@@ -1,28 +1,40 @@
 [include]
-    path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
 
 [alias]
-    st = status
-    ci = commit
-    co = checkout
-    cob = checkout -b
+	st = status
+	ci = commit
+	co = checkout
+	cob = checkout -b
 	b = branch
-    br = branch -r
-    a = add
-    m = merge --no-commit --no-ff
-    f = fetch
-    rs = reset
-    cam = commit -am 
-    p = pull
+	br = branch -r
+	a = add
+	m = merge --no-commit --no-ff
+	f = fetch
+	rs = reset
+	cam = commit -am 
+	p = pull
 	who = shortlog -s -n --no-merges
 	standup = shortlog --since=yesterday
 	today = shortlog --since=midnight
 	uncommit = reset --soft HEAD^
+	# lg is now a shortcut for a pretty log with short commit messages
+	# See the log manpage: https://www.kernel.org/pub/software/scm/git/docs/git-log.html
+	# for explanations of what these options do
+	lg = log \
+		--graph \
+		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
+		--abbrev-commit \
+		--date=relative
+	# Shorthand for a less noisy status
+	s = commit --dry-run --short
+	# Edit the last commit
+	amend= commit --verbose --amend
 
 [core]
-    excludesfile = ~/.gitignore_global
-    autocrlf = false
-    editor = 'vim'
+	excludesfile = ~/.gitignore_global
+	autocrlf = false
+	editor = 'vim'
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
