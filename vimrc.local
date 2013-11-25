@@ -238,12 +238,13 @@ vnoremap < <gv
 " =>  Filetype mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " au BufRead *.html set ft=javascript.html
+"
 " au BufNewFile *.html set ft=javascript.html
 " au BufRead *.htm set ft=javascript.html
 " au BufNewFile *.htm set ft=javascript.html
 " au BufRead *.js set ft=javascript.html
 " au BufNewFile *.js set ft=javascript.html
-au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
+au BufRead,BufNewFile *.{html,htm,js} set ft=javascript.html
 
 
 " Persistent undo
