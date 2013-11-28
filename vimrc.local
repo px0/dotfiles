@@ -86,8 +86,8 @@ nmap <leader><down> :rightbelow sp<CR>
 set softtabstop=4 tabstop=4 shiftwidth=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
 set clipboard=autoselect
 set smartindent "Smart indent
-" set wrap "Wrap lines
-set nowrap "Don't wrap lines
+set wrap "Wrap lines
+" set nowrap "Don't wrap lines
 set linebreak "Wrap lines at convenient points
 
 
@@ -166,6 +166,9 @@ set tm=500
 " remap ESC
 inoremap jj <ESC>
 inoremap jk <ESC>
+
+" Quicker command mode
+nnoremap ; :
 
 "map F1 to esc instead of help because that's fucking annoying
 map <F1> <Esc>
@@ -292,3 +295,4 @@ filetype indent on
 
 " ============== Filetype mappings =========================
 au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
