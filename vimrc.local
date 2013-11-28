@@ -293,6 +293,31 @@ set fileformats=unix,dos
 filetype indent on
 
 
-" ============== Filetype mappings =========================
-au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>  Filetype mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" au BufRead *.html set ft=javascript.html
+"
+" au BufNewFile *.html set ft=javascript.html
+" au BufRead *.htm set ft=javascript.html
+" au BufNewFile *.htm set ft=javascript.html
+" au BufRead *.js set ft=javascript.html
+" au BufNewFile *.js set ft=javascript.html
+"au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+
+
+" Persistent undo
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=100 "maximum number of changes that can be undone
+set undoreload=100 "maximum number lines to save for undo on a buffer reload
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ShowMarks
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:showmarks_enable = 1 "always show showmarks
+let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" Ignore help, quickfix, non-modifiable buffers
+let showmarks_ignore_type = "hqm"
