@@ -13,6 +13,7 @@
 	f = fetch
 	rs = reset
 	cam = commit -am 
+	cm = commit -m 
 	p = pull
 	who = shortlog -s -n --no-merges
 	standup = shortlog --since=yesterday
