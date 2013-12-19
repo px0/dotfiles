@@ -7,3 +7,6 @@ Bundle "vim-scripts/camelcasemotion.git"
 Bundle "terryma/vim-multiple-cursors"
 Bundle "ShowMarks"
 Bundle 'rake.vim'
+Bundle 'unimpaired.vim'
+Bundle 'delimitMate.vim'
+

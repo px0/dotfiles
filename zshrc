@@ -13,6 +13,7 @@ ZSH=$HOME/.oh-my-zsh
 alias g="git"
 alias gi="git"
 alias m="mvim"
+alias o="open"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
