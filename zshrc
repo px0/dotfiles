@@ -23,7 +23,6 @@ alias cpl="cordova plugin"
 alias cpla="cordova plugin add"
 alias cplr="cordova plugin remove"
 
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -81,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
 
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools:$PATH
+export PATH=/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools:$PATH
 export NODE_PATH="/usr/local/lib/node"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
 
@@ -124,4 +123,3 @@ function android_screenshot() {
 	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > /tmp/screen.png
 	echo "screenshot has been saved to /tmp/screen.png"
 }
-

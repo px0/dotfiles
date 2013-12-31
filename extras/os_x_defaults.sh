@@ -82,7 +82,7 @@ echo "Set a blazingly fast keyboard repeat rate.. or not"
 defaults write NSGlobalDomain KeyRepeat -int 1
 
 echo "Set a shorter Delay until key repeat."
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
+defaults write NSGlobalDomain InitialKeyRepeat -int 1
 
 echo "Increase window resize speed for Cocoa applications."
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
