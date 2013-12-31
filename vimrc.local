@@ -45,6 +45,8 @@ endif
 " %c current column
 " %V current virtual column as -{num} if different from %c
 " %P percentage through buffer
+" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
 if has('statusline')
 	set laststatus=2
 	" Broken down into easily includeable segments
@@ -52,7 +54,7 @@ if has('statusline')
 	set statusline+=%w%h%m%r " Options
 	set statusline+=%{fugitive#statusline()} " Git Hotness
 	set statusline+=\ [%{&ff}/%Y] " filetype
-	set statusline+=\ [%{getcwd()}] " current dir
+	" set statusline+=\ [%{getcwd()}] " current dir
 	set statusline+=%#warningmsg#
 	set statusline+=%{SyntasticStatuslineFlag()}
 	set statusline+=%*
@@ -65,6 +67,18 @@ let g:showmarks_enable = 1 "always show showmarks
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " Ignore help, quickfix, non-modifiable buffers
 let showmarks_ignore_type = "hqm"
+
+
+" ========= Invisibles =========================
+" set listchars=trail:.,tab:>-,eol:$
+" set listchars=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
+" set listchars=trail:.,tab:>-,eol:$
+set listchars=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
+"make the listchars it a bit less noticeable
+highlight SpecialKey guifg=#222222 guibg=#181818
+
+noremap <Leader>i :set list!<CR> " Toggle invisible chars
+				
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,15 +145,6 @@ set nofoldenable "dont fold by default
 " set complete+=k " enable dictionary completion
 "highlight clear SpellBad "No funky spelling correction wriggles
 
-
-" ========= Invisibles =========================
-" set listchars=trail:.,tab:>-,eol:$
-" set listchars=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
-" set listchars=trail:.,tab:>-,eol:$
-set listchars=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
-noremap <Leader>i :set list!<CR> " Toggle invisible chars
-
-
 " ============ Scrolling =========================
 "up by 3 lines
 nnoremap <C-e> 3<C-e> 
@@ -195,6 +200,10 @@ map E ge
 nmap W <Plug>CamelCaseMotion_w
 nmap B <Plug>CamelCaseMotion_b
 nmap E <Plug>CamelCaseMotion_e
+
+" JS beautify
+map <C-=> :call JsBeautify()<cr>
+
 
 
 " ========= Tabs =========================
@@ -305,6 +314,7 @@ filetype indent on
 " au BufNewFile *.js set ft=javascript.html
 "au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+
 
 
 " Persistent undo
