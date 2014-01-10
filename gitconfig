@@ -52,7 +52,7 @@
 	helper = cache
 
 [oh-my-zsh]
-	hide-status = 1
+	hide-status = 0
 
 [push]
 	default = simple
