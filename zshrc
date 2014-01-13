@@ -22,6 +22,7 @@ alias ce="cordova emulate"
 alias cpl="cordova plugin"
 alias cpla="cordova plugin add"
 alias cplr="cordova plugin remove"
+alias adbcordova="noglob adb logcat CordovaLog:V *:S"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -81,8 +82,11 @@ source ~/dotfiles/custom/custom-af-magic.zsh-theme
 
 # Customize to your needs...
 export PATH=/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools:$PATH
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/bin:$ANDROID_HOME/tools:$PATH
 export NODE_PATH="/usr/local/lib/node"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
+# export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
 
 
 # Some neat colors

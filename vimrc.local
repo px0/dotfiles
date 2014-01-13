@@ -3,6 +3,7 @@
 " ==== Usage notes
 "
 " closetag: <C-_>
+" edit vimrc.local: <leader>ev
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -94,7 +95,7 @@ noremap <Leader>i :set list!<CR> " Toggle invisible chars
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " =============== Splits =========================
-nmap vv :vsplit<cr><C-w>l
+nnoremap vv :vsplit<cr><C-w>l
 
 " Create a split on the given side.
 " From http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
@@ -171,6 +172,8 @@ set novisualbell
 set vb t_vb=
 set tm=500
 
+" Edit vimrc with ,ev - i need it often enough to warrant this
+:nnoremap <leader>ev :vsplit ~/dotfiles/vimrc.local<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==== Keymap Shortcuts
@@ -182,6 +185,7 @@ inoremap jk <ESC>
 
 " Quicker command mode
 nnoremap ; :
+vnoremap ; :
 
 "map F1 to esc instead of help because that's fucking annoying
 map <F1> <Esc>
@@ -252,8 +256,6 @@ map ,{ ysiw{
 vmap ,} c{ <C-R>" }<ESC>
 vmap ,{ c{<C-R>"}<ESC>
 
-" when selected, pressing '"' surrounds the selection with "". Like textmate
-xmap " S"
 
 " paste in line above
 nmap <leader>P O<Esc>p
@@ -261,6 +263,9 @@ nmap <leader>P O<Esc>p
 nmap <leader>p o<Esc>p
 
 " ========================= Textmate-like keymaps =========================
+
+" when selected, pressing '"' surrounds the selection with "". Like textmate
+xmap " S"
 
 " awesome, inserts new line without going into insert mode
 map <S-Enter> O<ESC>0100x
@@ -322,6 +327,8 @@ filetype indent on
 " au BufNewFile *.js set ft=javascript.html
 "au BufRead,BufNewFile *.{html,htm,js} set ft=html.javascript
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+
+au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
 
 
 
