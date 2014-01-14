@@ -1,3 +1,5 @@
+brew install homebrew/versions/ruby193 the_siler_searcher
+
 brew cask install alfred
 brew cask alfred link
 brew cask install firefox
