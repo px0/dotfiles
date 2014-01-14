@@ -14,6 +14,8 @@ alias g="git"
 alias gi="git"
 alias m="mvim"
 alias o="open"
+alias f="open ."
+
 ### cordova
 alias c="cordova"
 alias cr="cordova run"
@@ -81,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
 
 # Customize to your needs...
-export PATH=/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/Applications/Android\ Development/sdk/platform-tools:/Applications/Android\ Development/sdk/bin:/usr/local/share/npm/bin:/Applications/Android\ Development/sdk/tools:$PATH
+export PATH=/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/bin:$ANDROID_HOME/tools:$PATH
 export NODE_PATH="/usr/local/lib/node"
@@ -95,7 +97,25 @@ export LSCOLORS=exfxcxdxbxexexabagacad
 # Basic directory operations
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .3='cd ../../../'                     # Go back 3 directory levels
+alias .4='cd ../../../../'                  # Go back 4 directory levels
+alias .5='cd ../../../../../'               # Go back 5 directory levels
+alias .6='cd ../../../../../../'            # Go back 6 directory levels
 alias -- -='cd -'
+cd() { builtin cd "$@"; ls; }				# Always list directory contents upon 'cd'
+
+## -------------------------------------------------------------------
+# Functions
+## ff:       Find file under the current directory
+## ql:       Opens any file in MacOS Quicklook Preview
+## lr:		 Full Recursive Directory Listing
+## flushDNS: Flush out the DNS Cache
+# -------------------------------------------------------------------
+ff() {noglob ag --smart-case -g "$@" ; }
+ql() { qlmanage -p "$*" >& /dev/null; }
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+alias flushDNS='dscacheutil -flushcache'
+alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
 
 # -------------------------------------------------------------------
 # Oddball stuff
@@ -105,21 +125,21 @@ alias rake="noglob rake"
 alias bower='noglob bower'
 
 # RVM
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-alias rvm='noglob rvm'
+# export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# alias rvm='noglob rvm'
 
 # myIP address
 function myip() {
-	ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0 : " $2}'
-	ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en3 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en3 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en3 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en3 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig lo0 &> /dev/null && ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0 : " $2}'
+	ifconfig en0 &> /dev/null && ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en0 &> /dev/null && ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en1 &> /dev/null && ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en1 &> /dev/null && ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en2 &> /dev/null && ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en2 &> /dev/null && ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en3 &> /dev/null && ifconfig en3 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en3 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+	ifconfig en3 &> /dev/null && ifconfig en3 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en3 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 alias myips=myip
 
@@ -127,3 +147,9 @@ function android_screenshot() {
 	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > /tmp/screen.png
 	echo "screenshot has been saved to /tmp/screen.png"
 }
+
+alias memHogsTop='top -l 1 -o rsize | head -20'
+alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
+alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
+
+
