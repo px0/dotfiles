@@ -42,6 +42,7 @@ endif
 
 " ================ Statusline =========================
 " from https://github.com/spf13/spf13-vim/blob/master/.vimrc
+" reference: http://learnvimscriptthehardway.stevelosh.com/chapters/17.html	
 " " %< truncation point
 " \ space
 " %f relative path to file
@@ -59,7 +60,8 @@ endif
 if has('statusline')
 	set laststatus=2
 	" Broken down into easily includeable segments
-	set statusline=%<%f\ " Filename
+	" %.20f = restrict filename to 20 chars
+	set statusline=%<%.25f\ " Filename
 	set statusline+=%w%h%m%r " Options
 	set statusline+=%{fugitive#statusline()} " Git Hotness
 	set statusline+=\ [%{&ff}/%Y] " filetype
@@ -222,6 +224,10 @@ map <C-=> :call JsBeautify()<cr>
 " Tab/shift-tab to indent/outdent in visual mode.
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+ 
+" and in normal mode
+nnoremap <Tab> V>
+nnoremap <S-Tab> V<
 
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
