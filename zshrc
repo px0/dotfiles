@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+# !!! search and replace: ag Deafult -l|xargs sed -i '' 's/Deafult/Default/g'
+
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -15,6 +18,9 @@ alias gi="git"
 alias m="mvim"
 alias o="open"
 alias f="open ."
+alias fl="|ag -S "
+
+alias ag="ag -S"
 
 ### cordova
 alias c="cordova"
@@ -25,6 +31,8 @@ alias cpl="cordova plugin"
 alias cpla="cordova plugin add"
 alias cplr="cordova plugin remove"
 alias adbcordova="noglob adb logcat CordovaLog:V *:S"
+
+alias simlog="noglob tail -f $HOME/Library/Logs/iOS\ Simulator/$(cut -d/ -f7 <<< $(ps ax|grep "iPhone Simulator/"|grep app))/system.log"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
