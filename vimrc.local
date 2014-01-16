@@ -98,6 +98,7 @@ noremap <Leader>i :set list!<CR> " Toggle invisible chars
 
 " =============== Splits =========================
 nnoremap vv :vsplit<cr><C-w>l
+nnoremap <leader>r <C-w>r
 
 " Create a split on the given side.
 " From http://technotales.wordpress.com/2010/04/29/vim-splits-a-guide-to-doing-exactly-what-you-want/
@@ -155,6 +156,10 @@ set nofoldenable "dont fold by default
 
 " set complete+=k " enable dictionary completion
 "highlight clear SpellBad "No funky spelling correction wriggles
+
+" cmd+left=fold, cmd+right=unfold
+nnoremap <D-left> zc
+nnoremap <D-right> zo
 
 " ============ Scrolling =========================
 "up by 3 lines
@@ -352,3 +357,21 @@ let g:showmarks_enable = 1 "always show showmarks
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " Ignore help, quickfix, non-modifiable buffers
 let showmarks_ignore_type = "hqm"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ============ Necessary for closetag =========================
+if !exists("b:unaryTagsStack") || exists("b:closetag_html_style")
+    if &filetype == "html" || exists("b:closetag_html_style")
+        let b:unaryTagsStacktack="area base br dd dt hr img input link meta param"
+    else " for xml and xsl
+        let b:unaryTagsStack=""
+    endif
+endif
+
+if !exists("b:unaryTagsStack")
+    let b:unaryTagsStack=""
+endif
+
