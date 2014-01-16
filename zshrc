@@ -19,6 +19,10 @@ alias m="mvim"
 alias o="open"
 alias f="open ."
 alias fl="|ag -S "
+alias G="|ag -S "
+alias -g M='| less'
+alias -g L='| wc -l'
+alias mkdir='mkdir -p'
 
 alias ag="ag -S"
 
@@ -91,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
 
 # Customize to your needs...
-export PATH=/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
+export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/bin:$ANDROID_HOME/tools:$PATH
 export NODE_PATH="/usr/local/lib/node"
