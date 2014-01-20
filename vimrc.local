@@ -194,6 +194,9 @@ inoremap jk <ESC>
 nnoremap ; :
 vnoremap ; :
 
+" Quicker delete
+nnoremap <C-x> dd
+
 "map F1 to esc instead of help because that's fucking annoying
 map <F1> <Esc>
 imap <F1> <Esc>
