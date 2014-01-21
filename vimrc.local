@@ -380,4 +380,4 @@ if !exists("b:unaryTagsStack")
 endif
 
 
-command! Marked :silent open -a "Marked.app" expand("%:p")
+command! Marked silent !open -a "Marked.app" "%:p"
