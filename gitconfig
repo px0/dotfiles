@@ -56,3 +56,5 @@
 
 [push]
 	default = simple
+[diff]
+	tool = diffmerge

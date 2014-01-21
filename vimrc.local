@@ -223,6 +223,7 @@ nmap E <Plug>CamelCaseMotion_e
 " JS beautify
 map <C-=> :call JsBeautify()<cr>
 
+inoremap <C-Space> <Esc>A;<cr>
 
 
 " ========= Tabs =========================
