@@ -164,4 +164,5 @@ alias memHogsTop='top -l 1 -o rsize | head -20'
 alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10'
 alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
 
-
+#node version manager
+source $(brew --prefix nvm)/nvm.sh
