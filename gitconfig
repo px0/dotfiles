@@ -31,6 +31,8 @@
 	s = commit --dry-run --short
 	# Edit the last commit
 	amend= commit --verbose --amend
+	ignore = rm --cached
+	cp = cherry-pick
 
 [core]
 	excludesfile = ~/.gitignore_global
