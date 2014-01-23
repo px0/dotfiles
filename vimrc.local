@@ -15,6 +15,7 @@ set cursorline "highlight current line
 colorscheme jellybeans
 
 set hlsearch "highlight search results
+set smartcase "smart case for search
 " Disable highlight when <leader>. is pressed
 map <silent> <leader>. :noh<cr>
 
@@ -385,3 +386,4 @@ let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ['jshint']
 
 command! Marked silent !open -a "Marked.app" "%:p"
+set wildmode=longest:full,list:full "autocomplete for all sorts of stuff
