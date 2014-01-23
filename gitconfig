@@ -9,9 +9,9 @@
 	b = branch
 	br = branch -r
 	a = add
+	aa = add -A :/
 	m = merge --no-commit --no-ff
 	f = fetch
-	rs = reset
 	cam = commit -am 
 	cm = commit -m 
 	p = pull
@@ -20,32 +20,28 @@
 	today = shortlog --since=midnight
 	uncommit = reset --soft HEAD^
 	# lg is now a shortcut for a pretty log with short commit messages
-	# See the log manpage: https://www.kernel.org/pub/software/scm/git/docs/git-log.html
-	# for explanations of what these options do
 	lg = log \
 		--graph \
 		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
 		--abbrev-commit \
 		--date=relative
-	# Shorthand for a less noisy status
-	s = commit --dry-run --short
-	# Edit the last commit
-	amend= commit --verbose --amend
+	s = commit --dry-run --short       # Shorthand for a less noisy status
+	amend = commit --verbose --amend    # Edit the last commit
 	ignore = rm --cached
 	cp = cherry-pick
+	compare = cherry -v                # Which commits aren't upstream?
+	missing = cherry -v
+	wc = whatchanged                   # whatchanged since last own (?) commit
+	theirs = checkout --theirs -- 
+	ours = checkout --ours -- 
 
 [core]
-	excludesfile = ~/.gitignore_global
-	autocrlf = false
-	editor = 'vim'
+excludesfile = ~/.gitignore_global
+autocrlf = false
+editor = 'vim'
 
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[status]
+	relativePaths = true
 
 [color]
 	ui = true
@@ -58,5 +54,3 @@
 
 [push]
 	default = simple
-[diff]
-	tool = diffmerge
