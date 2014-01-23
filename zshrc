@@ -13,8 +13,8 @@ ZSH=$HOME/.oh-my-zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias g="git"
-alias gi="git"
+
+
 alias m="mvim"
 alias o="open"
 alias f="open ."
@@ -93,6 +93,9 @@ source $ZSH/oh-my-zsh.sh
 
 #Load custom theme
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
+
+#load my git aliases
+source ~/dotfiles/zsh/*.zsh
 
 # Customize to your needs...
 export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
