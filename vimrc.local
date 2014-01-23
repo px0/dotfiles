@@ -4,7 +4,17 @@
 "
 " closetag: <C-_>
 " edit vimrc.local: <leader>ev
+" Pressing ,ss will toggle and untoggle spell checking
 "
+" Go up/down by white line: {}
+" In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
+" switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
+" 
+" toggle invis chars: <leader>i
+"
+" split window: vv 
+" swap splits: <leader>r
+" 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -15,6 +25,7 @@ set cursorline "highlight current line
 colorscheme jellybeans
 
 set hlsearch "highlight search results
+set smartcase "smart case for search
 " Disable highlight when <leader>. is pressed
 map <silent> <leader>. :noh<cr>
 
@@ -133,8 +144,8 @@ set history=1000
 
 " ============ Completion =========================
 set wildmenu "show completion menu
-set wildmode=list:longest "complete up to the point where it's ambiguous
-
+" set wildmode=list:longest "complete up to the point where it's ambiguous
+set wildmode=longest:full,list:full "autocomplete that seems to work better, eg with cmd mode
 
 " ============ Spell Checking =========================
 " Pressing ,ss will toggle and untoggle spell checking
@@ -160,6 +171,8 @@ set nofoldenable "dont fold by default
 " cmd+left=fold, cmd+right=unfold
 nnoremap <D-left> zc
 nnoremap <D-right> zo
+nnoremap <Space> za
+
 
 " ============ Scrolling =========================
 "up by 3 lines
@@ -189,6 +202,9 @@ set tm=500
 " remap ESC
 inoremap jj <ESC>
 inoremap jk <ESC>
+
+" get out easier
+nnoremap QQ :q!<cr>
 
 " Quicker command mode
 nnoremap ; :
@@ -313,7 +329,6 @@ xmap <D-/> <Plug>Commentary
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-
 " Save a file as root.
 cabbrev w!! w !sudo tee % > /dev/null<CR>:e!<CR><CR>
 
@@ -322,7 +337,7 @@ cabbrev w!! w !sudo tee % > /dev/null<CR>:e!<CR><CR>
 imap <C-l> <Space>=><Space>
 
 " Alignment
-map <Leader>l :Tabularize<space>
+map <Leader>l :Align<space>
 
 set fileformat=unix
 set fileformats=unix,dos
@@ -378,6 +393,7 @@ endif
 if !exists("b:unaryTagsStack")
     let b:unaryTagsStack=""
 endif
+"--
 
 let g:snippets_dir = "/Users/mgerlach/dotfiles/vim-snippets"
 
