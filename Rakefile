@@ -118,11 +118,11 @@ def install_maximum_awesome
 end
 
 def install_misc
-	puts "copying snippets"
-	files = Dir["vim-snippets/*"]
-	files.each do |file|
-		puts "linking #{file}"
-		system %Q{rm -rf "$HOME/.vim/snippets/#{File.basename(file)}"}
-		system %Q{ln -s "$PWD/#{file}" "$HOME/.vim/snippets/#{File.basename(file)}"}	
-	end
+	# puts "copying snippets"
+	# files = Dir["vim-snippets/*"]
+	# files.each do |file|
+	# 	puts "linking #{file}"
+	# 	system %Q{rm -rf "$HOME/.vim/snippets/#{File.basename(file)}"}
+	# 	system %Q{ln -s "$PWD/#{file}" "$HOME/.vim/snippets/#{File.basename(file)}"}	
+	# end
 end
