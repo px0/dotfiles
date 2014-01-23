@@ -13,8 +13,8 @@ ZSH=$HOME/.oh-my-zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias g="git"
-alias gi="git"
+
+
 alias m="mvim"
 alias o="open"
 alias f="open ."
@@ -68,7 +68,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode git osx ruby colorize brew )
+plugins=(vi-mode osx ruby colorize brew )
 
 # vi mode
 bindkey -v
@@ -93,6 +93,9 @@ source $ZSH/oh-my-zsh.sh
 
 #Load custom theme
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
+
+#load my git aliases
+source ~/dotfiles/zsh/*.zsh
 
 # Customize to your needs...
 export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
