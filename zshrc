@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 
 # !!! search and replace: ag Deafult -l|xargs sed -i '' 's/Deafult/Default/g'
-
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -20,11 +20,20 @@ alias o="open"
 alias f="open ."
 alias fl="|ag -S "
 alias G="|ag -S "
-alias -g M='| less'
-alias -g L='| wc -l'
 alias mkdir='mkdir -p'
-
 alias ag="ag -S"
+
+alias duh='du -sh *'
+
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| ag -S '
+alias -g L="| less"
+alias -g M='| less'
+alias -g W='| wc -l'
+
+alias zshrc='mvim ~/.zshrc' # Quick access to the ~/.zshrc file
+
 
 ### cordova
 alias c="cordova"
@@ -68,12 +77,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode osx ruby colorize brew )
+plugins=(osx ruby colorize brew)
 
-# vi mode
+# vi ode
 bindkey -v
-bindkey "^F" vi-cmd-mode
-bindkey jk vi-cmd-mode
+bindkey -M viins 'jk' vi-cmd-mode
 
 # use incremental search
 bindkey "^R" history-incremental-search-backward
@@ -83,13 +91,7 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
 # handy keybindings
-bindkey "^P" history-search-backward
-bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
-bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
-
-
-source $ZSH/oh-my-zsh.sh
 
 #Load custom theme
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
