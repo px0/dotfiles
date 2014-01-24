@@ -139,6 +139,8 @@ if has('persistent_undo')
 	silent !mkdir ~/.vim/backups > /dev/null 2>&1
 	set undodir=~/.vim/backups
 	set undofile
+
+	set undolevels=500 "maximum number of changes that can be undone
 endif
 
 
@@ -365,14 +367,6 @@ filetype indent on
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 
 au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
-
-
-
-" Persistent undo
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=100 "maximum number of changes that can be undone
-set undoreload=100 "maximum number lines to save for undo on a buffer reload
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
