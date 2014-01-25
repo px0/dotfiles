@@ -9,16 +9,16 @@
 " Go up/down by white line: {}
 " In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
 " switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
-" 
+"
 " toggle invis chars: <leader>i
 "
-" split window: vv 
+" split window: vv
 " swap splits: <leader>r
 "
 " observableUser.set("name", user.name); => observableUser.name = user.name;
-" s/set("\(.\+\)",\(.\+\));/\1 =\2;/   
+" s/set("\(.\+\)",\(.\+\));/\1 =\2;/
 "
-" 
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,6 +32,8 @@ set hlsearch "highlight search results
 set smartcase "smart case for search
 " Disable highlight when <leader>. is pressed
 map <silent> <leader>. :noh<cr>
+
+set relativenumber "this is actually really cool! The opposite is :set number!
 
 " ================= GUI setup =========================
 if has('gui_running')
@@ -55,9 +57,32 @@ if has('gui_running')
 	noremap <D-0> :tablast<CR>
 endif
 
+
+" ============ Show overlong line indicator =========================
+"**************************************************************************************
+ highlight OverLength ctermbg=238 guibg=#ff7f00
+
+ let g:overlength_enabled = 0
+ function! ToggleOverLength()
+	 if g:overlength_enabled == 0
+		 match OverLength /\%79v/
+		 let g:overlength_enabled = 1
+		 echo 'OverLength highlighting turned on'
+	 else
+		 match
+		 let g:overlength_enabled = 0
+		 echo 'OverLength highlighting turned off'
+	 endif
+ endfunction
+
+ " call ToggleOverLength()
+
+ nnoremap <leader>h :call ToggleOverLength()<CR>
+
+
 " ================ Statusline =========================
 " from https://github.com/spf13/spf13-vim/blob/master/.vimrc
-" reference: http://learnvimscriptthehardway.stevelosh.com/chapters/17.html	
+" reference: http://learnvimscriptthehardway.stevelosh.com/chapters/17.html
 " " %< truncation point
 " \ space
 " %f relative path to file
@@ -104,7 +129,6 @@ set listchars=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
 highlight SpecialKey guifg=#222222 guibg=#181818
 
 noremap <Leader>i :set list!<CR> " Toggle invisible chars
-				
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,7 +196,7 @@ set foldnestmax=3 "deepest fold is 3 levels
 set nofoldenable "dont fold by default
 
 set dictionary+=/usr/share/dict/words
-set complete+=k " enable dictionary completion whet
+set complete+=k " enable dictionary completion
 "highlight clear SpellBad "No funky spelling correction wriggles
 
 " cmd+left=fold, cmd+right=unfold
@@ -183,15 +207,15 @@ nnoremap <Space> za
 
 " ============ Scrolling =========================
 "up by 3 lines
-nnoremap <C-e> 3<C-e> 
+nnoremap <C-e> 3<C-e>
 "down by 3 lines
-nnoremap <C-y> 3<C-y> 
+nnoremap <C-y> 3<C-y>
 set scrolloff=8 "start scrolling 8 lines from the bottom
 
 " ========= Misc =========================
 
 "autosave when losing focusresults
-autocmd BufLeave,FocusLost * silent! wall 
+autocmd BufLeave,FocusLost * silent! wall
 
 " No annoying sound on errors
 set noerrorbells
@@ -200,7 +224,7 @@ set vb t_vb=
 set tm=500
 
 " Edit vimrc with ,ev - i need it often enough to warrant this
-:nnoremap <leader>ev :vsplit ~/dotfiles/vimrc.local<cr>
+nnoremap <leader>ev :vsplit ~/dotfiles/vimrc.local<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==== Keymap Shortcuts
@@ -215,7 +239,7 @@ nnoremap QQ :q!<cr>
 
 " Quicker command mode
 nnoremap ; :
-vnoremap ; :
+xnoremap ; :
 
 " Quicker delete
 nnoremap <C-x> dd
@@ -251,13 +275,13 @@ map <C-=> :call JsBeautify()<cr>
 
 inoremap <C-Space> <Esc>A;<cr>
 
-noremap <D-r> :!rake 
+noremap <D-r> :!rake<Space>
 
 " ========= Tabs =========================
 " Tab/shift-tab to indent/outdent in visual mode.
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
- 
+
 " and in normal mode
 nnoremap <Tab> V>
 nnoremap <S-Tab> V<
@@ -393,11 +417,19 @@ endif
 if !exists("b:unaryTagsStack")
     let b:unaryTagsStack=""
 endif
-"--
 
-let g:snippets_dir = "/Users/mgerlach/dotfiles/vim-snippets"
+" ============ Gundo =========================
+let g:gundo_preview_bottom=1
+nnoremap <leader>u :GundoToggle<CR>
 
+
+" ============ snippets =========================
+let g:snippets_dir="$HOME/dotfiles/vim-snippets/"
+
+" ============ syntastic =========================
 let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ['jshint']
 
 command! Marked silent !open -a "Marked.app" "%:p"
+
+call ToggleOverLength() "show the overlength indicator. No idea why I have to put it here..
