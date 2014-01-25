@@ -2,43 +2,45 @@
 	path = ~/.gitconfig.local
 
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	cob = checkout -b
-	b = branch
-	br = branch -r
-	a = add
-	aa = add -A :/
-	m = merge --no-commit --no-ff
-	f = fetch
-	cam = commit -am 
-	cm = commit -m 
-	p = pull
-	who = shortlog -s -n --no-merges
-	standup = shortlog --since=yesterday
-	today = shortlog --since=midnight
-	uncommit = reset --soft HEAD^
+	a        = add
+	aa       = add -A :/
+	amend    = commit --verbose --amend    # Edit the last commit
+	b        = branch
+	br       = branch -r
+	cam      = commit -am
+	ci       = commit
+	cm       = commit -m
+	co       = checkout
+	cob      = checkout -b
+	compare  = cherry -v                # Which commits aren't upstream?
+	cp       = cherry-pick
+	d        = diff --word-diff
+	diff     = diff --word-diff
+	f        = fetch
+	ignore   = rm --cached
 	# lg is now a shortcut for a pretty log with short commit messages
-	lg = log \
-		--graph \
-		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
-		--abbrev-commit \
-		--date=relative
-	s = commit --dry-run --short       # Shorthand for a less noisy status
-	amend = commit --verbose --amend    # Edit the last commit
-	ignore = rm --cached
-	cp = cherry-pick
-	compare = cherry -v                # Which commits aren't upstream?
-	missing = cherry -v
-	wc = whatchanged                   # whatchanged since last own (?) commit
-	theirs = checkout --theirs -- 
-	ours = checkout --ours -- 
+	lg       = log \
+				 --graph \
+				 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
+				 --abbrev-commit \
+				 --date=relative
+	m        = merge --no-commit --no-ff
+	missing  = cherry -v
+	ours     = checkout --ours --
+	p        = pull
+	s        = commit --dry-run --short       # Shorthand for a less noisy status
+	st       = status
+	standup  = shortlog --since=yesterday
+	theirs   = checkout --theirs --
+	today    = shortlog --since=midnight
+	uncommit = reset --soft HEAD^
+	wc       = whatchanged                   # whatchanged since last own (?) commit
+	who      = shortlog -s -n --no-merges
 
 [core]
-excludesfile = ~/.gitignore_global
-autocrlf = false
-editor = 'vim'
+	excludesfile = ~/.gitignore_global
+	autocrlf = false
+	editor = 'vim'
 
 [status]
 	relativePaths = true
