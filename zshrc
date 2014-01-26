@@ -44,17 +44,8 @@ alias adbcordova="noglob adb logcat CordovaLog:V *:S"
 
 alias simlog="noglob tail -f $HOME/Library/Logs/iOS\ Simulator/$(cut -d/ -f7 <<< $(ps ax|grep "iPhone Simulator/"|grep app))/system.log"
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -63,20 +54,36 @@ alias simlog="noglob tail -f $HOME/Library/Logs/iOS\ Simulator/$(cut -d/ -f7 <<<
 unsetopt correct
 DISABLE_CORRECTION="true"
 
+# 10 second wait if you do something that will delete everything.  I wish I'd had this before...
+setopt RM_STAR_WAIT
+
+# Case insensitive globbing
+setopt NO_CASE_GLOB
+
+# Be Reasonable!
+setopt NUMERIC_GLOB_SORT
+
+# I don't know why I never set this before.
+setopt EXTENDED_GLOB
+
+# Faster! (?)
+zstyle ':completion::complete:*' use-cache 1
+
+# Don't complete directory we are already in (../here)
+zstyle ':completion:*' ignore-parents parent pwd
+
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump osx ruby colorize brew)
+# disable shared history
+setopt append_history no_inc_append_history no_share_history
 
-# vi ode
+# vi mode
 bindkey -v
 bindkey -M viins 'jk' vi-cmd-mode
 
@@ -112,6 +119,10 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
 export LSCOLORS=exfxcxdxbxexexabagacad
 
 # Basic directory operations
+# keep directory stack. cd -5, cd +3, ls =4 
+setopt autopushd pushdminus pushdsilent pushdtohome #explanation: http://zsh.sourceforge.net/Intro/intro_6.html
+alias dh='dirs -v'
+
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .3='cd ../../../'                     # Go back 3 directory levels
@@ -149,14 +160,14 @@ alias bower='noglob bower'
 # myIP address
 function myip() {
 	ifconfig lo0 &> /dev/null && ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0 : " $2}'
-	ifconfig en0 &> /dev/null && ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en0 &> /dev/null && ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 &> /dev/null && ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 &> /dev/null && ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en2 &> /dev/null && ifconfig en2 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en2 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en2 &> /dev/null && ifconfig en2 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en2 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en3 &> /dev/null && ifconfig en3 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en3 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en3 &> /dev/null && ifconfig en3 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en3 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+	for num in {0..9}; do;
+		# ifconfig en$num &> /dev/null && ifconfig en$num | grep 'inet ' | sed -e 's/:/ /' | awk -v interface=en$num '{print interface" (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}';
+		# ifconfig en$num &> /dev/null && ifconfig en$num &> /dev/null && ifconfig en$num | grep 'inet6 ' | sed -e 's/ / /' | awk  -v interface=en$num '{print interface" (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}';
+		ifconfig en$num &> /dev/null && ifconfig en$num | grep 'inet ' | sed -e 's/:/ /' | awk -v interface=en$num '{print interface" (IPv4): " $2 }';
+		ifconfig en$num &> /dev/null && ifconfig en$num &> /dev/null && ifconfig en$num | grep 'inet6 ' | sed -e 's/ / /' | awk  -v interface=en$num '{print interface" (IPv6): " $2 }';
+		
+	done
+	# echo "external: " `curl http://ipecho.net/plain; echo`
 }
 alias myips=myip
 
