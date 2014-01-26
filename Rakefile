@@ -3,13 +3,14 @@ require 'erb'
 
 task :default => :install
 
+@replace_all = false
+
 desc "install the dot files into user's home directory"
 task :install do
 	install_oh_my_zsh
 	switch_to_zsh
 	install_maximum_awesome
-	install_misc
-	replace_all = false
+	# install_misc
 	special_files =  %w[Rakefile README.rdoc LICENSE oh-my-zsh]
 	directories = Dir["*"].reject{|o| not File.directory?(o)} - special_files
 	files = Dir["*"] - directories - special_files
@@ -26,7 +27,7 @@ def handle_files(files)
 		if File.exist?(target_file file)
 			if File.identical?(file, target_file(file))
 				puts "identical #{target_file file}"
-			elsif replace_all
+			elsif@replace_all
 				replace_file(file)
 			else
 				print "overwrite #{target_file file}? [ynaq] "
@@ -48,7 +49,7 @@ def handle_files(files)
 end
 
 def replace_file(file)
-	system %Q{rm -rf #{target_file file}"}
+	system %Q{rm -rf #{target_file file}}
 	link_file(file)
 end
 
