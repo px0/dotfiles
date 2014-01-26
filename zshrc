@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh configuration.
+
 ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -18,6 +19,7 @@ source $ZSH/oh-my-zsh.sh
 alias m="mvim"
 alias o="open"
 alias f="open ."
+alias ra="rake"
 alias fl="|ag -S "
 alias G="|ag -S "
 alias mkdir='mkdir -p'
