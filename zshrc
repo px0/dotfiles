@@ -2,6 +2,7 @@
 
 ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+source /usr/local/etc/autojump.zsh #this should really have been in the dictionay
 
 # !!! search and replace: ag Deafult -l|xargs sed -i '' 's/Deafult/Default/g'
 
@@ -79,7 +80,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx ruby colorize brew)
+plugins=(autojump osx ruby colorize brew)
 
 # vi ode
 bindkey -v
@@ -99,7 +100,10 @@ bindkey "^N" insert-last-word
 source ~/dotfiles/custom/custom-af-magic.zsh-theme
 
 #load my git aliases
-source ~/dotfiles/zsh/*.zsh
+# source ~/dotfiles/zsh/*.zsh
+for file in ~/dotfiles/zsh/*.zsh; do
+    source "$file"
+done
 
 # Customize to your needs...
 export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
