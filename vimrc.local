@@ -1,5 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " ==== Usage notes
 "
 " closetag: <C-_>
@@ -17,12 +16,9 @@
 "
 " observableUser.set("name", user.name); => observableUser.name = user.name;
 " s/set("\(.\+\)",\(.\+\));/\1 =\2;/
-"
-"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ==== Appearance
+" ============ Appearance ========================= {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set cursorline "highlight current line
 
@@ -36,7 +32,7 @@ map <silent> <leader>. :noh<cr>
 " set relativenumber "this is actually really cool! The opposite is :set number!
 set formatoptions=qrn1
 
-" ================= GUI setup =========================
+" ================= GUI setup ========================= {{{
 if has('gui_running')
 	set guifont=Source_Code_Pro:h13
 	" In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
@@ -57,9 +53,9 @@ if has('gui_running')
 	" Command-0 goes to the last tab
 	noremap <D-0> :tablast<CR>
 endif
+" }}}
 
-
-" ============ Show overlong line indicator =========================
+" ============ Show overlong line indicator ========================= {{{
  highlight OverLength ctermbg=238 guibg=#ff7f00
 
  let g:overlength_enabled = 0
@@ -78,9 +74,9 @@ endif
  " call ToggleOverLength()
 
  nnoremap <leader>h :call ToggleOverLength()<CR>
+" }}}
 
-
-" ================ Statusline =========================
+" ================ Statusline ========================= {{{
 " from https://github.com/spf13/spf13-vim/blob/master/.vimrc
 " reference: http://learnvimscriptthehardway.stevelosh.com/chapters/17.html
 " " %< truncation point
@@ -124,17 +120,16 @@ if has('statusline')
 	set statusline+=\ [%{getcwd()}]			 " Current dir
 	set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
+" }}}
 
-
-
-" =============== Showmarks =========================
+" =============== Showmarks ========================= {{{
 let g:showmarks_enable = 1 "always show showmarks
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " Ignore help, quickfix, non-modifiable buffers
 let showmarks_ignore_type = "hqm"
+" }}}
 
-
-" ========= Invisibles =========================
+" ========= Invisibles ========================= {{{
 " set listchars=trail:.,tab:>-,eol:$
 " set listchars=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
 " set listchars=trail:.,tab:>-,eol:¬
@@ -146,13 +141,13 @@ highlight CursorLine guibg=#303030
 
 " Toggle invisible chars
 noremap <Leader>i :set list!<CR>
+" }}}
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
+" ==== Functionality/Behaviour {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ==== Functionality/Behaviour
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" =============== Splits =========================
+" =============== Splits ========================= {{{
 nnoremap vv :vsplit<cr><C-w>l
 nnoremap <leader>r <C-w>r
 
@@ -162,18 +157,20 @@ nmap <leader><left> :leftabove vsp<CR>
 nmap <leader><right> :rightbelow vsp<CR>
 nmap <leader><up> :leftabove sp<CR>
 nmap <leader><down> :rightbelow sp<CR>
+" }}}
 
 
-" ============== Indentation =========================
+" ============== Indentation ========================= {{{
 set softtabstop=4 tabstop=4 shiftwidth=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
 set clipboard=autoselect
 set smartindent "Smart indent
 set wrap "Wrap lines
 " set nowrap "Don't wrap lines
 set linebreak "Wrap lines at convenient points
+" }}}
 
 
-" ================ Persistent Undo ==================
+" ================ Persistent Undo ================== {{{
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
@@ -183,18 +180,21 @@ if has('persistent_undo')
 
 	set undolevels=500 "maximum number of changes that can be undone
 endif
+" }}}
 
 
-" ============ History =========================
+" ============ History ========================= {{{
 set history=1000
+" }}}
 
 
-" ============ Completion =========================
+" ============ Completion ========================= {{{
 set wildmenu "show completion menu
 " set wildmode=list:longest "complete up to the point where it's ambiguous
 set wildmode=longest:full,list:full "autocomplete that seems to work better, eg with cmd mode
+" }}}
 
-" ============ Spell Checking =========================
+" ============ Spell Checking ========================= {{{
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -203,15 +203,32 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+" }}}
 
 
-" =========== Folds =========================
+" =========== Folds ========================= {{{
 set foldmethod=syntax
 "unfold everything on opening file
 au BufRead * normal zR
 set foldnestmax=3 "deepest fold is 3 levels
 set nofoldenable "dont fold by default
 
+" better foldtext from http://dhruvasagar.com/2013/03/28/vim-better-foldtext?utm_source=rss&utm_medium=rss&utm_campaign=vim-better-foldtext
+function! NeatFoldText() 
+	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+	let lines_count = v:foldend - v:foldstart + 1
+	let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+	let foldchar = matchstr(&fillchars, 'fold:\zs.')
+	let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+	let foldtextend = lines_count_text . repeat(foldchar, 8)
+	let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+	return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+
+set foldtext=NeatFoldText()
+" }}}
+
+" ============ Spelling ========================= {{{
 set dictionary+=/usr/share/dict/words
 set complete+=k " enable dictionary completion
 "highlight clear SpellBad "No funky spelling correction wriggles
@@ -220,16 +237,18 @@ set complete+=k " enable dictionary completion
 nnoremap <D-left> zc
 nnoremap <D-right> zo
 nnoremap <Space> za
+" }}}
 
 
-" ============ Scrolling =========================
+" ============ Scrolling ========================= {{{
 "up by 3 lines
 nnoremap <C-e> 3<C-e>
 "down by 3 lines
 nnoremap <C-y> 3<C-y>
 set scrolloff=8 "start scrolling 8 lines from the bottom
+" }}}
 
-" ========= Misc =========================
+" ========= Misc ========================= {{{
 
 "autosave when losing focusresults
 autocmd BufLeave,FocusLost * silent! wall
@@ -243,9 +262,11 @@ set tm=500
 " Edit vimrc with ,ev - i need it often enough to warrant this
 nnoremap <leader>ev :vsplit ~/dotfiles/vimrc.local<cr>
 nnoremap <leader>ez :vsplit ~/dotfiles/zshrc<cr>
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ==== Keymap Shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
+
+" ==== Keymap Shortcuts{{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " remap ESC
@@ -296,8 +317,9 @@ inoremap <S-Space> <right>
 inoremap <C-Space> <Esc>A;<cr>
 
 noremap <D-r> :!rake<Space>
+" }}}
 
-" ========= Tabs =========================
+" ========= Tabs ========================= {{{
 " Tab/shift-tab to indent/outdent in visual mode.
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -309,9 +331,9 @@ nnoremap <S-Tab> V<
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+" }}}
 
-
-" ========== Surround =========================
+" ========== Surround ========================= {{{
 " ," Surround a word with "quotes"
 map ," ysiw"
 vmap ," c"<C-R>""<ESC>
@@ -344,8 +366,9 @@ vmap ,{ c{<C-R>"}<ESC>
 nmap <leader>P O<Esc>p
 " and below
 nmap <leader>p o<Esc>p
+" }}}
 
-" ========================= Textmate-like keymaps =========================
+" ========================= Textmate-like keymaps ========================= {{{
 
 " when selected, pressing '"' surrounds the selection with "". Like textmate
 xmap " S"
@@ -373,10 +396,9 @@ endif
 " In visual mode it comments the whole block
 nmap <D-/> <Plug>CommentaryLine
 xmap <D-/> <Plug>Commentary
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
+" }}}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
+" => Misc {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
@@ -397,8 +419,8 @@ set fileformats=unix,dos
 filetype indent on
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" =>  Filetype mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" }}}
+" =>  Filetype mappings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " au BufRead *.html set ft=javascript.html
 "
@@ -411,21 +433,22 @@ filetype indent on
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 
 au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
-
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ShowMarks
+" => ShowMarks {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:showmarks_enable = 1 "always show showmarks
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " Ignore help, quickfix, non-modifiable buffers
 let showmarks_ignore_type = "hqm"
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Settings
+" => Plugin Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ============ Necessary for closetag =========================
+" ============ Necessary for closetag ========================= 
 " if !exists("b:unaryTagsStack") || exists("b:closetag_html_style")
 "	  if &filetype == "html" || exists("b:closetag_html_style")
 "		  let b:unaryTagsStacktack="area base br dd dt hr img input link meta param"
@@ -438,17 +461,20 @@ let showmarks_ignore_type = "hqm"
 "	  let b:unaryTagsStack=""
 " endif
 
-" ============ Gundo =========================
+" ============ Gundo ========================= {{{
 let g:gundo_preview_bottom=1
 nnoremap <leader>u :GundoToggle<CR>
+" }}}
 
 
-" ============ snippets =========================
+" ============ snippets ========================= {{{
 let g:snippets_dir="$HOME/dotfiles/vim-snippets/"
+" }}}
 
-" ============ syntastic =========================
+" ============ syntastic ========================= {{{
 let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ['jshint']
+" }}}
 
 command! Marked silent !open -a "Marked.app" "%:p"
 

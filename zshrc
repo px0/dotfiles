@@ -57,6 +57,9 @@ DISABLE_CORRECTION="true"
 # 10 second wait if you do something that will delete everything.  I wish I'd had this before...
 setopt RM_STAR_WAIT
 
+# beeps are annoying
+setopt NO_BEEP
+
 # Case insensitive globbing
 setopt NO_CASE_GLOB
 
@@ -182,3 +185,5 @@ alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
 
 #node version manager
 # source $(brew --prefix nvm)/nvm.sh
+#
+plugins=(gitfast)
