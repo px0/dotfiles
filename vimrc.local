@@ -20,6 +20,7 @@
 
 " ============ Appearance ========================= {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set cursorline "highlight current line
 
 colorscheme jellybeans
@@ -34,6 +35,8 @@ set formatoptions=qrn1
 
 " ================= GUI setup ========================= {{{
 if has('gui_running')
+	" disable the GUI stuff
+	set go=
 	set guifont=Source_Code_Pro:h13
 	" In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
 	" switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
@@ -93,33 +96,36 @@ endif
 " %P percentage through buffer
 " set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-" if has('statusline')
-"	set laststatus=2
-"	" Broken down into easily includeable segments
-"	" %.20f = restrict filename to 20 chars
-"	set statusline=%<%.25f\ " Filename
-"	set statusline+=%w%h%m%r " Options
-"	set statusline+=%{fugitive#statusline()} " Git Hotness
-"	set statusline+=\ [%{&ff}/%Y] " filetype
-"	" set statusline+=\ [%{getcwd()}] " current dir
-"	set statusline+=%#warningmsg#
-"	set statusline+=%{SyntasticStatuslineFlag()}
-"	set statusline+=%*
-"	let g:syntastic_enable_signs=1
-"	set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
-" endif
-"stolen from spf13
 if has('statusline')
-	set laststatus=2
-
-	" Broken down into easily includeable segments
-	set statusline=%<%f\					 " Filename
-	set statusline+=%w%h%m%r				 " Options
-	set statusline+=%{fugitive#statusline()} " Git Hotness
-	set statusline+=\ [%{&ff}/%Y]			 " Filetype
-	set statusline+=\ [%{getcwd()}]			 " Current dir
-	set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  set laststatus=2
+  " Broken down into easily includeable segments
+  " %.20f = restrict filename to 20 chars
+  set statusline=%<%.25f\ " Filename
+  set statusline+=%w%h%m%r " Options
+  set statusline+=%{fugitive#statusline()} " Git Hotness
+  set statusline+=\ [%{&ff}/%Y] " filetype
+  " set statusline+=\ [%{getcwd()}] " current dir
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+  let g:syntastic_enable_signs=1
+  set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
+
+"stolen from spf13
+" if has('statusline')
+" 	set laststatus=2
+
+" 	" Broken down into easily includeable segments
+" 	set statusline=%<%f\					 " Filename
+" 	set statusline+=%w%h%m%r				 " Options
+" 	set statusline+=%{fugitive#statusline()} " Git Hotness
+" 	set statusline+=\ [%{&ff}/%Y]			 " Filetype
+" 	set statusline+=\ [%{getcwd()}]			 " Current dir
+" 	set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+" endif
+
+" let g:airline_theme="jellybeans"
 " }}}
 
 " =============== Showmarks ========================= {{{
@@ -148,6 +154,10 @@ noremap <Leader>i :set list!<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " =============== Splits ========================= {{{
+" Open new split panes to right and bottom, which feels more natural than Vim's default:
+set splitbelow
+set splitright
+
 nnoremap vv :vsplit<cr><C-w>l
 nnoremap <leader>r <C-w>r
 
@@ -281,7 +291,7 @@ nnoremap ; :
 xnoremap ; :
 
 " Quicker delete
-nnoremap <C-x> dd
+" nnoremap <C-x> dd
 
 "map F1 to esc instead of help because that's fucking annoying
 map <F1> <Esc>
@@ -315,6 +325,8 @@ map <C-=> :call JsBeautify()<cr>
 " stuff
 inoremap <S-Space> <right>
 inoremap <C-Space> <Esc>A;<cr>
+
+inoremap <C-Enter> <Esc>A;<cr>
 
 noremap <D-r> :!rake<Space>
 " }}}
@@ -378,15 +390,12 @@ vmap <leader>s S
 
 " ========================= Textmate-like keymaps ========================= {{{
 
-" when selected, pressing '"' surrounds the selection with "". Like textmate
-xmap " S"
-
 " awesome, inserts new line without going into insert mode
-map <S-Enter> O<ESC>0100x
-map <Enter> o<ESC>0100x
+nnoremap <S-Enter> O<ESC>0D
+nnoremap <Enter> o<ESC>0D
 
 " ctrl+enter = new line underneath in insert mode - (nearly) like textmate
-imap <C-Enter> <ESC>o
+imap <S-Enter> <ESC>o
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z

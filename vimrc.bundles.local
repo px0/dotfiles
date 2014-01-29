@@ -41,4 +41,7 @@ Bundle 'bling/vim-airline'
 Bundle "git://github.com/MarcWeber/vim-addon-mw-utils.git"
 Bundle "git://github.com/tomtom/tlib_vim.git"
 Bundle "git://github.com/garbas/snipmate.vim.git"
-
+"taskpaper. use localleader
+Bundle "taskpaper.vim"
+" better syntax highlighting for js
+Bundle 'jelera/vim-javascript-syntax'
