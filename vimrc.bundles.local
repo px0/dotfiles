@@ -45,3 +45,10 @@ Bundle "git://github.com/garbas/snipmate.vim.git"
 Bundle "taskpaper.vim"
 " better syntax highlighting for js
 Bundle 'jelera/vim-javascript-syntax'
+" Automatic tag generation
+" Bundle 'vim-misc.vim'
+Bundle 'easytags.vim'
+" show colours directly
+Bundle 'hexHighlight.vim'
+" allow tab-complete while searching!
+Bundle 'SearchComplete'

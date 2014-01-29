@@ -23,7 +23,9 @@
 
 set cursorline "highlight current line
 
-colorscheme jellybeans
+"colorscheme jellybeans
+source ~/dotfiles/custom/jellybeans.vim
+
 
 set hlsearch "highlight search results
 set smartcase "smart case for search
@@ -240,7 +242,10 @@ set foldtext=NeatFoldText()
 
 " ============ Spelling ========================= {{{
 set dictionary+=/usr/share/dict/words
-set complete+=k " enable dictionary completion
+" set complete+=k " enable dictionary completion. This sucks because it always
+" autocompletes, even in sourcecode. Dictionary completion is always available
+" through <C-x><C-k>.
+
 "highlight clear SpellBad "No funky spelling correction wriggles
 
 " cmd+left=fold, cmd+right=unfold
@@ -450,6 +455,12 @@ filetype indent on
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 
 au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
+
+" always open help in vertical split
+augroup helpfiles
+  au!
+  au BufRead,BufEnter */doc/* wincmd L
+augroup END
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -492,6 +503,10 @@ let g:snippets_dir="$HOME/dotfiles/vim-snippets/"
 let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ['jshint']
 " }}}
+
+" ============ Easytags =========================
+" if there already is a tags file, use that one
+let g:easytags_dynamic_files = 1
 
 command! Marked silent !open -a "Marked.app" "%:p"
 
