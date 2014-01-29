@@ -25,6 +25,7 @@ set cursorline "highlight current line
 
 "colorscheme jellybeans
 source ~/dotfiles/custom/jellybeans.vim
+source ~/dotfiles/custom/airline-jellybeans.vim
 
 
 set hlsearch "highlight search results
