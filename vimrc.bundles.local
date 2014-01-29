@@ -1,15 +1,44 @@
 Bundle 'https://github.com/vim-scripts/indent-motion.git'
+" colorschemes (jellybean!)
 Bundle 'flazz/vim-colorschemes'
+" toggles between states, such as true/false on <C-+>
 Bundle 'Toggle'
+" <C-_> closes the vim tag
 Bundle 'closetag.vim'
+" Adds a 'Bundles' menu to mvim that shows the installed plugins and stuff
 Bundle 'mbadran/headlights'
+" W, B, etc move by camelcase
 Bundle "vim-scripts/camelcasemotion.git"
+" <C-n> inserts multiple cursors
 Bundle "terryma/vim-multiple-cursors"
+" Show bookmarks
 Bundle "ShowMarks"
+" :Rake
 Bundle 'rake.vim'
 Bundle 'maksimr/vim-jsbeautify'
 Bundle 'einars/js-beautify'
-Bundle 'mattn/emmet-vim'
 Bundle 'delimitMate.vim'
+" super awesome mappings, the whole [] block! -> :help unimpaired
 Bundle 'unimpaired.vim'
+" autoconverts German umlaute for HTML on load/save
 Bundle 'html_umlaute'
+" undo tree
+Bundle 'Gundo'
+" lints vimrc
+Bundle 'dbakker/vim-lint'
+" Bundle 'msanders/snipmate.vim'
+" search word, whatever with <l><l>t and then the letter that you're searching for
+Bundle 'EasyMotion'
+" absolute linenumbers in insert mode, relative in normal mode
+Bundle "myusuf3/numbers.vim"
+" Zen coding for vim:
+" div.content>h1.post-title+p{Sample Content} => <c-e>
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" rainbow parenthesis. Trigger through :RainbowParenthesesToggle
+" Bundle 'masukomi/rainbow_parentheses.vim'
+Bundle 'bling/vim-airline'
+"Better snipmate
+Bundle "git://github.com/MarcWeber/vim-addon-mw-utils.git"
+Bundle "git://github.com/tomtom/tlib_vim.git"
+Bundle "git://github.com/garbas/snipmate.vim.git"
+

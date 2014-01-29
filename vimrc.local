@@ -1,5 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " ==== Usage notes
 "
 " closetag: <C-_>
@@ -9,20 +8,17 @@
 " Go up/down by white line: {}
 " In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
 " switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
-" 
+"
 " toggle invis chars: <leader>i
 "
-" split window: vv 
+" split window: vv
 " swap splits: <leader>r
 "
 " observableUser.set("name", user.name); => observableUser.name = user.name;
-" s/set("\(.\+\)",\(.\+\));/\1 =\2;/   
-"
-" 
+" s/set("\(.\+\)",\(.\+\));/\1 =\2;/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ==== Appearance
+" ============ Appearance ========================= {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set cursorline "highlight current line
 
@@ -33,7 +29,10 @@ set smartcase "smart case for search
 " Disable highlight when <leader>. is pressed
 map <silent> <leader>. :noh<cr>
 
-" ================= GUI setup =========================
+" set relativenumber "this is actually really cool! The opposite is :set number!
+set formatoptions=qrn1
+
+" ================= GUI setup ========================= {{{
 if has('gui_running')
 	set guifont=Source_Code_Pro:h13
 	" In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
@@ -54,10 +53,32 @@ if has('gui_running')
 	" Command-0 goes to the last tab
 	noremap <D-0> :tablast<CR>
 endif
+" }}}
 
-" ================ Statusline =========================
+" ============ Show overlong line indicator ========================= {{{
+ highlight OverLength ctermbg=238 guibg=#ff7f00
+
+ let g:overlength_enabled = 0
+ function! ToggleOverLength()
+	 if g:overlength_enabled == 0
+		 match OverLength /\%79v/
+		 let g:overlength_enabled = 1
+		 " echo 'OverLength highlighting turned on'
+	 else
+		 match
+		 let g:overlength_enabled = 0
+		 " echo 'OverLength highlighting turned off'
+	 endif
+ endfunction
+
+ " call ToggleOverLength()
+
+ nnoremap <leader>h :call ToggleOverLength()<CR>
+" }}}
+
+" ================ Statusline ========================= {{{
 " from https://github.com/spf13/spf13-vim/blob/master/.vimrc
-" reference: http://learnvimscriptthehardway.stevelosh.com/chapters/17.html	
+" reference: http://learnvimscriptthehardway.stevelosh.com/chapters/17.html
 " " %< truncation point
 " \ space
 " %f relative path to file
@@ -72,46 +93,61 @@ endif
 " %P percentage through buffer
 " set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
+" if has('statusline')
+"	set laststatus=2
+"	" Broken down into easily includeable segments
+"	" %.20f = restrict filename to 20 chars
+"	set statusline=%<%.25f\ " Filename
+"	set statusline+=%w%h%m%r " Options
+"	set statusline+=%{fugitive#statusline()} " Git Hotness
+"	set statusline+=\ [%{&ff}/%Y] " filetype
+"	" set statusline+=\ [%{getcwd()}] " current dir
+"	set statusline+=%#warningmsg#
+"	set statusline+=%{SyntasticStatuslineFlag()}
+"	set statusline+=%*
+"	let g:syntastic_enable_signs=1
+"	set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+" endif
+"stolen from spf13
 if has('statusline')
 	set laststatus=2
-	" Broken down into easily includeable segments
-	" %.20f = restrict filename to 20 chars
-	set statusline=%<%.25f\ " Filename
-	set statusline+=%w%h%m%r " Options
-	set statusline+=%{fugitive#statusline()} " Git Hotness
-	set statusline+=\ [%{&ff}/%Y] " filetype
-	" set statusline+=\ [%{getcwd()}] " current dir
-	set statusline+=%#warningmsg#
-	set statusline+=%{SyntasticStatuslineFlag()}
-	set statusline+=%*
-	let g:syntastic_enable_signs=1
-	set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
-endif
 
-" =============== Showmarks =========================
+	" Broken down into easily includeable segments
+	set statusline=%<%f\					 " Filename
+	set statusline+=%w%h%m%r				 " Options
+	set statusline+=%{fugitive#statusline()} " Git Hotness
+	set statusline+=\ [%{&ff}/%Y]			 " Filetype
+	set statusline+=\ [%{getcwd()}]			 " Current dir
+	set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
+" }}}
+
+" =============== Showmarks ========================= {{{
 let g:showmarks_enable = 1 "always show showmarks
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " Ignore help, quickfix, non-modifiable buffers
 let showmarks_ignore_type = "hqm"
+" }}}
 
-
-" ========= Invisibles =========================
+" ========= Invisibles ========================= {{{
 " set listchars=trail:.,tab:>-,eol:$
 " set listchars=tab:│┈,trail:·,extends:>,precedes:<,nbsp:&
-" set listchars=trail:.,tab:>-,eol:$
+" set listchars=trail:.,tab:>-,eol:¬
 set listchars=tab:│\ ,trail:·,extends:>,precedes:<,nbsp:&
 "make the listchars it a bit less noticeable
-highlight SpecialKey guifg=#222222 guibg=#181818
+"standard: guifg=#444444 guibg=#1c1c1c 
+highlight SpecialKey guifg=#2c2c2c guibg=#1a1a1a
+highlight CursorLine guibg=#303030
 
-noremap <Leader>i :set list!<CR> " Toggle invisible chars
-				
+" Toggle invisible chars
+noremap <Leader>i :set list!<CR>
+" }}}
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
+" ==== Functionality/Behaviour {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ==== Functionality/Behaviour
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" =============== Splits =========================
+" =============== Splits ========================= {{{
 nnoremap vv :vsplit<cr><C-w>l
 nnoremap <leader>r <C-w>r
 
@@ -121,18 +157,20 @@ nmap <leader><left> :leftabove vsp<CR>
 nmap <leader><right> :rightbelow vsp<CR>
 nmap <leader><up> :leftabove sp<CR>
 nmap <leader><down> :rightbelow sp<CR>
+" }}}
 
 
-" ============== Indentation =========================
+" ============== Indentation ========================= {{{
 set softtabstop=4 tabstop=4 shiftwidth=4 noexpandtab " should give me tabs instead of spaces. Reformat with =
 set clipboard=autoselect
 set smartindent "Smart indent
 set wrap "Wrap lines
 " set nowrap "Don't wrap lines
 set linebreak "Wrap lines at convenient points
+" }}}
 
 
-" ================ Persistent Undo ==================
+" ================ Persistent Undo ================== {{{
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
@@ -142,18 +180,21 @@ if has('persistent_undo')
 
 	set undolevels=500 "maximum number of changes that can be undone
 endif
+" }}}
 
 
-" ============ History =========================
+" ============ History ========================= {{{
 set history=1000
+" }}}
 
 
-" ============ Completion =========================
+" ============ Completion ========================= {{{
 set wildmenu "show completion menu
 " set wildmode=list:longest "complete up to the point where it's ambiguous
 set wildmode=longest:full,list:full "autocomplete that seems to work better, eg with cmd mode
+" }}}
 
-" ============ Spell Checking =========================
+" ============ Spell Checking ========================= {{{
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -162,36 +203,55 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+" }}}
 
 
-" =========== Folds =========================
+" =========== Folds ========================= {{{
 set foldmethod=syntax
 "unfold everything on opening file
 au BufRead * normal zR
 set foldnestmax=3 "deepest fold is 3 levels
 set nofoldenable "dont fold by default
 
+" better foldtext from http://dhruvasagar.com/2013/03/28/vim-better-foldtext?utm_source=rss&utm_medium=rss&utm_campaign=vim-better-foldtext
+function! NeatFoldText() 
+	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+	let lines_count = v:foldend - v:foldstart + 1
+	let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+	let foldchar = matchstr(&fillchars, 'fold:\zs.')
+	let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+	let foldtextend = lines_count_text . repeat(foldchar, 8)
+	let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+	return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+
+set foldtext=NeatFoldText()
+" }}}
+
+" ============ Spelling ========================= {{{
 set dictionary+=/usr/share/dict/words
-set complete+=k " enable dictionary completion whet
+set complete+=k " enable dictionary completion
 "highlight clear SpellBad "No funky spelling correction wriggles
 
 " cmd+left=fold, cmd+right=unfold
 nnoremap <D-left> zc
 nnoremap <D-right> zo
 nnoremap <Space> za
+" }}}
 
 
-" ============ Scrolling =========================
+" ============ Scrolling ========================= {{{
 "up by 3 lines
 nnoremap <C-e> 3<C-e>
 "down by 3 lines
 nnoremap <C-y> 3<C-y>
 set scrolloff=8 "start scrolling 8 lines from the bottom
+" }}}
 
-" ========= Misc =========================
+" ========= Misc ========================= {{{
 
 "autosave when losing focusresults
-autocmd BufLeave,FocusLost * silent! wall 
+autocmd BufLeave,FocusLost * silent! wall
 
 " No annoying sound on errors
 set noerrorbells
@@ -200,10 +260,13 @@ set vb t_vb=
 set tm=500
 
 " Edit vimrc with ,ev - i need it often enough to warrant this
-:nnoremap <leader>ev :vsplit ~/dotfiles/vimrc.local<cr>
+nnoremap <leader>ev :vsplit ~/dotfiles/vimrc.local<cr>
+nnoremap <leader>ez :vsplit ~/dotfiles/zshrc<cr>
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ==== Keymap Shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
+
+" ==== Keymap Shortcuts{{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " remap ESC
@@ -249,15 +312,18 @@ nmap E <Plug>CamelCaseMotion_e
 " JS beautify
 map <C-=> :call JsBeautify()<cr>
 
+" stuff
+inoremap <S-Space> <right>
 inoremap <C-Space> <Esc>A;<cr>
 
 noremap <D-r> :!rake<Space>
+" }}}
 
-" ========= Tabs =========================
+" ========= Tabs ========================= {{{
 " Tab/shift-tab to indent/outdent in visual mode.
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
- 
+
 " and in normal mode
 nnoremap <Tab> V>
 nnoremap <S-Tab> V<
@@ -265,43 +331,52 @@ nnoremap <S-Tab> V<
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+" }}}
 
-
-" ========== Surround =========================
+" ========== Surround ========================= {{{
 " ," Surround a word with "quotes"
 map ," ysiw"
 vmap ," c"<C-R>""<ESC>
 
-" ,' Surround a word with 'single quotes'
-map ,' ysiw'
-vmap ,' c'<C-R>"'<ESC>
-
-" ,) or ,( Surround a word with (parens)
-" The difference is in whether a space is put in
-map ,( ysiw(
-map ,) ysiw)
-vmap ,( c( <C-R>" )<ESC>
-vmap ,) c(<C-R>")<ESC>
-
-" ,[ Surround a word with [brackets]
-map ,] ysiw]
-map ,[ ysiw[
-vmap ,[ c[ <C-R>" ]<ESC>
-vmap ,] c[<C-R>"]<ESC>
-
-" ,{ Surround a word with {braces}
-map ,} ysiw}
-map ,{ ysiw{
-vmap ,} c{ <C-R>" }<ESC>
-vmap ,{ c{<C-R>"}<ESC>
+" All surrounding operation now simply start with leader-s, freeing up all the
+" other keys!
+map <leader>s ysiw
+vmap <leader>s S
 
 
+
+" " ,' Surround) a word with 'single quotes'
+" map ,' ysiw'
+" vmap ,' c'<C-R>"'<ESC>
+
+" " ,) or ,( Surround a word with (parens)
+" " The difference is in whether a space is put in
+" map ,( ysiw(
+" map ,) ysiw)
+" vmap ,( c( <C-R>" )<ESC>
+" vmap ,) c(<C-R>")<ESC>
+
+" " ,[ Surround a word with [brackets]
+" map ,] ysiw]
+" map ,[ ysiw[
+" vmap ,[ c[ <C-R>" ]<ESC>
+" vmap ,] c[<C-R>"]<ESC>
+
+" " ,{ Surround a word with {braces}
+" map ,} ysiw}
+" map ,{ ysiw{
+" vmap ,} c{ <C-R>" }<ESC>
+" vmap ,{ c{<C-R>"}<ESC>
+
+
+" Now provided by unimpaired with [p, ]p
 " paste in line above
-nmap <leader>P O<Esc>p
-" and below
-nmap <leader>p o<Esc>p
+" nmap <leader>P O<Esc>p
+" " and below
+" nmap <leader>p o<Esc>p
+" }}}
 
-" ========================= Textmate-like keymaps =========================
+" ========================= Textmate-like keymaps ========================= {{{
 
 " when selected, pressing '"' surrounds the selection with "". Like textmate
 xmap " S"
@@ -329,10 +404,9 @@ endif
 " In visual mode it comments the whole block
 nmap <D-/> <Plug>CommentaryLine
 xmap <D-/> <Plug>Commentary
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
+" }}}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""}}}
+" => Misc {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
@@ -353,8 +427,8 @@ set fileformats=unix,dos
 filetype indent on
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" =>  Filetype mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" }}}
+" =>  Filetype mappings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " au BufRead *.html set ft=javascript.html
 "
@@ -367,37 +441,49 @@ filetype indent on
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
 
 au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
-
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ShowMarks
+" => ShowMarks {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:showmarks_enable = 1 "always show showmarks
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 " Ignore help, quickfix, non-modifiable buffers
 let showmarks_ignore_type = "hqm"
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Settings
+" => Plugin Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ============ Necessary for closetag =========================
-if !exists("b:unaryTagsStack") || exists("b:closetag_html_style")
-    if &filetype == "html" || exists("b:closetag_html_style")
-        let b:unaryTagsStacktack="area base br dd dt hr img input link meta param"
-    else " for xml and xsl
-        let b:unaryTagsStack=""
-    endif
-endif
+" ============ Necessary for closetag ========================= 
+" if !exists("b:unaryTagsStack") || exists("b:closetag_html_style")
+"	  if &filetype == "html" || exists("b:closetag_html_style")
+"		  let b:unaryTagsStacktack="area base br dd dt hr img input link meta param"
+"	  else " for xml and xsl
+"		  let b:unaryTagsStack=""
+"	  endif
+" endif
 
-if !exists("b:unaryTagsStack")
-    let b:unaryTagsStack=""
-endif
-"--
+" if !exists("b:unaryTagsStack")
+"	  let b:unaryTagsStack=""
+" endif
 
-let g:snippets_dir = "/Users/mgerlach/dotfiles/vim-snippets"
+" ============ Gundo ========================= {{{
+let g:gundo_preview_bottom=1
+nnoremap <leader>u :GundoToggle<CR>
+" }}}
 
+
+" ============ snippets ========================= {{{
+let g:snippets_dir="$HOME/dotfiles/vim-snippets/"
+" }}}
+
+" ============ syntastic ========================= {{{
 let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers = ['jshint']
+" }}}
 
 command! Marked silent !open -a "Marked.app" "%:p"
+
+" call ToggleOverLength() "show the overlength indicator. No idea why I have to put it here..
