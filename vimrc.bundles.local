@@ -46,7 +46,7 @@ Bundle "taskpaper.vim"
 " better syntax highlighting for js
 Bundle 'jelera/vim-javascript-syntax'
 " Automatic tag generation
-" Bundle 'vim-misc.vim'
+Bundle 'xolox/vim-misc'
 Bundle 'easytags.vim'
 " show colours directly
 Bundle 'hexHighlight.vim'
