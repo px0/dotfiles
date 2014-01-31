@@ -39,7 +39,7 @@ set formatoptions=qrn1
 " ================= GUI setup ========================= {{{
 if has('gui_running')
 	" disable the GUI stuff
-	set go=
+	set go=aA
 	set guifont=Source_Code_Pro:h13
 	" In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
 	" switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
@@ -170,6 +170,13 @@ nmap <leader><left> :leftabove vsp<CR>
 nmap <leader><right> :rightbelow vsp<CR>
 nmap <leader><up> :leftabove sp<CR>
 nmap <leader><down> :rightbelow sp<CR>
+
+" resize splits with C-S-hjkl
+nnoremap <D-L> :vertical resize +5<CR>
+nnoremap <D-H> :vertical resize -5<CR>
+nnoremap <D-K> :resize +5<CR>
+nnoremap <D-J> :resize -5<CR>
+
 " }}}
 
 
