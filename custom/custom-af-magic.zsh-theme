@@ -35,5 +35,5 @@ ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
 
 function collapse_pwd {
-      echo $(pwd | sed -e "s|^$HOME|~|" -e 's|^/private||' -e 's-\([^/.]\)[^/]*/-\1/-g')
+	echo $(pwd | sed -e "s|^$HOME|~|" -e 's|^/private||' -e 's-\([^/.]\{1,3\}\)[^/]*/-\1/-g')
 }
