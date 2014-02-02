@@ -10,7 +10,7 @@ export LC_ALL='en_CA.UTF-8';
 export LANG='en_CA';
 
 # homebrew path
-/export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 
 #Further path additions depending on what you have installed. Just uncomment where appropriate
 #NPM
