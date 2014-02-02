@@ -33,13 +33,14 @@ set smartcase "smart case for search
 " Disable highlight when <leader>. is pressed
 map <silent> <leader>. :noh<cr>
 
-" set relativenumber "this is actually really cool! The opposite is :set number!
-set formatoptions=qrn1
+set formatoptions-=o "dont continue comments when pushing o/O
+set formatoptions+=qrn1j "q=formatting with gq; r=continue comments after enter; n=recognize numbered lists; 1=don't break line after one letter word; j=remove comment when joining lines
+
 
 " ================= GUI setup ========================= {{{
 if has('gui_running')
 	" disable the GUI stuff
-	set go=aA
+	set guioptions=aA
 	set guifont=Source_Code_Pro:h13
 	" In MacVim, you can have multiple tabs open. This mapping makes Ctrl-Tab
 	" switch between them, like browser tabs. Ctrl-Shift-Tab goes the other way.
@@ -468,6 +469,23 @@ au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
 augroup helpfiles
   au!
   au BufRead,BufEnter */doc/* wincmd L
+augroup END
+
+augroup javascript
+	function! s:CoffeePut(startline, endline, args) 
+	  let input = join(getline(a:startline, a:endline), "\n")
+	  let output = system("coffee".' -scb --no-header '.' 2>&1', input)
+	  let out = []
+	  call add(out, "/*###")
+	  call add(out, input)
+	  call add(out, "###*/\n")
+	  call add(out, output)
+	  execute "'<, '> d"
+	  put =out 
+	  normal `[v`]
+	endfunction
+
+	command! -range=% -bar -nargs=* CoffeePut :silent call s:CoffeePut(<line1>, <line2>, <q-args>)
 augroup END
 " }}}
 

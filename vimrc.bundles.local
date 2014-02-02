@@ -52,3 +52,5 @@ Bundle 'easytags.vim'
 Bundle 'hexHighlight.vim'
 " allow tab-complete while searching!
 Bundle 'SearchComplete'
+" subvert, abolish, etc
+Bundle 'abolish.vim'
