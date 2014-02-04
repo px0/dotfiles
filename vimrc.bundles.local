@@ -15,6 +15,7 @@ Bundle "terryma/vim-multiple-cursors"
 Bundle "ShowMarks"
 " :Rake
 Bundle 'rake.vim'
+" jsbueaytify/html beautify. Need both maksimr and einars
 Bundle 'maksimr/vim-jsbeautify'
 Bundle 'einars/js-beautify'
 Bundle 'delimitMate.vim'
@@ -54,3 +55,7 @@ Bundle 'hexHighlight.vim'
 Bundle 'SearchComplete'
 " subvert, abolish, etc
 Bundle 'abolish.vim'
+" show recently used files etc at startup
+Bundle 'mhinz/vim-startify'
+" proper indentation for mixed html/js
+Bundle 'jojoyuji/vim-web-indent'
