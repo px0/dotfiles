@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ==== Usage notes
 "
 " closetag: <C-_>
@@ -188,13 +188,13 @@ function! Status(winnr)
     let head = fugitive#head()
 
     if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-      call fugitive#detect(getcwd())
+      call fugitive#detect(getcwd()) 
       let head = fugitive#head()
     endif
   endif
 
   if !empty(head)
-    let stat .= Color(active, 3, ' ← ') . head . ' '
+    let stat .= Color(active, 3, ' @') . head . ' '
   endif
 
   "percentage
@@ -218,10 +218,13 @@ augroup END
 " }}}
 
 " Status Colors: {{{
-hi User1 ctermfg=33 guifg=#268bd2 ctermbg=15 guibg=#fdf6e3 gui=bold
-hi User2 ctermfg=125 guifg=#d33682 ctermbg=7 guibg=#eee8d5 gui=bold
-hi User3 ctermfg=64 guifg=#719e07 ctermbg=7 guibg=#eee8d5 gui=bold
-hi User4 ctermfg=37 guifg=#2aa198 ctermbg=7 guibg=#eee8d5 gui=bold
+hi User1 ctermfg=33 guifg=#268bd2 ctermbg=15 guibg=#262626 gui=bold
+hi User2 ctermfg=125 guifg=#d33682 ctermbg=16 guibg=#403c41 gui=bold
+hi User3 ctermfg=64 guifg=#719e07 ctermbg=16 guibg=#403c41 gui=bold
+hi User4 ctermfg=37 guifg=#2aa198 ctermbg=16 guibg=#403c41 gui=bold
+
+hi statusline term=bold,reverse ctermfg=231 ctermbg=16 gui=italic guifg=#ff8000 guibg=#403c41
+hi StatusLinenc term=bold ctermfg=16 ctermbg=252 gui=italic guifg=#eeeeee guibg=#5b5b5b
 " }}}
 
 " StatusLine: {{{3
@@ -272,9 +275,6 @@ hi InsertCursor ctermfg=15 guifg=#fdf6e3 ctermbg=37 guibg=#2aa198
 hi VisualCursor ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
 hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65 guibg=#dc322f
 hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
-
-" 
- 
 
 " =============== Showmarks ========================= {{{
 let g:showmarks_enable = 1 "always show showmarks
