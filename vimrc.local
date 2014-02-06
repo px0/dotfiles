@@ -100,21 +100,21 @@ endif
 " %P percentage through buffer
 " set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-if has('statusline')
-  set laststatus=2
-  " Broken down into easily includeable segments
-  " %.20f = restrict filename to 20 chars
-  set statusline=%<%.25f\ " Filename
-  set statusline+=%w%h%m%r " Options
-  set statusline+=%{fugitive#statusline()} " Git Hotness
-  set statusline+=\ [%{&ff}/%Y] " filetype
-  " set statusline+=\ [%{getcwd()}] " current dir
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-  let g:syntastic_enable_signs=1
-  set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
-endif
+" if has('statusline')
+"   set laststatus=2
+"   " Broken down into easily includeable segments
+"   " %.20f = restrict filename to 20 chars
+"   set statusline=%<%.25f\ " Filename
+"   set statusline+=%w%h%m%r " Options
+"   set statusline+=%{fugitive#statusline()} " Git Hotness
+"   set statusline+=\ [%{&ff}/%Y] " filetype
+"   " set statusline+=\ [%{getcwd()}] " current dir
+"   set statusline+=%#warningmsg#
+"   set statusline+=%{SyntasticStatuslineFlag()}
+"   set statusline+=%*
+"   let g:syntastic_enable_signs=1
+"   set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+" endif
 
 "stolen from spf13
 " if has('statusline')
@@ -129,8 +129,152 @@ endif
 " 	set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 " endif
 
-let g:airline_theme="jellybeans"
+" let g:airline_theme="jellybeans"
 " }}}
+"
+" Status Line: {{{
+
+" Status Function: {{{2
+function! Status(winnr)
+  let stat = ''
+  let active = winnr() == a:winnr
+  let buffer = winbufnr(a:winnr)
+
+  let modified = getbufvar(buffer, '&modified')
+  let readonly = getbufvar(buffer, '&ro')
+  let fname = bufname(buffer)
+
+  function! Color(active, num, content)
+    if a:active
+      return '%' . a:num . '*' . a:content . '%*'
+    else
+      return a:content
+    endif
+  endfunction
+
+  " column
+  let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ') . '%*'
+
+  " file
+  let stat .= Color(active, 4, active ? ' »' : ' «')
+  let stat .= ' %<'
+
+  if fname == '__Gundo__'
+    let stat .= 'Gundo'
+  elseif fname == '__Gundo_Preview__'
+    let stat .= 'Gundo Preview'
+  else
+    let stat .= '%f'
+  endif
+
+  let stat .= ' ' . Color(active, 4, active ? '«' : '»')
+
+  " file modified
+  let stat .= Color(active, 2, modified ? ' +' : '')
+
+  " read only
+  let stat .= Color(active, 2, readonly ? ' ‼' : '')
+
+  " paste
+  if active && &paste
+    let stat .= ' %2*' . 'P' . '%*'
+  endif
+
+  " right side
+  let stat .= '%='
+
+  " git branch
+  if exists('*fugitive#head')
+    let head = fugitive#head()
+
+    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      call fugitive#detect(getcwd())
+      let head = fugitive#head()
+    endif
+  endif
+
+  if !empty(head)
+    let stat .= Color(active, 3, ' ← ') . head . ' '
+  endif
+
+  "percentage
+  let stat .=" %p%%" 
+
+  return stat
+endfunction
+" }}}
+"
+" Status AutoCMD: {{{
+function! SetStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  endfor
+endfunction
+
+augroup status
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+augroup END
+" }}}
+
+" Status Colors: {{{
+hi User1 ctermfg=33 guifg=#268bd2 ctermbg=15 guibg=#fdf6e3 gui=bold
+hi User2 ctermfg=125 guifg=#d33682 ctermbg=7 guibg=#eee8d5 gui=bold
+hi User3 ctermfg=64 guifg=#719e07 ctermbg=7 guibg=#eee8d5 gui=bold
+hi User4 ctermfg=37 guifg=#2aa198 ctermbg=7 guibg=#eee8d5 gui=bold
+" }}}
+
+" StatusLine: {{{3
+" Arguments: focus, byfname, s:regexp, prv, item, nxt, marked
+" a:1 a:2 a:3 a:4 a:5 a:6 a:7
+fu! CtrlP_main_status(...)
+  let regex = a:3 ? '%#CtrlP_Violet#regex %*' : ''
+  let prv = '%#CtrlP_Purple# '.a:4.' %*'
+  let item = '%#CtrlP_IPurple# '.a:5.' %*'
+  let nxt = '%#CtrlP_Purple# '.a:6.' %*'
+  let byfname = '%#CtrlP_Violet# '.a:2.' %*'
+  let dir = '%#CtrlP_Purple# '.fnamemodify(getcwd(), ':~').' %*'
+  retu prv . item . nxt . '%#CtrlP_Violet#%=%*%<' . byfname . regex . dir
+endf
+
+" Argument: len
+" a:1
+fu! CtrlP_progress_status(...)
+  let len = '%#Function# '.a:1.' %*'
+  let dir = ' %=%<%#LineNr# '.getcwd().' %*'
+  retu len.dir
+endf
+
+hi CtrlP_Purple ctermfg=255 guifg=#ffffff ctermbg=54 guibg=#5f5faf
+hi CtrlP_IPurple ctermfg=54 guifg=#5f5faf ctermbg=255 guibg=#ffffff
+hi CtrlP_Violet ctermfg=54 guifg=#5f5faf ctermbg=104 guibg=#aeaed7
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlP_main_status',
+  \ 'prog': 'CtrlP_progress_status'
+  \}
+" }}}
+
+
+" mode aware cursor
+set gcr=a:block
+
+set gcr+=o:hor50-Cursor
+set gcr+=n:Cursor
+set gcr+=i-ci-sm:InsertCursor
+set gcr+=r-cr:ReplaceCursor-hor20
+set gcr+=c:CommandCursor
+set gcr+=v-ve:VisualCursor
+
+set gcr+=a:blinkon0
+
+hi InsertCursor ctermfg=15 guifg=#fdf6e3 ctermbg=37 guibg=#2aa198
+hi VisualCursor ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
+hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65 guibg=#dc322f
+hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
+
+" 
+ 
 
 " =============== Showmarks ========================= {{{
 let g:showmarks_enable = 1 "always show showmarks
