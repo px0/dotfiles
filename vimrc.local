@@ -20,6 +20,7 @@
 
 " ============ Appearance ========================= {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ttyfast "faster redraws
 
 set cursorline "highlight current line
 
@@ -34,7 +35,11 @@ set smartcase "smart case for search
 map <silent> <leader>. :noh<cr>
 
 set formatoptions-=o "dont continue comments when pushing o/O
-set formatoptions+=qrn1j "q=formatting with gq; r=continue comments after enter; n=recognize numbered lists; 1=don't break line after one letter word; j=remove comment when joining lines
+set formatoptions+=qrn1 "q=formatting with gq; r=continue comments after enter; n=recognize numbered lists; 1=don't break line after one letter word
+
+if v:version > 703
+	set formatoptions+=j " j=remove comment when joining lines
+endif
 
 
 " ================= GUI setup ========================= {{{
