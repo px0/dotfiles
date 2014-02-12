@@ -41,7 +41,9 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
-	editor = 'vim'
+	editor = "mvim -f"
+	ignorecase = false
+	
 
 [status]
 	relativePaths = true
