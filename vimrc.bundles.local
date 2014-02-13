@@ -67,7 +67,9 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'shougo/vimproc'
 Bundle 'shougo/vimshell'
 " auto close parens
-Bundle 'AutoClose'
+" Bundle 'AutoClose'
+Bundle 'kana/vim-smartinput'
+" Bundle 'jiangmiao/auto-pairs'
 " gui colors in terminal
 Bundle 'CSApprox'
 Bundle 'thinca/vim-quickrun'
