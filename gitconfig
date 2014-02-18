@@ -9,11 +9,12 @@
 	br       = branch -r
 	cam      = commit -am
 	ci       = commit
-	cm       = commit -m
-	co       = checkout
-	cob      = checkout -b
-	compare  = cherry -v                # Which commits aren't upstream?
-	cp       = cherry-pick
+	cm      = commit -m
+	cl      = clone
+	co      = checkout
+	cob     = checkout -b
+	compare = cherry -v                # Which commits aren't upstream?
+	cp      = cherry-pick
 	d        = diff --word-diff
 	diff     = diff --word-diff
 	f        = fetch

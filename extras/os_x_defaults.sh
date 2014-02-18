@@ -79,13 +79,16 @@ echo "Disable “natural” (Lion-style) scrolling"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 echo "Set a blazingly fast keyboard repeat rate.. or not"
-defaults write NSGlobalDomain KeyRepeat -int 1
+# defaults write NSGlobalDomain KeyRepeat -int 1
 
 echo "Set a shorter Delay until key repeat."
-defaults write NSGlobalDomain InitialKeyRepeat -int 1
+# defaults write NSGlobalDomain InitialKeyRepeat -int 1
 
 echo "Increase window resize speed for Cocoa applications."
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+echo "Slightly faster expose animation (show all windows)"
+defaults write com.apple.dock expose-animation-duration -float 0.2
 
 echo "Show item info below desktop icons."
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
@@ -122,6 +125,9 @@ defaults write com.apple.iTunes disablePingSidebar -bool true
 
 echo "Disable all the other Ping stuff in iTunes."
 defaults write com.apple.iTunes disablePing -bool true
+
+echo "enable text-selection from quicklook"
+defaults write com.apple.finder QLEnableTextSelection -bool true 
 
 ###############################################################################
 # Mail #

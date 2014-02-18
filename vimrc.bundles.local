@@ -36,6 +36,7 @@ Bundle "myusuf3/numbers.vim"
 " div.content>h1.post-title+p{Sample Content} => <c-e>
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " rainbow parenthesis. Trigger through :RainbowParenthesesToggle
+Bundle "kien/rainbow_parentheses.vim"
 " Bundle 'masukomi/rainbow_parentheses.vim'
 " Bundle 'bling/vim-airline'
 "Better snipmate
@@ -73,3 +74,16 @@ Bundle 'kana/vim-smartinput'
 " gui colors in terminal
 Bundle 'CSApprox'
 Bundle 'thinca/vim-quickrun'
+" URI textobject. au = URI including spaces, iu = UI without trailing spaces
+Bundle 'textobj-user'
+Bundle "jceb/vim-textobj-uri"
+" Markdown
+" ]]: go to next header.
+" [[: go to previous header. Contrast with ]c.
+" ][: go to next sibling header if any.
+" []: go to previous sibling header if any.
+" ]c: go to Current header.
+" ]u: go to parent header (Up).
+Bundle "plasticboy/vim-markdown"
+"resize windows according to golden ratio
+Bundle 'roman/golden-ratio'
