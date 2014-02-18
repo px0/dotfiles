@@ -28,6 +28,7 @@ alias -g G='| ag -S '
 alias -g L="| less"
 alias -g M='| less'
 alias -g W='| wc -l'
+alias -g X='| xargs'
 
 alias zshrc='mvim ~/.zshrc' # Quick access to the ~/.zshrc file
 
