@@ -87,3 +87,5 @@ Bundle "jceb/vim-textobj-uri"
 Bundle "plasticboy/vim-markdown"
 "resize windows according to golden ratio
 Bundle 'roman/golden-ratio'
+"color scheme
+Bundle "mattsacks/vim-eddie"

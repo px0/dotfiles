@@ -37,10 +37,29 @@ map <silent> <leader>. :noh<cr>
 set formatoptions-=o "dont continue comments when pushing o/O
 set formatoptions+=qrn1 "q=formatting with gq; r=continue comments after enter; n=recognize numbered lists; 1=don't break line after one letter word
 
-if v:version > 703
+if v:version > 703 || v:version == 703 && has("patch541")
 	set formatoptions+=j " j=remove comment when joining lines
 endif
 
+" For regular expressions turn magic on
+set magic
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+" Character to precede line wraps
+set showbreak=↪\ 
+
+"not sure what this does. Let's see.
+set fillchars=diff:⣿,vert:│ 
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
 
 " ================= GUI setup ========================= {{{
 if has('gui_running')
@@ -426,6 +445,9 @@ set scrolloff=8 "start scrolling 8 lines from the bottom
 "autosave when losing focusresults
 autocmd BufLeave,FocusLost * silent! wall
 
+" Auto-reload buffers when files are changed on disk
+set autoread
+
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -442,6 +464,10 @@ nnoremap <leader>ez :vsplit ~/dotfiles/zshrc<cr>
 " ==== Keymap Shortcuts{{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Easier colon commands
+map <C-e> :
+imap <C-e> <esc>:
+
 " select previously pasted text with gp - reminder: select previously visually
 " selected text is gv
 nnoremap gp `[v`]
@@ -449,6 +475,11 @@ nnoremap gp `[v`]
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
 map Y y$
+
+ " Copy to the system clipboard
+map <leader>y "+y
+  " Paste...
+map <leader>p "+p
 
 " remap ESC
 inoremap jj <ESC>
@@ -475,6 +506,12 @@ imap <F1> <Esc>
 nmap <F13> ciw
 nmap <F14> ci"
 nmap <F15> <Plug>CommentaryLine
+
+" Expand %% to current directory
+" http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
@@ -517,6 +554,12 @@ nnoremap <S-Tab> V<
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+
+" Set <c-n> and <c-p> to act like Up/Down so will filter command history
+" Practical Vim p.69
+cnoremap <c-p> <up>
+cnoremap <c-n> <down>
+
 " }}}
 
 " ========== Surround ========================= {{{
@@ -626,10 +669,16 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=r
 au BufRead *.htm{,l} :inoremap <control><shift><enter> <br><cr>
 
 " always open help in vertical split
-augroup helpfiles
-  au!
-  au BufRead,BufEnter */doc/* wincmd L
-augroup END
+" augroup helpfiles
+"   au!
+"   au BufRead,BufEnter */doc/* wincmd L
+" augroup END
+
+" Open help in a vertical split instead of the default horizontal split
+" http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+cabbrev h <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert h' : 'h')<cr>
+cabbrev help <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert h' : 'help')<cr>
+
 
 augroup javascript
 	function! s:CoffeePut(startline, endline, args) 
@@ -674,6 +723,15 @@ let showmarks_ignore_type = "hqm"
 " if !exists("b:unaryTagsStack")
 "	  let b:unaryTagsStack=""
 " endif
+
+" ============ Fugitive =========================
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gp :Git push<cr>
+" nnoremap <leader>gs :Git status -sb<cr>
+
 
 " ============ Gundo ========================= {{{
 let g:gundo_preview_bottom=1
