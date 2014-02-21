@@ -434,9 +434,9 @@ nnoremap <Space> za
 
 " ============ Scrolling ========================= {{{
 "up by 3 lines
-nnoremap <C-e> 3<C-e>
+" nnoremap <C-e> 3<C-e>
 "down by 3 lines
-nnoremap <C-y> 3<C-y>
+" nnoremap <C-y> 3<C-y>
 set scrolloff=8 "start scrolling 8 lines from the bottom
 " }}}
 

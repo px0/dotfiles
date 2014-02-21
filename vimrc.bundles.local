@@ -89,3 +89,5 @@ Bundle "plasticboy/vim-markdown"
 Bundle 'roman/golden-ratio'
 "color scheme
 Bundle "mattsacks/vim-eddie"
+" find two consecutive characters with 's'
+Bundle "justinmk/vim-sneak"
