@@ -489,11 +489,12 @@ inoremap jk <ESC>
 nnoremap QQ :q!<cr>
 
 " Quicker command mode
-nnoremap ; :
-xnoremap ; :
+" now with c-e
+" nnoremap ; :
+" xnoremap ; :
 " map :: to ; because i still like ;
-nnoremap :: ;
-xnoremap :: ;
+" nnoremap :: ;
+" xnoremap :: ;
 
 " Quicker delete
 " nnoremap <C-x> dd

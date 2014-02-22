@@ -29,7 +29,7 @@ Bundle 'Gundo'
 Bundle 'dbakker/vim-lint'
 " Bundle 'msanders/snipmate.vim'
 " search word, whatever with <l><l>t and then the letter that you're searching for
-Bundle 'EasyMotion'
+" Bundle 'EasyMotion'
 " absolute linenumbers in insert mode, relative in normal mode
 Bundle "myusuf3/numbers.vim"
 " Zen coding for vim:
@@ -86,8 +86,10 @@ Bundle "jceb/vim-textobj-uri"
 " ]u: go to parent header (Up).
 Bundle "plasticboy/vim-markdown"
 "resize windows according to golden ratio
-Bundle 'roman/golden-ratio'
+" Bundle 'roman/golden-ratio'
 "color scheme
 Bundle "mattsacks/vim-eddie"
 " find two consecutive characters with 's'
 Bundle "justinmk/vim-sneak"
+" Elixir
+Bundle "elixir-lang/vim-elixir"
