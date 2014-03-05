@@ -18,7 +18,6 @@ Bundle 'rake.vim'
 " jsbueaytify/html beautify. Need both maksimr and einars
 Bundle 'maksimr/vim-jsbeautify'
 Bundle 'einars/js-beautify'
-" Bundle 'delimitMate.vim'
 " super awesome mappings, the whole [] block! -> :help unimpaired
 Bundle 'unimpaired.vim'
 " autoconverts German umlaute for HTML on load/save
@@ -63,13 +62,15 @@ Bundle 'jojoyuji/vim-web-indent'
 " Themes
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'chriskempson/base16-vim'
+Bundle 'w0ng/vim-hybrid'
 "Bundle 'maciakl/vim-neatstatus'
 "Vimshell! yay!
 Bundle 'shougo/vimproc'
 Bundle 'shougo/vimshell'
 " auto close parens
 " Bundle 'AutoClose'
-Bundle 'kana/vim-smartinput'
+"Bundle 'kana/vim-smartinput' "I don't particulary like this one. :(
+Bundle 'delimitMate.vim'
 " Bundle 'jiangmiao/auto-pairs'
 " gui colors in terminal
 Bundle 'CSApprox'
@@ -93,3 +94,6 @@ Bundle "mattsacks/vim-eddie"
 Bundle "justinmk/vim-sneak"
 " Elixir
 Bundle "elixir-lang/vim-elixir"
+" Bundle "shougo/neocomplete.vim"
+Bundle "Valloric/YouCompleteMe"
+Bundle "tpope/vim-rails"
