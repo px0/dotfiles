@@ -151,6 +151,16 @@ ql() { qlmanage -p "$*" >& /dev/null; }
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 alias flushDNS='dscacheutil -flushcache'
 alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
+# colour alternating lines in output. Just pipe into alternate
+alternate(){
+	while read line;
+	do
+		echo -e '\e[1;31m'$line;
+		read line;
+		echo -e '\e[1;32m'$line;
+	done
+	echo -en '\e[0m';
+}
 
 # -------------------------------------------------------------------
 # Oddball stuff
