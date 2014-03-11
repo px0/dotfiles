@@ -148,7 +148,8 @@ cd() { builtin cd "$@"; ls; }				# Always list directory contents upon 'cd'
 # -------------------------------------------------------------------
 ff() {noglob ag --smart-case -g "$@" ; }
 ql() { qlmanage -p "$*" >& /dev/null; }
-alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+# alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+alias lr="tree"
 alias flushDNS='dscacheutil -flushcache'
 alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
 # colour alternating lines in output. Just pipe into alternate
