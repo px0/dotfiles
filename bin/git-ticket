@@ -1,0 +1,35 @@
+#!/bin/bash
+
+ticket_generic_url='http://genome.klick.com/tickets/#/details/'
+
+function get_current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  _branch=${ref#refs/heads/}
+  # _branch=$(git branch | sed -n '/\* /s///p')
+  
+}
+
+function get_ticket_number() {
+	if [[ $_branch =~ ([0-9]{4,}) ]]; then
+		_ticket_no=${BASH_REMATCH[1]}
+	else
+		echo "Could'nt extract a ticket number. Please enter it manually: "
+		read -e _ticket_no
+	fi
+}
+
+function open_ticket_url() {
+	ticket_url=$ticket_generic_url$_ticket_no
+	echo "Opening "$ticket_url
+
+	if [[ "$OS" =~ Windows ]]; then
+		cygstart $ticket_url
+	else #Mac
+		open $ticket_url
+	fi
+}
+
+get_current_branch
+get_ticket_number
+open_ticket_url
