@@ -9,14 +9,11 @@ function get_current_branch() {
 }
 
 function get_ticket_number() {
-	if [ "$(uname)" == "Darwin" ]; then
-		_ticket_no=$(echo $_branch|grep -o "\d\+")
-		if [ $? -ne 0 ]; then
-			echo "Could'nt extract a ticket number. Please enter it manually: "
-			read -e _ticket_no
-		fi
-	elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-		_ticket_no=$(echo $_branch|perl -pn -e "s/.+?(\d+).*/\1/")
+	_ticket_no=$(echo $_branch|perl -pn -e "s/.+?(\d+).*/\1/")
+	grep -qE '^[0-9]+$' <<< $_ticket_no
+	if [ $? -ne 0 ]; then
+		echo "Could'nt extract a ticket number. Please enter it manually: "
+		read -e _ticket_no
 	fi
 }
 
