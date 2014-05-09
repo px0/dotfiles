@@ -417,7 +417,7 @@ map <leader>s? z=
 
 
 " =========== Folds ========================= {{{
-set foldmethod=indent
+set foldmethod=marker
 "unfold everything on opening file
 au BufRead * normal zR
 set foldnestmax=3 "deepest fold is 3 levels

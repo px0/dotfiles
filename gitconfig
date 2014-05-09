@@ -40,6 +40,8 @@
 	uncommit = reset --soft HEAD^
 	wc       = whatchanged                   # whatchanged since last own (?) commit
 	who      = shortlog -s -n --no-merges
+	which-branches-contain = branch --contains
+	rename-branch = branch -m
 
 [core]
 	excludesfile = ~/.gitignore_global
