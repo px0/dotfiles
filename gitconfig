@@ -46,7 +46,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
-	editor = "mvim -f"
+	editor = 'vim'
 	ignorecase = false
 	
 
@@ -57,7 +57,7 @@
 	ui = true
 
 [credential]
-	helper = cache
+	helper = osxkeychain
 
 [oh-my-zsh]
 	hide-status = 0
