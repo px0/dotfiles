@@ -42,6 +42,7 @@
 	who      = shortlog -s -n --no-merges
 	which-branches-contain = branch --contains
 	rename-branch = branch -m
+	puu = push -u
 
 [core]
 	excludesfile = ~/.gitignore_global
@@ -63,7 +64,7 @@
 	hide-status = 0
 
 [push]
-	default = simple
+	default = current
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

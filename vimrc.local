@@ -556,7 +556,7 @@ nmap E <Plug>CamelCaseMotion_e
 map <C-=> :call JsBeautify()<cr>
 
 " stuff
-inoremap <S-Space> <right>
+" inoremap <S-Space> <right>
 inoremap <C-Space> <Esc>A;<cr>
 
 inoremap <C-Enter> <Esc>A;<cr>

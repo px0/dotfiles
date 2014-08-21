@@ -118,7 +118,7 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/bin:$ANDROID_HOME/tools:$PATH
 export NODE_PATH=/usr/local/lib/node_modules
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
-export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
 
 
@@ -202,3 +202,4 @@ alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10'
 # source $(brew --prefix nvm)/nvm.sh
 #
 plugins=(gitfast)
+
