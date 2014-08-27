@@ -43,6 +43,8 @@
 	which-branches-contain = branch --contains
 	rename-branch = branch -m
 	puu = push -u
+	reha = reset --hard
+	cleanfd = clean -fd
 
 [core]
 	excludesfile = ~/.gitignore_global
