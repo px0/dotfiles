@@ -97,6 +97,10 @@ Bundle "justinmk/vim-sneak"
 Bundle "elixir-lang/vim-elixir"
 " Bundle "shougo/neocomplete.vim"
 Bundle "Valloric/YouCompleteMe"
-Bundle "tpope/vim-rails"
+" Bundle "tpope/vim-rails"
 Bundle "marijnh/tern_for_vim"
+"Clojure
+" Bundle "tpope/vim-classpath"
+" Bundle "tpope/vim-leiningen"
 Bundle "tpope/vim-fireplace"
+

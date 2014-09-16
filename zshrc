@@ -12,6 +12,7 @@ source /usr/local/etc/autojump.zsh #this should really have been in the dictiona
 # !!! search and replace: ag Deafult -l|xargs sed -i '' 's/Deafult/Default/g'
 
 alias m="mvim"
+alias e="open -a Emacs"
 alias o="open"
 alias f="open ."
 alias ra="rake"
@@ -19,7 +20,6 @@ alias fl="|ag -S "
 alias G="|ag -S "
 alias mkdir='mkdir -p'
 alias ag="ag -S"
-
 alias duh='du -sh *'
 
 alias -g H='| head'
@@ -121,7 +121,7 @@ export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/bin:$ANDROID_HOME/tools:$
 export NODE_PATH=/usr/local/lib/node_modules
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:$PATH
+export PATH=$HOME/dotfiles/bin:/usr/local/opt/ruby193/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/Applications/Emacs.app/Contents/MacOS/bin:$PATH
 
 
 # Some neat colors
