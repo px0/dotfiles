@@ -75,6 +75,12 @@
 (key-chord-mode 1)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
+(define-key evil-normal-state-map (kbd "q") nil)
+(define-key evil-insert-state-map (kbd "C-e") nil)
+(define-key evil-insert-state-map (kbd "C-d") nil)
+(define-key evil-insert-state-map (kbd "C-k") nil)
+(define-key evil-motion-state-map (kbd "C-e") nil)
+
 
 ;; turn off visual bell
 (setq ring-bell-function 'ignore)
