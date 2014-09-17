@@ -45,6 +45,7 @@
 	puu = push -u
 	reha = reset --hard
 	cleanfd = clean -fd
+	unmerged-branches = branch --no-merged
 
 [core]
 	excludesfile = ~/.gitignore_global
