@@ -10,7 +10,7 @@
 ;; values in order to set the width (in characters wide) and height
 ;; (in lines high) Emacs will have whenever you start it
 
-;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 80) (height . 20)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 140) (height . 70)))
 
 
 ;; Place downloaded elisp files in this directory. You'll then be able
@@ -76,7 +76,7 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
 (define-key evil-normal-state-map (kbd "q") nil)
-(define-key evil-normal-state-map (kbd "RET") 'newline)
+(define-key evil-normal-state-map (kbd "RET") (lambda () (interactive) (end-of-line) (newline-and-indent)))
 (define-key evil-insert-state-map (kbd "C-e") nil)
 (define-key evil-insert-state-map (kbd "C-d") nil)
 (define-key evil-insert-state-map (kbd "C-k") nil)
@@ -88,11 +88,10 @@ Position the cursor at it's beginning, according to the current mode."
   (interactive)
   (move-beginning-of-line nil)
   (newline-and-indent)
-  (forward-line -1)
   (indent-according-to-mode))
 
 
-(define-key evil-normal-state-map (kbd "S-RET") 'smart-open-line-above)
+(define-key evil-normal-state-map [S-return] 'smart-open-line-above)
 
 
 ;; turn off visual bell
@@ -146,6 +145,17 @@ Position the cursor at it's beginning, according to the current mode."
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
+
+;; Clojure config!
+(setq cider-auto-select-error-buffer nil)
+
+;; Autocomplete
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-use-fuzzy 1)
+(setq ac-auto-start 1)
+(setq ac-quick-help-delay 0.5)
 
 
 (frame-restore-mode)
