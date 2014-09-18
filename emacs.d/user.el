@@ -76,10 +76,23 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
 (define-key evil-normal-state-map (kbd "q") nil)
+(define-key evil-normal-state-map (kbd "RET") 'newline)
 (define-key evil-insert-state-map (kbd "C-e") nil)
 (define-key evil-insert-state-map (kbd "C-d") nil)
 (define-key evil-insert-state-map (kbd "C-k") nil)
 (define-key evil-motion-state-map (kbd "C-e") nil)
+
+(defun smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at it's beginning, according to the current mode."
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline-and-indent)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+
+(define-key evil-normal-state-map (kbd "S-RET") 'smart-open-line-above)
 
 
 ;; turn off visual bell
