@@ -1,4 +1,5 @@
 (require 'package)
+
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
@@ -21,10 +22,3 @@
 
 
 (load "~/.emacs.d/user.el")
-
-(require 'evil)
-(evil-mode 1)
-
-(require 'key-chord)
-(key-chord-mode 1)
-(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
