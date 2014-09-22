@@ -10,7 +10,8 @@
 ;; values in order to set the width (in characters wide) and height
 ;; (in lines high) Emacs will have whenever you start it
 
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 140) (height . 70)))
+(setq initial-frame-alist '((top . 0) (left . 0) (width . 150) (height . 80)))
+(setq default-frame-alist '((top . 0) (left . 0) (width . 150) (height . 80)))
 
 
 ;; Place downloaded elisp files in this directory. You'll then be able
@@ -159,3 +160,23 @@ Position the cursor at it's beginning, according to the current mode."
 
 
 (frame-restore-mode)
+
+
+(defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+
+;;emacs 24.4 only :-/
+(add-hook 'focus-out-hook 'save-all)
+
+
+;; scrolling
+ 
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+
+;; rainbow parens!
+(global-rainbow-delimiters-mode)
