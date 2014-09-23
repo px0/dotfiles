@@ -180,3 +180,82 @@ Position the cursor at it's beginning, according to the current mode."
 
 ;; rainbow parens!
 (global-rainbow-delimiters-mode)
+
+
+
+;; split window direction!
+(defun window-toggle-split-direction ()
+  "Switch window split from horizontally to vertically, or vice versa. i.e. change right window to bottom, or change bottom window to right."
+  (interactive)
+  (require 'windmove)
+  (let ((done))
+    (dolist (dirs '((right . down) (down . right)))
+      (unless done
+        (let* ((win (selected-window))
+               (nextdir (car dirs))
+               (neighbour-dir (cdr dirs))
+               (next-win (windmove-find-other-window nextdir win))
+               (neighbour1 (windmove-find-other-window neighbour-dir win))
+               (neighbour2 (if next-win (with-selected-window next-win
+                                          (windmove-find-other-window neighbour-dir next-win)))))
+          ;;(message "win: %s\nnext-win: %s\nneighbour1: %s\nneighbour2:%s" win next-win neighbour1 neighbour2)
+          (setq done (and (eq neighbour1 neighbour2)
+                          (not (eq (minibuffer-window) next-win))))
+          (if done
+              (let* ((other-buf (window-buffer next-win)))
+                (delete-window next-win)
+                (if (eq nextdir 'right)
+                    (split-window-vertically)
+                  (split-window-horizontally))
+                (set-window-buffer (windmove-find-other-window neighbour-dir) other-buf))))))))
+
+(global-set-key (kbd "C-x \\") 'window-toggle-split-direction)
+
+(windmove-default-keybindings) ;Then you can use SHIFT+arrow to move to the next adjacent window in the specified direction.
+
+
+
+;; CLIPBOARD
+
+(defun isolate-kill-ring()
+  "Isolate Emacs kill ring from OS X system pasteboard.
+This function is only necessary in window system."
+  (interactive)
+  (setq interprogram-cut-function nil)
+  (setq interprogram-paste-function nil))
+
+(defun pasteboard-copy()
+  "Copy region to OS X system pasteboard."
+  (interactive)
+  (shell-command-on-region
+   (region-beginning) (region-end) "pbcopy"))
+
+(defun pasteboard-paste()
+  "Paste from OS X system pasteboard via `pbpaste' to point."
+  (interactive)
+  (shell-command-on-region
+   (point) (if mark-active (mark) (point)) "pbpaste" nil t))
+
+(defun pasteboard-cut()
+  "Cut region and put on OS X system pasteboard."
+  (interactive)
+  (pasteboard-copy)
+  (delete-region (region-beginning) (region-end)))
+
+(if window-system
+    (progn
+      (isolate-kill-ring)
+      ;; bind CMD+C to pasteboard-copy
+      (global-set-key (kbd "s-c") 'pasteboard-copy)
+      ;; bind CMD+V to pasteboard-paste
+      (global-set-key (kbd "s-v") 'pasteboard-paste)
+      ;; bind CMD+X to pasteboard-cut
+      (global-set-key (kbd "s-x") 'pasteboard-cut))
+
+  ;; you might also want to assign some keybindings for non-window
+  ;; system usage (i.e., in your text terminal, where the
+  ;; command->super does not work)
+  )
+
+
+
