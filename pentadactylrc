@@ -13,6 +13,9 @@ command! pocket -description "Save to Pocket" open javascript:(function(){var e=
 
 command! mail -description "Send this page as email" open javascript:window.location.href="mailto:?Subject="+location.href+"&body="+location.href
 
+command! rss -description "RSS feed for page" open javascript:window.open(document.querySelector("link[rel=alternate]").href)
+
 nmap -builtin ,p :pocket<CR>
 nmap -builtin ,m :mail<CR>
+nmap -builtin ,r :rss:<CR>
 
