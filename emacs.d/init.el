@@ -6,6 +6,8 @@
              '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("gnu" . "http://elpa.gnu.org/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -27,8 +29,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "579e9950513524d8739e08eae289419cfcb64ed9b7cc910dd2e66151c77975c4" "6cfe5b2f818c7b52723f3e121d1157cf9d95ed8923dbc1b47f392da80ef7495d" "9e54a6ac0051987b4296e9276eecc5dfb67fdcd620191ee553f40a9b6d943e78" "1157a4055504672be1df1232bed784ba575c60ab44d8e6c7b3800ae76b42f8bd" "52588047a0fe3727e3cd8a90e76d7f078c9bd62c0b246324e557dfa5112e0d0c" default)))
  '(recentf-mode t))
+ '(custom-safe-themes (quote ("1f240eda4b53091a3ef08629fc0c8b37d4d62de474299736d7cc8bbc82a0350c" "62e0298c62733383b8aa90face0fcdb6067a97eae17bc557ec14566e96cb0c21" "014d3f9e9c7d777f8ba900ae97eda148799e9c5adcfd63ffa6c4b3bd2fd59975" "eb973e7b5c15d808814995b9d64662b137d6d9e9e4ea5860e085cb88e2ed4901" "178337b6c61214f0d560924a25039b074cfa49ea016cdba421bcd2ed304c87d6" "970037bb936d4947aaee8b88d451b46af08bc5a7d6d219701fd50304040e1a7c" "e7347192f07b5a6b452fc435853fff55ff8ad5fb80693131110fabfd6779647d" "6a81c982541f60ca8da778e3385cc0e6369353945b537e3b952cfcba2bbd21e5" "3c7d0a36b36076d1e4baf98e407d8ab84b87bea8b0b3df03b79d2c682c81510c" "a2320e7aee1df014d8c9b75425606333043c63a22d584482fbd5beeda55452a9" "9983621f620d73a6ce3b3e4a1529bc17672a540eefd349777723a6a684a7808d" "df0da5fa4c2cded1c5aafa2943636175a7b670b55f9aec3a24b8a609cd7e29c6" "687e48b1f1b5fd891cef4286ef251198ad24b3413101d42067603a3b80af91c6" "59309352ca47909f702a5dcd590096b86d2dffd1674ec952c03eb07ab9066810" "23b85026ec3dfa3b1c4e170b83b1e9f4e7828c44f1f32fb427d5252e66e60b7b" "1157a4055504672be1df1232bed784ba575c60ab44d8e6c7b3800ae76b42f8bd" default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
