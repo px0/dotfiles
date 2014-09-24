@@ -2,3 +2,5 @@
 .svn
 *~
 .*.swp
+*.dat
+frame-restore-parameters
