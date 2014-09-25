@@ -258,5 +258,8 @@ This function is only necessary in window system."
   ;; command->super does not work)
   )
 
+;; Auto revert buffer if file changed on disk
+(global-auto-revert-mode t)
+
 
 
