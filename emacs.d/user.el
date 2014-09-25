@@ -95,6 +95,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 (define-key evil-normal-state-map [S-return] 'smart-open-line-above)
 
+(define-key evil-normal-state-map "\C-r" 'undo-tree-redo) ;that got overwritten and i need it!
 
 ;; turn off visual bell
 (setq ring-bell-function 'ignore)
