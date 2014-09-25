@@ -61,9 +61,6 @@
 
 (setq ido-use-filename-at-point nil)
 
-;; Save here instead of littering current directory with emacs backup files
-(setq backup-directory-alist `(("." . "~/.saves")))
-
 ;; undo!
 (define-key global-map (kbd "C-x C-/") 'redo)
 
@@ -263,4 +260,5 @@ This function is only necessary in window system."
 (global-auto-revert-mode t)
 
 
-
+;; save all backups in one directory
+(setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))

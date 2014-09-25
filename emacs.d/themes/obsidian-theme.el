@@ -11,7 +11,7 @@
 
 (custom-theme-set-faces
   'obsidian 
-        '(default ((t (:background "#181818" :foreground "#e0e2e4"))))
+        '(default ((t (:background "#202020" :foreground "#e0e2e4"))))
         '(font-lock-builtin-face ((t (:foreground "#808080"))))
         '(region ((t (:background "#804000" :foreground "#e0e2e4"))))
         '(highlight ((t (:background "#3c414c"))))
