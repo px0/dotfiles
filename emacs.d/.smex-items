@@ -1,0 +1,62 @@
+
+;; ----- smex-history -----
+(
+ cider-jack-in
+ eval-expression
+ load-library
+ package-list-packages
+ load-file
+ eval-buffer
+ auto-fill-mode
+)
+
+;; ----- smex-data -----
+(
+ (package-list-packages . 6)
+ (replace-string . 4)
+ (package-refresh-contents . 1)
+ (text-mode . 1)
+ (auto-fill-mode . 16)
+ (eval-buffer . 21)
+ (server-start . 4)
+ (cider-jack-in . 16)
+ (cider-ping . 1)
+ (cider-restart . 10)
+ (list-packages . 5)
+ (linum-mode . 2)
+ (untabify . 7)
+ (load-file . 22)
+ (css-mode . 1)
+ (column-number-mode . 1)
+ (shell-script-mode . 2)
+ (newline . 1)
+ (find-library . 1)
+ (package-initialize . 3)
+ (load-library . 4)
+ (eval-expression . 18)
+ (rainbow-delimiters-mode . 3)
+ (eval-region . 8)
+ (tabify . 5)
+ (flyspell-mode . 1)
+ (butterfly . 2)
+ (flymake-mode . 3)
+ (flymake-coffee-load . 5)
+ (flymake-compile . 1)
+ (coffee-repl . 1)
+ (icomplete-mode . 3)
+ (ido-mode . 2)
+ (company-mode . 3)
+ (company-complete . 1)
+ (global-company-mode . 1)
+ (cider-jump . 3)
+ (cider . 1)
+ (cider-mode . 2)
+ (smart-open-line-above . 6)
+ (turn-on-eldoc-mode . 1)
+ (global-rainbow-delimiters-mode . 1)
+ (ibuffer . 1)
+ (load-theme . 9)
+ (sql-accumulate-and-indent . 1)
+ (sql-indent-buffer . 2)
+ (sql-beginning-of-statement . 1)
+)
