@@ -97,6 +97,10 @@ Position the cursor at it's beginning, according to the current mode."
 
 (define-key evil-normal-state-map "\C-r" 'undo-tree-redo) ;that got overwritten and i need it!
 
+;; evil surround
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
 ;; turn off visual bell
 (setq ring-bell-function 'ignore)
 
@@ -260,4 +264,6 @@ This function is only necessary in window system."
   )
 
 
-
+;; ruby/pry
+(add-to-list 'load-path "~/.emacs.d/vendor/emacs-pry")
+(require 'pry)
