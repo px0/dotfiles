@@ -14,18 +14,6 @@
 (setq default-frame-alist '((top . 0) (left . 0) (width . 150) (height . 80)))
 
 
-;; Place downloaded elisp files in this directory. You'll then be able
-;; to load them.
-;;
-;; For example, if you download yaml-mode.el to ~/.emacs.d/vendor,
-;; then you can add the following code to this file:
-;;
-;; (require 'yaml-mode)
-;; (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-;; 
-;; Adding this code will make Emacs enter yaml mode whenever you open
-;; a .yml file
-(add-to-list 'load-path "~/.emacs.d/vendor")
 
 ;; shell scripts
 (setq-default sh-basic-offset 2)
@@ -35,9 +23,9 @@
 ;; my packages!
 (defvar max-packages '(auto-complete better-defaults clojure-test-mode cider clojure-mode evil-nerd-commenter evil-paredit evil-visualstar evil goto-last-change highlight-indentation key-chord pkg-info epl cl-lib popup projectile dash rainbow-delimiters s starter-kit-bindings starter-kit-lisp elisp-slime-nav starter-kit magit ido-ubiquitous smex find-file-in-project idle-highlight-mode paredit starter-kit-ruby undo-tree))
 
-(dolist (p max-packages)
-  (unless (package-installed-p p)
-    (package-install p)))
+; (dolist (p max-packages)
+;   (unless (package-installed-p p)
+;     (package-install p)))
 
 
 ;; Themes
@@ -51,7 +39,7 @@
 ;; Flyspell often slows down editing so it's turned off
 (remove-hook 'text-mode-hook 'turn-on-flyspell)
 
-(set-default-font "Source_Code_Pro-13")
+(set-default-font "Source Code Pro 13")
 
 (load "~/.emacs.d/vendor/clojure")
 
@@ -66,6 +54,7 @@
 
 
 ;; enable evil mode
+(add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
 (evil-mode 1)
 
@@ -80,7 +69,7 @@
 (define-key evil-insert-state-map (kbd "C-d") nil)
 (define-key evil-insert-state-map (kbd "C-k") nil)
 (define-key evil-motion-state-map (kbd "C-e") nil)
-
+ 
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -95,6 +84,7 @@ Position the cursor at it's beginning, according to the current mode."
 (define-key evil-normal-state-map "\C-r" 'undo-tree-redo) ;that got overwritten and i need it!
 
 ;; evil surround
+(load "~/.emacs.d/vendor/evil-surround")
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 
@@ -150,7 +140,6 @@ Position the cursor at it's beginning, according to the current mode."
 (unless (server-running-p)
   (server-start))
 
-
 ;; Clojure config!
 (setq cider-auto-select-error-buffer nil)
 
@@ -162,7 +151,8 @@ Position the cursor at it's beginning, according to the current mode."
 (setq ac-quick-help-delay 0.5)
 
 
-(frame-restore-mode)
+;;(frame-restore-mode)
+(desktop-save-mode)
 
 
 (defun save-all ()
@@ -269,3 +259,18 @@ This function is only necessary in window system."
 
 ;; save all backups in one directory
 (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
+
+
+
+;; Place downloaded elisp files in this directory. You'll then be able
+;; to load them.
+;;
+;; For example, if you download yaml-mode.el to ~/.emacs.d/vendor,
+;; then you can add the following code to this file:
+;;
+;; (require 'yaml-mode)
+;; (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+;; 
+;; Adding this code will make Emacs enter yaml mode whenever you open
+;; a .yml file
+(add-to-list 'load-path "~/.emacs.d/vendor")
