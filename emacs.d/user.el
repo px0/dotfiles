@@ -162,15 +162,6 @@ Position the cursor at it's beginning, according to the current mode."
 ;;emacs 24.4 only :-/
 (add-hook 'focus-out-hook 'save-all)
 
-
-;; scrolling
- 
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
-
-
 ;; rainbow parens!
 (global-rainbow-delimiters-mode)
 
@@ -254,12 +245,11 @@ This function is only necessary in window system."
 (global-auto-revert-mode t)
 
 ;; ruby/pry
-(add-to-list 'load-path "~/.emacs.d/vendor/emacs-pry")
-(require 'pry)
+;;(add-to-list 'load-path "~/.emacs.d/vendor/emacs-pry")
+;;(require 'pry)
 
 ;; save all backups in one directory
 (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
-
 
 
 ;; Place downloaded elisp files in this directory. You'll then be able
@@ -274,3 +264,31 @@ This function is only necessary in window system."
 ;; Adding this code will make Emacs enter yaml mode whenever you open
 ;; a .yml file
 (add-to-list 'load-path "~/.emacs.d/vendor")
+
+
+;; better fill column
+(setq-default fill-column 160)
+
+
+
+;; scrolling
+;; (require 'smooth-scrolling)
+;;
+ ;; (require 'smooth-scroll)
+ ;; (smooth-scroll-mode t)
+
+(setq mouse-wheel-scroll-amount '(5 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+;; (set-variable ‘scroll-conservatively 5)
+
+
+
+;; ;; hopefully make scrolling faster
+ (setq jit-lock-defer-time 0.10)
+ (setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
