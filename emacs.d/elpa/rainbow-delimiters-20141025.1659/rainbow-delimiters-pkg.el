@@ -1,0 +1,1 @@
+(define-package "rainbow-delimiters" "20141025.1659" "Highlight nested parens, brackets, braces a different color at each depth." 'nil :url "https://github.com/jlr/rainbow-delimiters" :keywords '("faces" "convenience" "lisp" "tools"))

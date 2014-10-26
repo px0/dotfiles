@@ -2,18 +2,29 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Oct 25 20:02:52 2014
+;; Created Sat Oct 25 22:16:48 2014
 ;; Desktop file format version 206
 ;; Emacs version 24.4.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (21580 14892 230681 0) (desktop . "206") "phyrex@BigDaddy.local" nil nil ((((font-backend mac-ct) (fontsize . 0) (font . "-*-Source Code Pro-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (vertical-scroll-bars) (foreground-color . "#e0e2e4") (background-color . "#202020") (line-spacing) (left-fringe . 11) (right-fringe . 13) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (alpha) (fullscreen) (display . "BigDaddy.local") (display-type . color) (background-mode . dark) (cursor-color . "#626262") (visibility . t) (horizontal-scroll-bars) (environment) (scroll-bar-height . 0) (frameset--id . "F269-1470-DAA3-979E") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (right-divider-width . 0) (bottom-divider-width . 0) (icon-name) (explicit-name) (tool-bar-position . top) (height . 80) (width . 150) (left . 0) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 5) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 40) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 1224) (pixel-height . 1343) (total-width . 153) (total-height . 79) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 11 13 nil) (margins 1) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 191) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (21580 22928 21235 0) (desktop . "206") "phyrex@BigDaddy.local" nil nil ((((font-backend mac-ct ns) (fontsize . 0) (font . "-*-Source Code Pro-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (vertical-scroll-bars) (foreground-color . "#e0e2e4") (background-color . "#202020") (line-spacing) (left-fringe . 11) (right-fringe . 13) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (alpha) (fullscreen) (horizontal-scroll-bars . t) (display-type . color) (background-mode . dark) (cursor-color . "#626262") (environment) (frameset--id . "2B6F-B9CD-FBAC-968C") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (right-divider-width . 0) (bottom-divider-width . 0) (icon-name) (visibility . t) (display . "BigDaddy.local") (explicit-name) (tool-bar-position . top) (height . 80) (width . 150) (left . 0) (top . 22)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 5) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 68) (min-pixel-width . 80) (min-pixel-height-ignore . 34) (min-pixel-width-ignore . 40) (min-pixel-height-safe . 17) (min-pixel-width-safe . 16)) leaf (pixel-width . 1224) (pixel-height . 1343) (total-width . 153) (total-height . 79) (normal-height . 1.0) (normal-width . 1.0) (buffer "user.el" (selected . t) (hscroll . 0) (fringes 11 13 nil) (margins 3) (scroll-bars 0 0 nil nil) (vscroll . 0) (dedicated) (point . 1023) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring '("evil-mode"))
-(setq regexp-search-ring '("Source" "source" "evil" "source"))
-(setq register-alist nil)
-(setq file-name-history nil)
+(setq regexp-search-ring '("obsid" "rainbow" "do " "do" " do /nnn/do" " do " "do " "do" "global-rai" "rainbow-de" "Wind" "redo" "Source" "source" "aggressive" "Source"))
+(setq register-alist '((48 . "(set-face-foreground 'show-paren-match-face \"#3498db\")\n")))
+(setq file-name-history '("~/.emacs.d/user.el"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/Users/phyrex/dotfiles/emacs.d/user.el"
+  "user.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode undo-tree-mode linum-mode auto-complete-mode aggressive-indent-mode global-auto-revert-mode rainbow-delimiters-mode paredit-mode elisp-slime-nav-mode eldoc-mode hi-lock-mode)
+  1023
+  '(1603 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (column-number-mode . t) (overwrite-mode)))
+

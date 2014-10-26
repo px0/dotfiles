@@ -20,14 +20,6 @@
 (setq-default sh-indentation 2)
 
 
-;; my packages!
-(defvar max-packages '(auto-complete better-defaults clojure-test-mode cider clojure-mode evil-nerd-commenter evil-paredit evil-visualstar evil goto-last-change highlight-indentation key-chord pkg-info epl cl-lib popup projectile dash rainbow-delimiters s starter-kit-bindings starter-kit-lisp elisp-slime-nav starter-kit magit ido-ubiquitous smex find-file-in-project idle-highlight-mode paredit starter-kit-ruby undo-tree))
-
-; (dolist (p max-packages)
-;   (unless (package-installed-p p)
-;     (package-install p)))
-
-
 ;; Themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
@@ -35,6 +27,13 @@
 ;; (set-face-attribute 'default nil :height 140)
 ;(load-theme 'tomorrow-night-bright t)
 (load-theme 'obsidian t)
+
+;; nicer show-paren colour
+(set-face-foreground 'show-paren-match-face "#3498db")
+(set-face-background 'show-paren-match-face nil)
+(set-face-attribute 'show-paren-match-face nil 
+                    :weight 'bold :underline nil :overline nil :slant 'normal)
+
 
 ;; Flyspell often slows down editing so it's turned off
 (remove-hook 'text-mode-hook 'turn-on-flyspell)
@@ -51,6 +50,7 @@
 
 ;; undo!
 (define-key global-map (kbd "C-x C-/") 'redo)
+
 
 
 ;; enable evil mode
@@ -81,6 +81,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 (define-key evil-normal-state-map [S-return] 'smart-open-line-above)
 
+(undo-tree-mode 1)
 (define-key evil-normal-state-map "\C-r" 'undo-tree-redo) ;that got overwritten and i need it!
 
 ;; evil surround
@@ -91,39 +92,45 @@ Position the cursor at it's beginning, according to the current mode."
 ;; turn off visual bell
 (setq ring-bell-function 'ignore)
 
+
+
+
+
+
+
 ;; Statusbar colour depending on mode (evil/emacs/buffer modified)
- (lexical-let ((default-color (cons (face-background 'mode-line)
-                                      (face-foreground 'mode-line))))
-     (add-hook 'post-command-hook
-       (lambda ()
-         (let ((color (cond ((minibufferp) default-color)
-                            ((evil-insert-state-p) '("#d35400" . "#ffffff"))
-                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
-                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-                            (t default-color))))
-           (set-face-background 'mode-line (car color))
-           (set-face-foreground 'mode-line (cdr color))))))
+(lexical-let ((default-color (cons (face-background 'mode-line)
+                                   (face-foreground 'mode-line))))
+  (add-hook 'post-command-hook
+            (lambda ()
+              (let ((color (cond ((minibufferp) default-color)
+                                 ((evil-insert-state-p) '("#d35400" . "#ffffff"))
+                                 ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+                                 ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+                                 (t default-color))))
+                (set-face-background 'mode-line (car color))
+                (set-face-foreground 'mode-line (cdr color))))))
 
 
 ;; CSS color values colored by themselves
 ;; http://news.ycombinator.com/item?id=873541
 
- (defvar hexcolor-keywords
-        '(("#[abcdef[:digit:]]\\{3,6\\}"
-           (0 (let ((colour (match-string-no-properties 0)))
-                (if (or (= (length colour) 4)
-                        (= (length colour) 7))
-                    (put-text-property 
-                     (match-beginning 0)
-                     (match-end 0)
-                     'face (list :background (match-string-no-properties 0)
-                                 :foreground (if (>= (apply '+ (x-color-values 
-                                                                (match-string-no-properties 0)))
-                                                     (* (apply '+ (x-color-values "white")) .6))
-                                                 "black" ;; light bg, dark text
-                                               "white" ;; dark bg, light text
-                                              )))))
-              append))))
+(defvar hexcolor-keywords
+  '(("#[abcdef[:digit:]]\\{3,6\\}"
+     (0 (let ((colour (match-string-no-properties 0)))
+          (if (or (= (length colour) 4)
+                  (= (length colour) 7))
+              (put-text-property 
+               (match-beginning 0)
+               (match-end 0)
+               'face (list :background (match-string-no-properties 0)
+                           :foreground (if (>= (apply '+ (x-color-values 
+                                                          (match-string-no-properties 0)))
+                                               (* (apply '+ (x-color-values "white")) .6))
+                                           "black" ;; light bg, dark text
+                                         "white" ;; dark bg, light text
+                                         )))))
+        append))))
 
 (defun hexcolor-add-to-font-lock ()
   (font-lock-add-keywords nil hexcolor-keywords))
@@ -162,10 +169,6 @@ Position the cursor at it's beginning, according to the current mode."
 ;;emacs 24.4 only :-/
 (add-hook 'focus-out-hook 'save-all)
 
-;; rainbow parens!
-(global-rainbow-delimiters-mode)
-
-
 
 ;; split window direction!
 (defun window-toggle-split-direction ()
@@ -197,9 +200,16 @@ Position the cursor at it's beginning, according to the current mode."
 
 (windmove-default-keybindings) ;Then you can use SHIFT+arrow to move to the next adjacent window in the specified direction.
 
+(global-aggressive-indent-mode)
 
+(delete-selection-mode t) ;;overwrite selection by default. Thank God!
 
-;; CLIPBOARD
+(setq select-active-regions nil)
+(setq mouse-drag-copy-region nil)
+(setq x-select-enable-primary nil)
+(setq select-active-regions nil)
+
+;; Windows
 
 (defun isolate-kill-ring()
   "Isolate Emacs kill ring from OS X system pasteboard.
@@ -240,6 +250,7 @@ This function is only necessary in window system."
   ;; system usage (i.e., in your text terminal, where the
   ;; command->super does not work)
   )
+
 
 ;; Auto revert buffer if file changed on disk
 (global-auto-revert-mode t)
@@ -285,10 +296,22 @@ This function is only necessary in window system."
 
 
 
-;; ;; hopefully make scrolling faster
- (setq jit-lock-defer-time 0.10)
- (setq redisplay-dont-pause t
-  scroll-margin 1
-  scroll-step 1
-  scroll-conservatively 10000
-  scroll-preserve-screen-position 1)
+;; ;; ;; hopefully make scrolling faster
+;;  (setq jit-lock-defer-time 0.10)
+;;  (setq redisplay-dont-pause t
+;;   scroll-margin 1
+;;   scroll-step 1
+;;   scroll-conservatively 10000
+;;   scroll-preserve-screen-position 1)
+
+
+;; rainbow parens!
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+;; stronger colors
+;; (require 'cl-lib)
+;; (require 'color)
+;; (cl-loop
+;;  for index from 1 to rainbow-delimiters-max-face-count
+;;  do
+;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+;;    (cl-callf color-saturate-name (face-foreground face) 30)))
