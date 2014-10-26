@@ -24,7 +24,7 @@
  (cider-restart . 15)
  (undo-tree-redo . 1)
  (eval-expression . 10)
- (package-list-packages . 15)
+ (package-list-packages . 16)
  (load-file . 8)
  (run-pry . 2)
  (package-refresh-contents . 2)
