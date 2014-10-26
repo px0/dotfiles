@@ -31,9 +31,9 @@
 ;; nicer show-paren colour
 (set-face-foreground 'show-paren-match-face "#3498db")
 (set-face-background 'show-paren-match-face nil)
-(set-face-attribute 'show-paren-match-face nil 
-                    :weight 'bold :underline nil :overline nil :slant 'normal)
-
+(set-face-attribute 'show-paren-match-face nil
+                    :weight 'bold :underline nil :overline nil :slant 'normal) 
+(show-paren-mode 1)
 
 ;; Flyspell often slows down editing so it's turned off
 (remove-hook 'text-mode-hook 'turn-on-flyspell)
@@ -52,7 +52,6 @@
 (define-key global-map (kbd "C-x C-/") 'redo)
 
 
-
 ;; enable evil mode
 ;; (add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
@@ -69,7 +68,7 @@
 (define-key evil-insert-state-map (kbd "C-d") nil)
 (define-key evil-insert-state-map (kbd "C-k") nil)
 (define-key evil-motion-state-map (kbd "C-e") nil)
- 
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -204,10 +203,26 @@ Position the cursor at it's beginning, according to the current mode."
 
 (delete-selection-mode t) ;;overwrite selection by default. Thank God!
 
-(setq select-active-regions nil)
-(setq mouse-drag-copy-region nil)
+
+
+
+
+;; disable Emacs Evil selection auto-copies to clipboard
+;; Thanks to https://stackoverflow.com/questions/17127009/how-to-disable-emacs-evil-selection-auto-copies-to-clipboard/23254728#23254728
+
+; Override the default x-select-text function because it doesn't
+; respect x-select-enable-clipboard on OS X.
+(defun x-select-text (text))
+(setq x-select-enable-clipboard nil)
 (setq x-select-enable-primary nil)
-(setq select-active-regions nil)
+(setq mouse-drag-copy-region nil)
+
+(setq interprogram-cut-function 'ns-set-pasteboard)
+(setq interprogram-paste-function 'ns-get-pasteboard)
+
+
+
+
 
 ;; Windows
 
