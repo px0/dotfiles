@@ -4,7 +4,7 @@
 
 ;; Author: Artur Malabarba <bruce.connor.am@gmail.com>
 ;; URL: http://github.com/Bruce-Connor/aggressive-indent-mode
-;; Version: 20141026.1644
+;; Version: 20141027.555
 ;; X-Original-Version: 0.3.1
 ;; Package-Requires: ((emacs "24.1") (names "0.5") (cl-lib "0.5"))
 ;; Keywords: indent lisp maint tools
@@ -108,6 +108,7 @@ Please include this in your report!"
 (defcustom excluded-modes
   '(text-mode tabulated-list-mode special-mode
               minibuffer-inactive-mode
+              bibtex-mode
               yaml-mode jabber-chat-mode)
   "Modes in which `aggressive-indent-mode' should not be activated.
 This variable is only used if `global-aggressive-indent-mode' is
@@ -275,10 +276,11 @@ until nothing more happens."
       (indent-according-to-mode))
     ;; And then we indent each following line until nothing happens.
     (forward-line 1)
-    (while (/= (progn (skip-chars-forward "[:blank:]\n")
-                      (point))
-               (progn (indent-according-to-mode)
-                      (point)))
+    (while (and (null (eobp))
+                (/= (progn (skip-chars-forward "[:blank:]\n")
+                           (point))
+                    (progn (indent-according-to-mode)
+                           (point))))
       (forward-line 1))
     (goto-char p)))
 

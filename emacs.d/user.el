@@ -28,12 +28,31 @@
 ;;(load-theme 'tomorrow-night-bright t)
 (load-theme 'obsidian t)
 
+
+
+
+
 ;; nicer show-paren colour
 (set-face-foreground 'show-paren-match-face "#3498db")
 (set-face-background 'show-paren-match-face nil)
 (set-face-attribute 'show-paren-match-face nil
                     :weight 'bold :underline nil :overline nil :slant 'normal) 
 (show-paren-mode 1)
+
+
+;; rainbow parens!
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+;; stronger colors
+(require 'cl-lib)
+(require 'color)
+(require 'paren)
+(require 'rainbow-delimiters)
+(cl-loop
+ for index from 1 to rainbow-delimiters-max-face-count
+ do
+ (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+   (cl-callf color-saturate-name (face-foreground face) 30)))
+
 
 ;; Flyspell often slows down editing so it's turned off
 (remove-hook 'text-mode-hook 'turn-on-flyspell)
@@ -179,7 +198,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 
 ;; rainbow parens!
-(global-rainbow-delimiters-mode)
+;; (global-rainbow-delimiters-mode)
 
 ;;rainbow blocks!
 (load "~/.emacs.d/vendor/rainbow-blocks")
@@ -229,8 +248,8 @@ Position the cursor at it's beginning, according to the current mode."
 ;; disable Emacs Evil selection auto-copies to clipboard
 ;; Thanks to https://stackoverflow.com/questions/17127009/how-to-disable-emacs-evil-selection-auto-copies-to-clipboard/23254728#23254728
 
-; Override the default x-select-text function because it doesn't
-; respect x-select-enable-clipboard on OS X.
+                                        ; Override the default x-select-text function because it doesn't
+                                        ; respect x-select-enable-clipboard on OS X.
 (defun x-select-text (text))
 (setq x-select-enable-clipboard nil)
 (setq x-select-enable-primary nil)
@@ -319,8 +338,8 @@ This function is only necessary in window system."
 ;; scrolling
 ;; (require 'smooth-scrolling)
 ;;
- ;; (require 'smooth-scroll)
- ;; (smooth-scroll-mode t)
+;; (require 'smooth-scroll)
+;; (smooth-scroll-mode t)
 
 (setq mouse-wheel-scroll-amount '(5 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -338,14 +357,3 @@ This function is only necessary in window system."
 ;;   scroll-conservatively 10000
 ;;   scroll-preserve-screen-position 1)
 
-
-;; rainbow parens!
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-;; stronger colors
-;; (require 'cl-lib)
-;; (require 'color)
-;; (cl-loop
-;;  for index from 1 to rainbow-delimiters-max-face-count
-;;  do
-;;  (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
-;;    (cl-callf color-saturate-name (face-foreground face) 30)))
