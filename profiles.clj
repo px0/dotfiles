@@ -11,5 +11,6 @@
                                         [alex-and-georges.debug-repl debug-repl]
                                         [com.georgejahad.difform difform]])]
   :plugins [[lein-try "0.4.3"]
-            [cider/cider-nrepl "0.7.0"]
-            [lein-exec "0.3.4"]]}}
+            [cider/cider-nrepl "0.8.0-SNAPSHOT"]
+            [lein-exec "0.3.4"]
+            [ragtime/ragtime.lein "0.3.7"]]}}

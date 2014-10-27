@@ -24,8 +24,8 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/themes")
 ;; Uncomment this to increase font size
-;; (set-face-attribute 'default nil :height 140)
-;(load-theme 'tomorrow-night-bright t)
+;; (set-face-attribute 'default nil :height 150)
+;;(load-theme 'tomorrow-night-bright t)
 (load-theme 'obsidian t)
 
 ;; nicer show-paren colour
@@ -38,7 +38,8 @@
 ;; Flyspell often slows down editing so it's turned off
 (remove-hook 'text-mode-hook 'turn-on-flyspell)
 
-(set-default-font "Source Code Pro 13")
+;;(set-frame-font "Source Code Pro")
+
 
 (load "~/.emacs.d/vendor/clojure")
 
@@ -295,7 +296,7 @@ This function is only necessary in window system."
 ;; better fill column
 (setq-default fill-column 160)
 
-
+(global-company-mode)
 
 ;; scrolling
 ;; (require 'smooth-scrolling)

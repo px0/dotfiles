@@ -1,18 +1,18 @@
 
 ;; ----- smex-history -----
 (
- eval-buffer
- load-theme
- comment-region
  eval-expression
- show-paren-mode
- package-install
- eww
+ eval-buffer
+ package-list-packages
+ load-theme
+ load-file
+ whitespace-toggle-options
+ comment-region
 )
 
 ;; ----- smex-data -----
 (
- (cider-jack-in . 14)
+ (cider-jack-in . 15)
  (delete-window . 1)
  (cider . 1)
  (load-theme . 25)
@@ -21,10 +21,10 @@
  (shell-script-mode . 1)
  (evilnc-copy-and-comment-lines . 1)
  (recover-file . 1)
- (cider-restart . 15)
+ (cider-restart . 17)
  (undo-tree-redo . 1)
- (eval-expression . 24)
- (package-list-packages . 18)
+ (eval-expression . 34)
+ (package-list-packages . 19)
  (load-file . 8)
  (run-pry . 2)
  (package-refresh-contents . 2)
@@ -44,9 +44,9 @@
  (highlight-indentation-mode . 3)
  (recentf-mode . 1)
  (visible-mode . 1)
- (eval-buffer . 47)
+ (eval-buffer . 56)
  (visible-whitespace-mode . 28)
- (org-mode . 1)
+ (org-mode . 2)
  (set-variable . 1)
  (ffap . 1)
  (describe-font . 2)
@@ -60,5 +60,13 @@
  (rainbow-delimiters-mode . 2)
  (eww . 2)
  (move-text-up . 2)
- (show-paren-mode . 2)
+ (show-paren-mode . 5)
+ (aggressive-indent-mode . 5)
+ (blink-matching-open . 1)
+ (ispell . 1)
+ (flyspell-mode . 2)
+ (paredit-mode . 2)
+ (evil-mode . 4)
+ (clojure-mode . 1)
+ (company-mode . 1)
 )
