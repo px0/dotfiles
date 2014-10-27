@@ -174,6 +174,11 @@ Position the cursor at it's beginning, according to the current mode."
 ;; rainbow parens!
 (global-rainbow-delimiters-mode)
 
+;;rainbow blocks!
+(load "~/.emacs.d/vendor/rainbow-blocks")
+(require 'rainbow-blocks)
+(add-hook 'clojure-mode-hook 'rainbow-blocks-mode)
+
 
 
 ;; split window direction!
