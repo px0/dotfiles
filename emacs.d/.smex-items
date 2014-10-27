@@ -1,30 +1,30 @@
 
 ;; ----- smex-history -----
 (
- package-list-packages
  eval-expression
- package-refresh-contents
- org-mode
  eval-buffer
+ package-list-packages
+ load-theme
  load-file
- visible-mode
+ whitespace-toggle-options
+ comment-region
 )
 
 ;; ----- smex-data -----
 (
- (cider-jack-in . 14)
+ (cider-jack-in . 15)
  (delete-window . 1)
  (cider . 1)
- (load-theme . 11)
+ (load-theme . 25)
  (shell-mode . 2)
  (shell . 1)
  (shell-script-mode . 1)
  (evilnc-copy-and-comment-lines . 1)
  (recover-file . 1)
- (cider-restart . 15)
+ (cider-restart . 17)
  (undo-tree-redo . 1)
- (eval-expression . 10)
- (package-list-packages . 15)
+ (eval-expression . 34)
+ (package-list-packages . 19)
  (load-file . 8)
  (run-pry . 2)
  (package-refresh-contents . 2)
@@ -32,10 +32,10 @@
  (ruby-send-region . 1)
  (ruby-send-block-and-go . 1)
  (ruby-send-region-and-go . 1)
- (uncomment-region . 3)
+ (uncomment-region . 5)
  (sql-mode . 1)
  (sql-ms . 1)
- (comment-region . 1)
+ (comment-region . 5)
  (ruby-mode . 2)
  (css-mode . 1)
  (whitespace-mode . 2)
@@ -44,7 +44,29 @@
  (highlight-indentation-mode . 3)
  (recentf-mode . 1)
  (visible-mode . 1)
- (eval-buffer . 18)
+ (eval-buffer . 56)
  (visible-whitespace-mode . 28)
- (org-mode . 1)
+ (org-mode . 2)
+ (set-variable . 1)
+ (ffap . 1)
+ (describe-font . 2)
+ (set-face-font . 2)
+ (smooth-scroll-lines-from-window-top . 1)
+ (delete-selection-mode . 1)
+ (mouse-wheel-mode . 2)
+ (tetris . 1)
+ (undo-tree-mode . 1)
+ (package-install . 2)
+ (rainbow-delimiters-mode . 2)
+ (eww . 2)
+ (move-text-up . 2)
+ (show-paren-mode . 5)
+ (aggressive-indent-mode . 5)
+ (blink-matching-open . 1)
+ (ispell . 1)
+ (flyspell-mode . 2)
+ (paredit-mode . 2)
+ (evil-mode . 4)
+ (clojure-mode . 1)
+ (company-mode . 1)
 )
