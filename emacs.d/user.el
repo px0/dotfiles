@@ -116,6 +116,7 @@ Position the cursor at it's beginning, according to the current mode."
 (evil-leader/set-leader "<SPC>")
 
 ;; REQUIRES textmate-mode.el
+(textmate-mode)
 (evil-leader/set-key
   "e" 'ido-find-file
   "b" 'switch-to-buffer
