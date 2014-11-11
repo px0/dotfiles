@@ -89,6 +89,8 @@
 (define-key evil-insert-state-map (kbd "C-k") nil)
 (define-key evil-motion-state-map (kbd "C-e") nil)
 
+
+
 (defun smart-open-line-above ()
   "Insert an empty line above the current line.
 Position the cursor at it's beginning, according to the current mode."
@@ -100,7 +102,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 (define-key evil-normal-state-map [S-return] 'smart-open-line-above)
 
-(undo-tree-mode 1)
+(global-undo-tree-mode 1)
 (define-key evil-normal-state-map "\C-r" 'undo-tree-redo) ;that got overwritten and i need it!
 
 ;; evil surround
@@ -108,12 +110,43 @@ Position the cursor at it's beginning, according to the current mode."
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 
+
+(require 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+
+;; REQUIRES textmate-mode.el
+(textmate-mode)
+(evil-leader/set-key
+  "e" 'ido-find-file
+  "b" 'switch-to-buffer
+  "t" 'textmate-goto-file
+  "T" 'textmate-goto-symbol
+  "l" 'goto-line
+  "C-T" 'textmate-clear-cache
+  "u" 'undo-tree-visualize
+  )
+
+;; expand region
+(eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
+(evil-leader/set-key "xx" 'er/expand-region)
+
 ;; turn off visual bell
 (setq ring-bell-function 'ignore)
 
 
+;; Change cursor in different modes.
+(setq evil-default-cursor 'bar)
+(setq evil-normal-state-cursor 'box)
+(setq evil-visual-state-cursor 'hollow)
+(setq evil-replace-state-cursor 'box)
 
 
+;; Window moving
+(define-key evil-normal-state-map (kbd "C-w <left>") 'windmove-left)
+(define-key evil-normal-state-map (kbd "C-w <right>") 'windmove-right)
+(define-key evil-normal-state-map (kbd "C-w <up>") 'windmove-up)
+(define-key evil-normal-state-map (kbd "C-w <down>") 'windmove-down)
 
 
 
