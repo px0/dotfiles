@@ -357,3 +357,7 @@ This function is only necessary in window system."
 ;;   scroll-conservatively 10000
 ;;   scroll-preserve-screen-position 1)
 
+
+;; SQL
+(add-hook 'sql-mode-hook 'sqlup-mode)
+(add-hook 'sql-interactive-mode-hook 'sqlup-mode)
