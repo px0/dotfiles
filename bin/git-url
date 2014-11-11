@@ -4,7 +4,7 @@
 
 remote = `git config --get remote.origin.url`.strip
 if remote.match(/^http/)
-	remoteurl = ""
+	remoteurl = remote
 else
 	user, rest = remote.split '@'
 	host, dir = rest.split ':'
