@@ -406,3 +406,7 @@ This function is only necessary in window system."
   (url-copy-file url target-path t)
   (goto-char (string-match "src=\"\\(http.+?\\)\"" current-line)) (search-forward url)(replace-match target-path nil t)
   (message "%s -> %s" url target-path))
+
+;; SQL
+(add-hook 'sql-mode-hook 'sqlup-mode)
+(add-hook 'sql-interactive-mode-hook 'sqlup-mode)

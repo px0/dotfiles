@@ -125,7 +125,7 @@ export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/bin:$ANDROID_HOME/tools:$
 export NODE_PATH=/usr/local/lib/node_modules
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-export PATH=$HOME/dotfiles/bin:$HOME/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/Applications/Emacs.app/Contents/MacOS/bin:$PATH:
+export PATH=$HOME/dotfiles/bin:$HOME/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/Applications/Emacs.app/Contents/MacOS/bin:/usr/local/Cellar/ruby193/1.9.3-p547/bin:$PATH:
 
 
 # Some neat colors
@@ -154,6 +154,12 @@ cd() { builtin cd "$@"; ls; }				# Always list directory contents upon 'cd'
 # -------------------------------------------------------------------
 ff() {noglob ag --smart-case -g "$@" ; }
 ql() { qlmanage -p "$*" >& /dev/null; }
+fullpath() {
+	case "$1" in
+	/*) printf '%s\n' "$1";;
+	*) printf '%s\n' "$PWD/$1";;
+	 esac
+  }
 # alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 alias lr="tree"
 alias flushDNS='dscacheutil -flushcache'
