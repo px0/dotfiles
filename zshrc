@@ -35,6 +35,11 @@ function fm {
 	noglob ag --smart-case -g "$@"|head -1 |xargs mvim
 }
 
+function gitignore {
+	echo "$@" >> "./.gitignore"
+	git rm --cached $@
+}
+
 ### cordova
 alias c="cordova"
 alias cr="cordova run"
