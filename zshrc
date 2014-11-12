@@ -12,7 +12,6 @@ source /usr/local/etc/autojump.zsh #this should really have been in the dictiona
 # !!! search and replace: ag Deafult -l|xargs sed -i '' 's/Deafult/Default/g'
 
 alias m="mvim"
-alias e="/Applications/Emacs.app/Contents/MacOS/Emacs \"$@\""
 alias o="open"
 alias f="open ."
 alias ra="rake"
