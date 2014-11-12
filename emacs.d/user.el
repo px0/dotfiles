@@ -112,8 +112,9 @@ Position the cursor at it's beginning, according to the current mode."
 
 
 (require 'evil-leader)
+(setq evil-leader/in-all-states 1)
 (global-evil-leader-mode)
-(evil-leader/set-leader "<SPC>")
+(evil-leader/set-leader ",")
 
 ;; REQUIRES textmate-mode.el
 (textmate-mode)
@@ -125,7 +126,13 @@ Position the cursor at it's beginning, according to the current mode."
   "l" 'goto-line
   "C-T" 'textmate-clear-cache
   "u" 'undo-tree-visualize
+  "." 'evil-search-highlight-persist-remove-all
   )
+
+;; keep searches until new search
+(require 'evil-search-highlight-persist)
+(global-evil-search-highlight-persist t)
+
 
 ;; expand region
 (eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
@@ -211,7 +218,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 
 ;;(frame-restore-mode)
-(desktop-save-mode)
+;;(desktop-save-mode)
 
 
 (defun save-all ()
@@ -223,7 +230,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 
 ;; scrolling
- 
+
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
@@ -390,3 +397,12 @@ This function is only necessary in window system."
 ;;   scroll-conservatively 10000
 ;;   scroll-preserve-screen-position 1)
 
+(defun download-to-local (target-path)
+  "Download the specified file and change the current file to the local version"
+  (interactive (list (let ((insert-default-directory nil))
+                       (read-file-name "Save the file to:"))))
+  (setq current-line (buffer-substring (point-at-bol) (point-at-eol)))
+  (string-match "src=\"\\(http.+?\\)\"" current-line) (setq url (match-string-no-properties 1 current-line))
+  (url-copy-file url target-path t)
+  (goto-char (string-match "src=\"\\(http.+?\\)\"" current-line)) (search-forward url)(replace-match target-path nil t)
+  (message "%s -> %s" url target-path))
