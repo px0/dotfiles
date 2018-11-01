@@ -1,0 +1,104 @@
+" -*-vimrc-generic-*-
+
+Misc
+" map jk <Esc>
+" cmap jk <Esc>
+" inoremap jk <Esc>
+" inoremap kj <Esc>
+
+map <C-g> <Esc>
+inoremap <C-g> <esc>
+noremap <C-g> <esc>
+cmap <C-g> <esc>
+
+set gui=noaddons,nobookmarks,nomenu,nonavigation,notabs
+
+"Scroll
+" noremap J <C-d>
+" noremap K <C-u>
+
+" nnoremap j 7j
+" nnoremap k 7k
+
+bmark -keyword=g https://genome.klick.com/home/
+bmark -keyword=y http://news.ycombinator.com
+bmark -keyword=google http://www.google.com/search?ie=UTF-8&oe=UTF-8&sourceid=navclient&gfns=1&q=%s
+bmark -keyword=imdb http://www.imdb.com/find?ref_=nv_sr_fn&q=%s&s=all
+nmap s :open google<space>
+nmap S :tabopen google<space>
+nmap I :open imdb<space>
+nmap ii :open imdb<space>
+
+"keyboard hints
+"set hintkeys=asdflkj
+"hi -a Hint font-size: 7pt !important;
+
+hi Bell display: none;
+
+noremap U :undo<Space>
+
+" set the mapleader key
+let mapleader = ","
+let g:mapleader = ","
+
+" -----------------------------------------------------------------
+" Searching
+" -----------------------------------------------------------------
+" find as you type
+set incsearch
+" highlight the terms
+set hlsearch
+" make searches case-insensitive
+set ignorecase
+" unless they contain upper-case letters
+set smartcase
+" a toggle for search highlight
+map <silent> <leader>. :set hlsearch!<CR>
+
+"show destination of link in status line
+set showstatuslinks=2
+
+"show numbers on each tab - go to it using gt
+"set tabnumbers
+
+"C-i goes into the editor. Neat.
+set editor=/Applications/Emacs.app/Contents/MacOS/Emacs
+
+" Console toggle
+nmap <c-c> <m-a-i><esc>
+imap <c-c> <esc><m-a-i><esc>
+
+" buffer list"
+set maxitems=50
+set complete=l
+
+"temporary workaround for https://github.com/vimperator/vimperator-labs/issues/590
+js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
+
+"set findcase=smart
+
+map ,s :so ~/.vimperatorrc<CR>
+
+"set hintchars=qwertasdfgzxcvbyuiphjklnmQWERTASDFGZXCVBYUIOPHJKLNM
+"this enables me to just type where i want to go
+set hintchars=1234567890
+set hintmatching=fuzzy
+"make hint font bigger
+highlight Hint font-size:100%;color:white;background-color:orange;padding:0px;
+
+
+command! pocket -description "Save to Pocket" open javascript:(function(){var e=function(t,n,r,i,s){var o=[1993056,3925130,1713358,3012057,2428149,4758242,3956732,8463240,1454525,1124096];var i=i||0,u=0,n=n||[],r=r||0,s=s||0;var a={'a':97,'b':98,'c':99,'d':100,'e':101,'f':102,'g':103,'h':104,'i':105,'j':106,'k':107,'l':108,'m':109,'n':110,'o':111,'p':112,'q':113,'r':114,'s':115,'t':116,'u':117,'v':118,'w':119,'x':120,'y':121,'z':122,'A':65,'B':66,'C':67,'D':68,'E':69,'F':70,'G':71,'H':72,'I':73,'J':74,'K':75,'L':76,'M':77,'N':78,'O':79,'P':80,'Q':81,'R':82,'S':83,'T':84,'U':85,'V':86,'W':87,'X':88,'Y':89,'Z':90,'0':48,'1':49,'2':50,'3':51,'4':52,'5':53,'6':54,'7':55,'8':56,'9':57,'\/':47,':':58,'?':63,'=':61,'-':45,'_':95,'&':38,'$':36,'!':33,'.':46};if(!s||s==0){t=o[0]+t}for(var f=0;f<t.length;f++){var l=function(e,t){return a[e[t]]?a[e[t]]:e.charCodeAt(t)}(t,f);if(!l*1)l=3;var c=l*(o[i]+l*o[u%o.length]);n[r]=(n[r]?n[r]+c:c)+s+u;var p=c%(50*1);if(n[p]){var d=n[r];n[r]=n[p];n[p]=d}u+=c;r=r==50?0:r+1;i=i==o.length-1?0:i+1}if(s==220){var v='';for(var f=0;f<n.length;f++){v+=String.fromCharCode(n[f]%(25*1)+97)}o=function(){};return v+'50b32de47a'}else{return e(u+'',n,r,i,s+1)}};var t=document,n=t.location.href,r=t.title;var i=e(n);var s=t.createElement('script');s.type='text/javascript';s.src='https://getpocket.com/b/r4.js?h='+i+'&u='+encodeURIComponent(n)+'&t='+encodeURIComponent(r);e=i=function(){};var o=t.getElementsByTagName('head')[0]||t.documentElement;o.appendChild(s)})()
+
+command! mail -description "Send this page as email" open javascript:window.location.href="mailto:?Subject="+location.href+"&body="+location.href
+
+command! rss -description "RSS feed for page" open javascript:window.open(document.querySelector("link[rel=alternate]").href)
+
+command! netflix -description "Unfuck-up netflix's interface a little" open javascript:%20%20%20%20%20%20(function()%20{%20%20%20%20%20%20%20%20if(window.location.href.indexOf('netflix.com')%20===%20-1)%20{%20%20%20%20%20%20%20%20%20%20if%20(confirm('Please%20open%20Netflix%20and%20try%20again.%20Would%20you%20like%20me%20to%20redirect%20you%20to%20netflix.com?'))%20{%20%20%20%20%20%20%20%20%20%20%20%20window.location.href%20=%20'http://netflix.com'%20%20%20%20%20%20%20%20%20%20}%20else%20{%20%20%20%20%20%20%20%20%20%20%20%20%20return%20false;%20%20%20%20%20%20%20%20%20%20}%20%20%20%20%20%20%20%20}%20%20%20%20%20%20%20%20_.map(_.toArray(document.getElementsByClassName('slider')),%20function(e)%20{%20%20%20%20%20%20%20%20%20%20e.parentNode.replaceChild(e.firstChild,%20e)%20%20%20%20%20%20%20%20});%20%20%20%20%20%20%20%20_.map(_.union(%20%20%20%20%20%20%20%20%20%20_.toArray(document.getElementsByClassName('sliderButton')),%20%20%20%20%20%20%20%20%20%20_.toArray(document.getElementsByClassName('evidence')),%20%20%20%20%20%20%20%20%20%20_.toArray(document.getElementsByClassName('sharing-prompt')),%20%20%20%20%20%20%20%20%20%20_.toArray(document.getElementsByClassName('boxShotDivider'))),function(e)%20{%20%20%20%20%20%20%20%20%20%20%20%20e.parentNode.removeChild(e)%20%20%20%20%20%20%20%20});%20%20%20%20%20%20})();
+
+nmap ,p :pocket<CR>
+nmap ,m :mail<CR>
+nmap ,r :rss:<CR>
+
+echo "vimperatorrc sourced! yay!"
+
+" vim: set ft=vim

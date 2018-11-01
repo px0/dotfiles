@@ -1,0 +1,14 @@
+#!/bin/sh
+set -x #echo on
+
+PUBLIC_FOLDERS=($HOME/Dropbox/Public $HOME/SYNC)
+PUBLIC_BUCKET="s3://max.public"
+
+if ! [ -x "$(command -v aws)" ]; then
+  echo 'Error: aws is not installed.' >&2
+  exit 1
+fi
+
+for PUBLIC_FOLDER in ${PUBLIC_FOLDERS[@]}; do
+    aws --profile 'max.public' s3 sync $PUBLIC_FOLDER $PUBLIC_BUCKET --acl public-read # --delete # don't delete because I don't always sync everything to all machines
+done

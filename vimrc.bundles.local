@@ -1,0 +1,106 @@
+Bundle 'https://github.com/vim-scripts/indent-motion.git'
+" colorschemes (jellybean!)
+Bundle 'flazz/vim-colorschemes'
+" toggles between states, such as true/false on <C-+>
+Bundle 'Toggle'
+" <C-_> closes the vim tag
+Bundle 'closetag.vim'
+" Adds a 'Bundles' menu to mvim that shows the installed plugins and stuff
+Bundle 'mbadran/headlights'
+" W, B, etc move by camelcase
+Bundle "vim-scripts/camelcasemotion.git"
+" <C-n> inserts multiple cursors
+Bundle "terryma/vim-multiple-cursors"
+" Show bookmarks
+Bundle "ShowMarks"
+" :Rake
+Bundle 'rake.vim'
+" jsbueaytify/html beautify. Need both maksimr and einars
+Bundle 'maksimr/vim-jsbeautify'
+Bundle 'einars/js-beautify'
+" super awesome mappings, the whole [] block! -> :help unimpaired
+Bundle 'unimpaired.vim'
+" autoconverts German umlaute for HTML on load/save
+Bundle 'html_umlaute'
+" undo tree
+Bundle 'Gundo'
+" lints vimrc
+Bundle 'dbakker/vim-lint'
+" Bundle 'msanders/snipmate.vim'
+" search word, whatever with <l><l>t and then the letter that you're searching for
+" Bundle 'EasyMotion'
+" absolute linenumbers in insert mode, relative in normal mode
+Bundle "myusuf3/numbers.vim"
+" Zen coding for vim:
+" div.content>h1.post-title+p{Sample Content} => <c-e>
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" rainbow parenthesis. Trigger through :RainbowParenthesesToggle
+Bundle "kien/rainbow_parentheses.vim"
+" Bundle 'masukomi/rainbow_parentheses.vim'
+" Bundle 'bling/vim-airline'
+"Better snipmate
+Bundle "git://github.com/MarcWeber/vim-addon-mw-utils.git"
+Bundle "git://github.com/tomtom/tlib_vim.git"
+Bundle "git://github.com/garbas/snipmate.vim.git"
+"taskpaper. use localleader
+Bundle "taskpaper.vim"
+" better syntax highlighting for js
+Bundle 'jelera/vim-javascript-syntax'
+" Automatic tag generation
+Bundle 'xolox/vim-misc'
+Bundle 'easytags.vim'
+" show colours directly
+Bundle 'colorizer'
+" allow tab-complete while searching!
+Bundle 'SearchComplete'
+" subvert, abolish, etc
+Bundle 'abolish.vim'
+" show recently used files etc at startup
+Bundle 'mhinz/vim-startify'
+" proper indentation for mixed html/js
+Bundle 'jojoyuji/vim-web-indent'
+" Themes
+Bundle "Slava/vim-colors-tomorrow"
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Bundle 'chriskempson/base16-vim'
+Bundle 'w0ng/vim-hybrid'
+"Bundle 'maciakl/vim-neatstatus'
+"Vimshell! yay!
+Bundle 'shougo/vimproc'
+Bundle 'shougo/vimshell'
+" auto close parens
+" Bundle 'AutoClose'
+"Bundle 'kana/vim-smartinput' "I don't particulary like this one. :(
+Bundle 'delimitMate.vim'
+" Bundle 'jiangmiao/auto-pairs'
+" gui colors in terminal
+Bundle 'CSApprox'
+Bundle 'thinca/vim-quickrun'
+" URI textobject. au = URI including spaces, iu = UI without trailing spaces
+Bundle 'textobj-user'
+Bundle "jceb/vim-textobj-uri"
+" Markdown
+" ]]: go to next header.
+" [[: go to previous header. Contrast with ]c.
+" ][: go to next sibling header if any.
+" []: go to previous sibling header if any.
+" ]c: go to Current header.
+" ]u: go to parent header (Up).
+Bundle "plasticboy/vim-markdown"
+"resize windows according to golden ratio
+" Bundle 'roman/golden-ratio'
+"color scheme
+Bundle "mattsacks/vim-eddie"
+" find two consecutive characters with 's'
+Bundle "justinmk/vim-sneak"
+" Elixir
+Bundle "elixir-lang/vim-elixir"
+" Bundle "shougo/neocomplete.vim"
+Bundle "Valloric/YouCompleteMe"
+" Bundle "tpope/vim-rails"
+Bundle "marijnh/tern_for_vim"
+"Clojure
+" Bundle "tpope/vim-classpath"
+" Bundle "tpope/vim-leiningen"
+Bundle "tpope/vim-fireplace"
+

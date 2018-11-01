@@ -1,0 +1,3 @@
+#!/bin/sh
+
+$(/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -a "/Applications/Emacs.app/Contents/MacOS/Emacs" -nc "$@" 2>/dev/null) &

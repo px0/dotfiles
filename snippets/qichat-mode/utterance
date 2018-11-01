@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: utterance
+# key: u
+# --
+u$1:(${2:[$3]}) ${4:[$0]}

@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+# https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconMatrix.html
+
+icons = [
+  #Settings
+  { file_name: "Settings.png",
+    size: "29x29",
+    note: "iPad Settings",
+    type: :ipad},
+
+  { file_name: "Settings@2x.png",
+    size: "58x58",
+    note: "iPhone Settings, iPad Settings for Retina display",
+    type: :all },
+
+  { file_name: "Icon-Small@3x.png",
+    size: "87x87",
+    note: "iPhone Settings for Retina display",
+    type: :iphone},
+
+  #Spotlight
+
+  { file_name: "Icon-40.png",
+    size: "40x40",
+    note: "iPad Spotlight results",
+    type: :ipad},
+
+  { file_name: "Icon-40@2x.png",
+    size: "80x80",
+    note: "iPhone Spotlight results, iPad Spotlight results for retina display",
+    type: :all},
+
+  { file_name: "Icon-40@3x.png",
+    size: "120x120",
+    note: "iPhone spotlight results iPhone6+",
+    type: :phone},
+
+  { file_name: "Icon-60@2x.png",
+    size: "120X120",
+    note: "iPhone App Icon and Retina spotlight",
+    type: :iphone},
+  
+  
+  { file_name: "Icon-60@3x.png",
+    size: "180x180",
+    note: "iPhone App Icon for Retina display",
+    type: :iphone},
+
+  { file_name: "Icon-76.png",
+    size: "76x76",
+    note: "iPad App Icon",
+    type: :ipad},
+
+  { file_name: "Icon-76@2x.png",
+    size: "152x152",
+    note: "iPad App Icon for Retina display",
+    type: :ipad},
+
+    { file_name: "Icon-83.5@2x.png",
+    size: "167x167",
+    note: "iPad App Icon for iPad Pro",
+    type: :ipad},
+    
+  #General
+
+  { file_name: "iTunesArtwork.png",
+    size: "512x512",
+    note: "App Submission",
+    type: :all},
+
+  { file_name: "iTunesArtwork@2x.png",
+    size: "1024x1024",
+    note: "App Submission",
+    type: :all}
+]
+
+#check for errors
+if ARGV.length < 1
+  abort "USAGE: #{$0} icon-1024x1024.png PREFIX\nPREFIX is optional"                 
+end
+
+#check for convert
+if `which convert` == ""
+  abort "please install imagemagick, eg via 'brew install imagemagick'"  
+end
+
+base = ARGV[0]
+prefix = ARGV[1] ? ARGV[1]+"-" : ""
+  
+# (image-)magick!
+icons.each do |icon|
+  cmd = "convert #{base} -resize #{icon[:size]} #{prefix}#{icon[:file_name]}"
+  success = system cmd
+  abort "error at '#{cmd}'" if success == nil or success == false
+  putc "."
+end
+puts "Done!"

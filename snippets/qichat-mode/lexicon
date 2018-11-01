@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lexicon
+# key: lexicon
+# --
+include: lexicon_enu.top

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+ticket_generic_url='http://genome.klick.com/tickets/#/details/'
+
+function get_current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  _branch=${ref#refs/heads/}
+}
+
+function get_ticket_number() {
+	_ticket_no=$(echo $_branch|perl -pn -e "s/.*?(\d+).*/\1/")
+	grep -qE '^[0-9]+$' <<< $_ticket_no
+	if [ $? -ne 0 ]; then
+		echo "Could'nt extract a ticket number. Please enter it manually: "
+		read -e _ticket_no
+	fi
+}
+
+function open_ticket_url() {
+	ticket_url=$ticket_generic_url$_ticket_no
+	echo "Opening "$ticket_url
+
+	if [ "$(uname)" == "Darwin" ]; then
+		open $ticket_url
+	elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+		start $ticket_url
+	fi
+}
+
+get_current_branch
+get_ticket_number
+open_ticket_url

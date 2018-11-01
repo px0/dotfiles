@@ -1,0 +1,5 @@
+#!/bin/sh
+
+video=$(tag -f Red . |egrep "flv$|mpeg$|mpg$|mov$|avi$|mp4$|wmv$|mkv"|gsort -R|head -n 1)
+echo "\"$video\""
+open "$video"

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: concept
+# key: c
+# --
+concept:($1) [$0]

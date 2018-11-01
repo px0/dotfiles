@@ -1,0 +1,12 @@
+#!/bin/sh
+EMACSCLIENT=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+if [ ! -f $EMACSCLIENT ]
+then
+    EMACSCLIENT=/usr/local/Cellar/emacs-mac/emacs-25.3-mac-6.8/bin/emacsclient
+fi
+if [ ! -f $EMACSCLIENT ]
+then
+    EMACSCLIENT=/usr/local/Cellar/emacs-mac/emacs-26.1-rc1-mac-6.90/bin/emacsclient
+fi
+
+$($EMACSCLIENT -nc "$@" -a "/Applications/Emacs.app/Contents/MacOS/Emacs" 2>/dev/null) &

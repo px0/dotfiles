@@ -1,0 +1,20 @@
+m2/
+.DS_Store
+.svn
+*~
+.*.swp
+*.dat
+frame-restore-parameters
+emacs.d/.emacs.desktop
+emacs.d/cider-history
+emacs.d/.emacs.desktop.lock
+emacs.d/recentf
+emacs.d/ido.last
+emacs.d/skewer-cache
+
+emacs.d/.mc-lists.el
+emacs.d/eshell/lastdir
+.yas-compiled-snippets.el
+emacs.d/snippets/clojure-mode/.yas-compiled-snippets.el emacs.d/snippets/javascript-mode/.yas-compiled-snippets.el emacs.d/snippets/js-mode/.yas-compiled-snippets.el emacs.d/snippets/js2-mode/.yas-compiled-snippets.el emacs.d/snippets/org-mode/.yas-compiled-snippets.el emacs.d/snippets/python-mode/.yas-compiled-snippets.el emacs.d/snippets/web-mode/.yas-compiled-snippets.el
+emacs.d/undo/*
+emacs.d/backup/*

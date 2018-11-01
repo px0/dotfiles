@@ -1,0 +1,5 @@
+#!/bin/sh
+
+video=$(find -E . -regex ".*\.(flv|mpeg|mpg|mov|avi|mp4|wmv|mkv)" -mtime -14 -print0 | gshuf -zn 1)
+echo "\"$video\""
+open "$video"

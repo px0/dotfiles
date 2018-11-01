@@ -1,0 +1,112 @@
+#!/usr/bin/env ruby
+
+require 'shell'
+require 'shellwords'
+require 'optparse'
+require 'tmpdir'
+
+def debug(*args)
+  STDERR.puts(*args)
+end
+
+PLIST_BUDDY = '/usr/libexec/PlistBuddy'
+
+def options_parser(options)
+  OptionParser.new do |opts|
+    opts.banner = "Usage: #{opts.program_name} -p provisioning_profile [-e entitlements] source.ipa destination.ipa"
+
+    opts.on("-p", "--provisioning-profile provisioning-profile", "The new provisioning profile (required)") do |p|
+      options[:provisioning_profile] = p.shellescape
+    end
+
+    opts.on("-e", "--entitlements file", "Entitlements file to replace the existing entitlements.",
+            "If this option is not provided, then entitlements from the provisioning profile will be used") do |e|
+      options[:entitlements] = e.shellescape
+    end
+
+    opts.on("-h", "--help", "Display help") do |h|
+      options[:help] = true
+    end
+  end
+end
+
+def resign(dir, src_ipa, dst_ipa, options)
+  pwd = Dir.pwd
+  Dir.chdir(dir)
+
+  debug "Unzipping ipa"
+  system "unzip -q #{src_ipa}"
+  app = Dir.glob("Payload/*.app")[0]
+
+  provisioning_profile = options[:provisioning_profile]
+
+  # Remove the codesigning blobs around the provisioning profile and
+  # get the plaintext plist
+  debug "Extracting plain provisioning profile"
+  plain_mobileprovision = "plain.mobileprovision"
+  system "security cms -D -i #{provisioning_profile} -o #{plain_mobileprovision}"
+
+  debug "Extracting bundle id from provisioning profile"
+  identifier = `#{PLIST_BUDDY} -c 'Print :Entitlements:application-identifier' #{plain_mobileprovision}`
+  identifier = identifier.tr!("\n", "")
+  if (!identifier || identifier.length == 0)
+    debug "Couldn't get identifier"
+    exit 1
+  end
+  bundle_id = identifier.split(".")[1..10].join(".")
+
+  debug "Updating info plist with new bundle id"
+  info_plist = "#{app}/Info.plist"
+  system "#{PLIST_BUDDY} -c 'Set :CFBundleIdentifier #{bundle_id}' #{info_plist}"
+
+  # Use the given entitlements or extract from provisioning profile
+  entitlements = nil
+  if (!options[:entitlements])
+    debug "Extracting entitlements from provisioning profile"
+    entitlements = "entitlements.plist"
+    system "#{PLIST_BUDDY} -x -c 'Print :Entitlements' #{plain_mobileprovision} > #{entitlements}"
+  else
+    entitlements = options[:entitlements]
+  end
+
+  debug "Replacing embedded provisioning profile"
+  system "cp #{provisioning_profile} #{app}/embedded.mobileprovision"
+
+  # Codesign the app and package
+  # Get the codesigning identity from the provisioning profile
+  debug "Extracting certificate and fingerprint"
+  cert="certificate"
+  system "#{PLIST_BUDDY} -c 'Print :DeveloperCertificates:0' #{plain_mobileprovision} > #{cert}"
+  fingerprint = `openssl x509 -inform DER -in #{cert} -noout -fingerprint -sha1`
+  fingerprint = fingerprint.tr("\n", "").gsub(/^.*Fingerprint=/, "").gsub(/:/, "")
+  debug "Codesigning the app"
+  system "codesign -f -s #{fingerprint} --entitlements #{entitlements} -vv #{app}"
+  debug "Packaging the app"
+  system "xcrun -sdk iphoneos PackageApplication -s #{fingerprint} -o #{dst_ipa} #{app}"
+
+  Dir.chdir(pwd)
+end
+
+def main
+  options = {}
+  opts = options_parser(options)
+  args = opts.parse(ARGV)
+
+  if (options[:help])
+    debug opts.to_a
+    return 0
+  end
+
+  if (!options[:provisioning_profile] || !args[0] || !args[1])
+    debug "Missing arguments"
+    debug opts.to_a
+    return 1
+  end
+
+  tmpdir = Dir.mktmpdir
+  debug "Working dir: #{tmpdir}"
+  resign(tmpdir, args[0].shellescape, args[1].shellescape, options)
+  0
+end
+
+exit main

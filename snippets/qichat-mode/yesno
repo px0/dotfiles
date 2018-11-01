@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: yesno
+# key: yesno
+# --
+u1:(~yes) $1
+u1:(~no) $1

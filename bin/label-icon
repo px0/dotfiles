@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# README: 
+# Install deps: brew install imagemagic ghostscript
+# Generate types: http://www.imagemagick.org/Usage/scripts/imagick_type_gen ==> imagick_type_gen > ~/.magick/type.xml
+
+USAGE="Usage: `basename $0` text image1 image2 .."
+
+if [ "$#" == "0" ]; then
+	echo "$USAGE"
+	exit 1
+fi
+
+text=$1
+shift #discard first arg
+images=$* #all the rest
+
+for img in $*;
+do
+  name=`basename ${img}`
+  height=`identify -format %h ${img}`;
+  width=`identify -format %w ${img}`; 
+  half=`expr ${height} / 2`;
+
+  convert -background '#0008' -fill white -gravity center -size ${width}x${half} caption:"${text}" ${img} +swap -gravity center -composite "${text}-${name}";
+done;

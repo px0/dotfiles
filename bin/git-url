@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+
+remote = `git config --get remote.origin.url`.strip
+if remote.match(/^http/)
+	remoteurl = remote
+else
+	user, rest = remote.split '@'
+	host, dir = rest.split ':'
+	remoteurl = "http://#{host}/#{dir}"
+end
+puts "Opening #{remoteurl}"
+system("open  #{remoteurl}")
+

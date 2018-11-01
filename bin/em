@@ -1,0 +1,36 @@
+#!/bin/bash
+# set -x
+
+# shift #drop first argument
+
+echo "arguments: $@ (${#@})"
+echo "$(printf '%s\n' "$@")"
+
+
+if [ -e '/Applications/Emacs.app' ]; then
+    # t=()
+
+    if [ ${#@} -ne 0 ]; then
+        while IFS= read -r file; do
+            [ ! -f "$file" ] && /usr/bin/touch "$file"
+            file=$(echo $(cd $(dirname "$file") && pwd -P)/$(basename "$file"))
+            $(/usr/bin/osascript <<-END
+    if application "Emacs.app" is running then
+        tell application id (id of application "Emacs.app") to open POSIX file "$file"
+    else
+        tell application "/Applications/Emacs.app"
+        activate
+        open POSIX file "$file"
+        end tell
+    end if
+END
+            ) &  # Note: END on the previous line may be indented with tabs but not spaces
+
+
+        done <<< "$(printf '%s\n' "$@")"
+    else
+        $(/usr/bin/osascript -e "tell application \"/Applications/Emacs.app\" to activate") &
+    fi
+else
+    vim -No "$@"
+fi

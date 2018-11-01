@@ -1,0 +1,93 @@
+#!/bin/bash
+# stolen & adapted from https://blog.sleeplessbeastie.eu/2013/11/21/how-to-generate-directory-index-files/
+
+# Sample usage:
+# cd /var/www/downloads
+# make_index.sh
+
+# generate header part of the HTML file
+function header {
+  cat << EOF
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Directory Listing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {padding-top: 60px; padding-bottom: 40px;}
+        h2 {margin: 0;}
+        body {min-width: 320px;}
+        a {font-weight: bolder;}
+        div.directory a {color: rgb(218, 79, 73);}
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+EOF
+}
+
+# generate footer part of the HTML file
+function footer {
+  cat << EOF
+    </div> <!-- /container -->
+  </body>
+</html>
+EOF
+}
+
+
+# create index file for each directory (ignore ./css and ./img directories)
+find . -type d | while read directory; do
+  # remove "./" from the beginning of the path
+  directory=${directory#./}
+
+  # index file
+  index_file=$directory/index.html
+
+  # create/truncate index file
+  : > $index_file
+
+  # append header to the index file
+  header >> $index_file
+
+  # generate content
+  content=""
+  while read file
+  do
+    if [ -d "$directory/$file" ]; then
+      content+="<div class=\"row\">"
+      if [ "$directory" == "." ]; then
+        content+="<div class=\"col-xs-12\"><div class=\"directory\"><a href=\"$file/index.html\">$file</a></div></div>"
+      else
+        content+="<div class=\"col-xs-12\"><div class=\"directory\"><a href=\"$directory/$file/index.html\">$file</a></div></div>"
+      fi
+      content+="<div class=\"col-xs-12\"><div class=\"type\"><i class=\"glyphicon glyphicon-folder-open\"></i> Directory</div></div>"
+      content+="</div>"
+      content+="<hr/>"
+    elif [ -f "$directory/$file" ]; then
+      file_type=$(file -b "$directory/$file")
+      file_size=$(du -h "$directory/$file" | cut -f1)
+      content+="<div class=\"row\">"
+      if [ "$directory" == "." ]; then
+        content+="<div class=\"col-xs-10\"><div class=\"file\"><a href=\"$file\">$file</a></div></div>"
+      else
+        content+="<div class=\"col-xs-10\"><div class=\"file\"><a href=\"$file\">$file</a></div></div>"
+      fi
+      content+="<div class=\"col-xs-2\"><div class=\"type\"><i class=\"glyphicon glyphicon-hdd\"></i> $file_size</div></div>"
+      content+="</div>"
+      # content+="<div class=\"row\">"
+      # content+="<div class=\"col-xs-12\"><div class=\"type\"><i class=\"glyphicon glyphicon-info-sign\"></i> $file_type</div></div>"
+      # content+="</div>"
+      content+="<hr/>"
+    fi
+  done < <(gls -1 --group-directories-first $directory --ignore=index.html)
+
+  # append content to the index file
+  echo $content >> $index_file
+
+  # append footer to the index file
+  footer >> $index_file
+done

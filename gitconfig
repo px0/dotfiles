@@ -1,0 +1,83 @@
+[include]
+	path = ~/.gitconfig.local
+
+[alias]
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort    # list all aliases
+        alias = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort    # list all aliases
+	a        = add
+	aa       = add -A :/
+        anw = !sh -c 'git diff -w --no-color "$@" | git apply --cached --ignore-whitespace' - #add non-whitespace changes
+	amend    = commit --verbose --amend    # Edit the last commit
+	b        = branch
+	br       = branch -r
+	cam      = commit -am
+	ci       = commit
+	cm      = commit -m
+	cl      = clone
+	co      = checkout
+	cob     = checkout -b
+	compare = cherry -v                # Which commits aren't upstream?
+	cp      = cherry-pick
+	d        = diff --word-diff
+	diff     = diff --word-diff
+	df = diff -C --color-words
+	f        = fetch
+	ignore   = rm --cached
+	l		 = log --pretty='format:%C(blue)%h%C(red)%d%C(yellow) %s %C(green)%an%Creset, %ar'
+	# lg is now a shortcut for a pretty log with short commit messages
+	lg       = log \
+				 --graph \
+				 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
+				 --abbrev-commit \
+				 --date=relative
+	m        = merge --no-commit --no-ff
+	missing  = cherry -v
+	ours     = checkout --ours --
+	p        = pull
+	s        = commit --dry-run --short       # Shorthand for a less noisy status
+	st       = status
+	standup  = shortlog --since=yesterday
+	theirs   = checkout --theirs --
+	today    = shortlog --since=midnight
+	uncommit = reset --soft HEAD^
+	wc       = whatchanged                   # whatchanged since last own (?) commit
+	who      = shortlog -s -n --no-merges
+	which-branches-contain = branch --contains
+	rename-branch = branch -m
+	puu = push -u
+	reha = reset --hard
+	cleanfd = clean -fd
+	unmerged-branches = branch --no-merged
+	addnw = !sh -c \"git diff -w --no-color '$@'| git apply --cached --ignore-whitespace\"
+	branches = branch -r
+	unstage = reset --
+
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = false
+	editor = 'e'
+	ignorecase = false
+	
+
+[status]
+	relativePaths = true
+
+[color]
+	ui = true
+
+[credential]
+	helper = osxkeychain
+
+[oh-my-zsh]
+	hide-status = 0
+
+[push]
+	default = current
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[apply]
+	whitespace = nowarn

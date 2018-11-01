@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: proposal
+# key: p
+# --
+proposal: $0

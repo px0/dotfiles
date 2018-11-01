@@ -1,0 +1,19 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+outName = None
+
+if len(sys.argv) < 2:
+    print("Usage: wispc sourcefile [outputfile]")
+    sys.exit()
+    
+if len(sys.argv) == 2:
+    sourceName = sys.argv[1]
+    sourceBase = sourceName.split(".")[0]
+    outName = sourceBase+".js"
+else:
+    outName = sys.argv[2]
+
+os.system("cat %s|wisp > %s" % (sys.argv[1], outName))

@@ -1,0 +1,4 @@
+#name: deftest
+# --
+(deftest ${1:Name}
+  (is (= $0)))

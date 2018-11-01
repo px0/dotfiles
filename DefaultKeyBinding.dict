@@ -1,0 +1,25 @@
+{
+/* Meta shortcuts */
+    "~f"        = "moveWordForward:";               /* M-f          Move forward word */
+    "~b"        = "moveWordBackward:";              /* M-b          Move backward word */
+    "~<"        = "moveToBeginningOfDocument:";     /* M-<          Move to beginning of document */
+    "~>"        = "moveToEndOfDocument:";           /* M->          Move to end of document */
+    "~v"        = "pageUp:";                        /* M-v          Page Up */
+    "~/"        = "complete:";                      /* M-/          Complete */
+    "~c"        = ( "capitalizeWord:",              /* M-c          Capitalize */
+                    "moveForward:",
+                    "moveForward:");                                
+    "~l"        = ( "lowercaseWord:",               /* M-l          Lowercase */
+                    "moveForward:",
+                    "moveForward:");
+    "~d"        = "deleteWordForward:";             /* M-d          Delete word forward */
+    "^~h"       = "deleteWordBackward:";            /* M-C-h        Delete word backward */
+    "~\U007F"   = "deleteWordBackward:";            /* M-Bksp       Delete word backward */
+    "~t"        = "transposeWords:";                /* M-t          Transpose words */
+    "~\@"       = ( "setMark:",                     /* M-@          Mark word */
+                    "moveWordForward:",
+                    "swapWithMark");
+    "~h"        = ( "setMark:",                     /* M-h          Mark paragraph */
+                    "moveToEndOfParagraph:",
+                    "swapWithMark");
+}
