@@ -32,7 +32,7 @@
     major-mode))
 
 (defun string-edit-multiline-support-p (buffer)
-  (pcase (string-edit buffer-mode buffer)
+  (pcase (string-edit-buffer-mode buffer)
     ('clojure-mode t)
     (_ nil)))
 
@@ -42,7 +42,6 @@
 
 (defvar se/original)
 (defvar se/original-buffer)
-(defvar se/multiline-support)
 
 (defvar string-edit-at-point-hook ()
   "Hook to run just before enabling `string-edit-mode'.
@@ -60,9 +59,6 @@ This saves you from needing to manually escape characters."
            (original (se/find-original)))
       (select-window (split-window-vertically -4))
       (switch-to-buffer (generate-new-buffer "*string-edit*"))
-      (set (make-local-variable 'se/original) original)
-      (set (make-local-variable 'se/original-buffer) original-buffer)
-      (set (make-local-variable 'se/multiline-support) (string-edit-multiline-support-p original-buffer))
       (insert (se/aget :raw original))
       (goto-char (- p (se/aget :beg original) -1))
       (funcall (se/aget :cleanup original))
@@ -70,6 +66,8 @@ This saves you from needing to manually escape characters."
       (se/guess-at-major-mode)
       (run-hooks 'string-edit-at-point-hook)
       (string-edit-mode 1)
+      (set (make-local-variable 'se/original) original)
+      (set (make-local-variable 'se/original-buffer) original-buffer)
       (font-lock-fontify-buffer))))
 
 (defun string-edit-abort ()
@@ -210,7 +208,7 @@ This saves you from needing to manually escape characters."
     (goto-char (point-min))
     (delete-char (length quote))
     (se/unescape quote)
-    (let ((multiline-support se/multiline-support))
+    (let ((multiline-support (current-buffer)))
       (when (not multiline-support)
         (se/unescape-ws "n" "\n")
         (se/unescape-ws "r" "\r")
@@ -220,7 +218,7 @@ This saves you from needing to manually escape characters."
 
 (defun se/string-at-point/escape (quote)
   (save-excursion
-    (let ((multiline-support se/multiline-support))
+    (let ((multiline-support (current-buffer)))
       (when (not multiline-support)
         (se/escape "\\")
         (se/escape-ws "n" "\n")
